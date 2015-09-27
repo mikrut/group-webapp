@@ -6,12 +6,12 @@
 #
 default: &default
   adapter: mysql2
+  encoding: utf8
   pool: 5
   timeout: 5000
   username: root
-  password: 0000
+  password: '0000'
   host: localhost
-  port: 3306
 
 development:
   <<: *default

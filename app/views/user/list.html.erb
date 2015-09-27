@@ -1,0 +1,14 @@
+<div class="group">
+  <div class="group__list">
+    <div class="group__list__title">Список группы
+    <span class="group__list__title__name">ИУ6-52</span></div>
+    <ol class="group__list__students">
+      <% @group.each.with_index do |student, index| %>
+        <li class="group__list__students__student">
+            <%=link_to student.name, action: 'read', id: student.id %>
+          <%= student.email %>
+        </div>
+      <% end %>
+    </ol>
+  </div>
+</div>

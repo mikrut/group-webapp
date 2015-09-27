@@ -1,0 +1,110 @@
+// Place all the styles related to the User controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.login {
+  &__box {
+    width: 500px;
+    border: 2px solid black;
+    box-shadow: 0 0 40px 10px;
+    margin: 50px auto 0;
+    padding: 30px;
+
+    &__caption {
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    &__options {
+      &__group, &__submit {
+        display: block;
+        margin: auto 0;
+        text-align: center;
+      }
+
+      &__group {
+        margin: 10px;
+
+        &__name {
+
+        }
+        &__input {
+
+        }
+      }
+
+      &__submit {
+        margin: 7px;
+
+        &__button {
+          background-color: #16D060;
+          padding: 5px;
+          border: 5px solid #108C41;
+          color: white;
+
+          &:active {
+            border-color: #16D060;
+            background-color: #108C41;
+          }
+        }
+      }
+    }
+  }
+}
+
+.userpage {
+  &__info {
+    &__who {
+      margin: 5px;
+      padding: 10px;
+      float: left;
+
+      &__image {
+        border: 2px solid silver;
+        border-radius: 5px;
+      }
+
+      &__name {
+        font-size: 16pt;
+        font-weight: bold;
+        font-family: Jura;
+      }
+
+      &__role {
+        font-size: 14pt;
+        color: silver;
+      }
+
+      &__group {
+        font-size: 14pt;
+      }
+
+      &__birthday {
+
+      }
+    }
+
+    &__subscriptions {
+      margin: 5px;
+
+      &__title {
+        font-size: 14pt;
+        font-weight: bold;
+
+        font-family: Ubuntu, sans-serif;
+      }
+
+      &__list {
+        list-style: none;
+
+        &__item {
+          font-size: 13pt;
+
+          &_more {
+            font-style: italic;
+          }
+        }
+      }
+    }
+  }
+}

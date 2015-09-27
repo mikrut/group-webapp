@@ -1,0 +1,29 @@
+
+<div class="login__box">
+  <div class="login__box__caption">
+    <h1 class="login__box__caption__title">Log in</h1>
+  </div>
+  <div class="login__box__options">
+    <%= form_tag do %>
+    <div class="login__box__options__group">
+      <div class="login__box__options__group__name">
+        <%= label_tag(:name, "Login") %>
+      </div>
+      <div class="login__box__options__group__input">
+        <%= text_field(:user, :name) %>
+      </div>
+    </div>
+    <div class="login__box__options__group">
+      <div class="login__box__options__group__name">
+        <%= label_tag(:name, "Password") %>
+      </div>
+      <div class="login__box__options__group__input">
+        <%= text_field(:user, :password) %>
+      </div>
+    </div>
+    <div class="login__box__options__submit">
+      <%= submit_tag "Log in", class: "login__box__options__submit__button" %>
+    </div>
+    <% end %>
+  </div>
+</div>

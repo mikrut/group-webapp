@@ -1,0 +1,158 @@
+@import 'https://fonts.googleapis.com/css?family=Kelly+Slab|Forum|Jura&subset=latin,cyrillic';
+
+$primary-width: 1080px;
+
+$top-background-color: #0024E2;
+$top-background-color2: #3D59F1;
+
+$logo-font-color: #FFB600;
+
+$top-divider-color: #FFED74;
+$top-font-color: #FFDE00;
+
+$input-border-color: #FFD774;
+$input-focus-shadow: #FFD774;
+
+$button-bg-color: #FFED74;
+$button-bg-color-hover: #FFC841;
+$button-border-color: #FFE641;
+$button-font-color: #26006F;
+
+$username-font-color: #FFDE00;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.app {
+  height: 100%;
+  &__wrapper {
+    height: 100%;
+
+    &__topwrapper {
+      &__topbar {
+        display: block;
+        margin: 0 auto;
+
+        padding: 0 20px;
+
+        background-color: $top-background-color;
+        background-image: linear-gradient(to bottom, $top-background-color 0px, $top-background-color2 100%);
+
+        border: 1px solid black;
+        border-top: none;
+        border-radius: 0 0 10px 10px;
+
+        height: 50px;
+        width: $primary-width;
+
+        &__menu {
+          display: block;
+          position: relative;
+          top: 12px;
+          float: left;
+
+          margin: 0 10px;
+
+          &__main {
+            display: inline;
+            color: $logo-font-color;
+
+            font-family: 'Kelly Slab';
+            font-size: 16pt;
+            padding-right: 20px;
+            border-right: 1px solid $top-divider-color;
+          }
+
+          &__list {
+            list-style: outside none none;
+            display: inline;
+            margin: 0;
+            padding: 0;
+
+            &__item {
+              display: inline;
+              color: $top-font-color;
+
+              padding: 5px 15px;
+              margin: 10px 0px;
+              font-family: Jura;
+              font-size: 14pt;
+            }
+          }
+        }
+
+        &__search {
+          display: block;
+          float: left;
+          position: relative;
+          top: 12px;
+
+          border-left: 1px solid $top-divider-color;
+          border-right: 1px solid $top-divider-color;
+          padding: 0 20px;
+
+          margin: 0 5px;
+
+          &__input {
+            border: 3px solid $input-border-color;
+            border-radius: 5px 5px 5px 5px;
+
+            padding: 3px;
+
+            &:focus {
+              box-shadow: 0 0 15px $input-focus-shadow;
+            }
+          }
+
+          &__submit {
+            border-color: $button-border-color;
+            background-color: $button-bg-color;
+            color: $button-font-color;
+            padding: 5px 15px;
+
+            &:hover {
+              background-color: $button-bg-color-hover;
+            }
+          }
+        }
+
+        &__userbar {
+          display: block;
+          float: left;
+          vertical-align: middle;
+          height: 100%;
+
+          margin-left: 20px;
+
+          &__picture {
+            position: relative;
+            top: 5px;
+          }
+
+          &__name {
+            display: inline-block;
+            position: relative;
+            top: -10px;
+            color: $username-font-color;
+            font-family: Jura;
+            font-size: 14pt;
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+
+    &__content {
+      display: block;
+      padding: 25px 0;
+      margin: 0 auto;
+      width: $primary-width;
+      // background-color: #66A1D2;
+      overflow: auto;
+      height: 100%;
+    }
+  }
+}

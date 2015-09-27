@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Vasily Alibabaevich
+  email: vasya@ali.com
+  password_digest: foobar
+  date_of_birth: 2015-09-18
+
+two:
+  name: MyString
+  email: My@String2
+  password_digest: baroof
+  date_of_birth: 2015-09-18

@@ -1,0 +1,11 @@
+<h1>Materials#create</h1>
+<p>Find me in app/views/materials/create.html.erb</p>
+
+<%= form_for :material, method: 'POST', html: {multipart: true} do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title, default: "My material" %>
+  <%= form.label :description %>
+  <%= form.text_field :description, default: "Hello, world!" %>
+  <%= form.file_field :document %>
+  <%= form.submit "Upload file" %>
+<% end %>

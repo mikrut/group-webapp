@@ -1,0 +1,47 @@
+<div class="user__profile">
+<h1 class="user__profile__title">Настройки профиля</h1>
+
+<%= form_for(:user, method: 'POST', :html => {autocomplete: 'off'}) do |u| %>
+  <div class="user__profile__setup">
+    <div class="user__profile__setup__item">
+      <div class="user__profile__setup__item__label">
+        <%= u.label :name, "Login" %>
+      </div>
+      <div class="user__profile__setup__item__option">
+        <%= u.text_field(:name, default: @user.name) %>
+      </div>
+    </div>
+    <div class="user__profile__setup__item">
+      <div class="user__profile__setup__item__label">
+        <%= u.label :email, "Email" %>
+      </div>
+      <div class="user__profile__setup__item__option">
+        <%= u.text_field(:email, default: @user.email) %>
+      </div>
+    </div>
+    <div class="user__profile__setup__item">
+      <div class="user__profile__setup__item__label">
+        <%= u.label :date_of_birth, "Date of birth" %>
+      </div>
+      <div class="user__profile__setup__item__option">
+        <%= u.date_field(:date_of_birth, start_year: 1980,
+          use_two_digit_numbers:true, order: [:day, :month, :year],
+          default: @user.date_of_birth) %>
+      </div>
+    </div>
+  </div>
+
+  <% if current_user.admin? %>
+  <div class="user__profile__admin">
+    <%= u.label :role %>
+    <%= u.label :role, "User"%>
+    <%= u.radio_button :role, :user, checked: @user.user? %>
+    <%= u.label :role, "Admin" %>
+    <%= u.radio_button :role, :admin, checked: @user.admin?%>
+  </div>
+  <% end %>
+
+  <%= u.submit "Change", class: "user__profile__submit" %>
+<% end %>
+  <%= button_to "Delete", {action: "delete", id: @user.id}, class: "user__profile__delete" %>
+</div>

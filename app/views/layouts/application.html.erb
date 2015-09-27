@@ -8,7 +8,47 @@
 </head>
 <body>
 
-<%= yield %>
+  <div class="app">
+    <div class="app__wrapper">
+      <div class="app__wrapper__topwrapper">
+        <header class="app__wrapper__topwrapper__topbar">
+          <nav class="app__wrapper__topwrapper__topbar__menu">
+            <a class="app__wrapper__topwrapper__topbar__menu__main">MyWebSite</a>
+            <ul class="app__wrapper__topwrapper__topbar__menu__list">
+              <li class="app__wrapper__topwrapper__topbar__menu__list__item">Timetable</li>
+              <li class="app__wrapper__topwrapper__topbar__menu__list__item">About group</li>
+              <li class="app__wrapper__topwrapper__topbar__menu__list__item">Files</li>
+            </ul>
+          </nav>
+
+          <%= form_tag("/search", method: "get", class: "app__wrapper__topwrapper__topbar__search") do %>
+            <%= text_field_tag :q, nil, class: "app__wrapper__topwrapper__topbar__search__input" %>
+            <%= submit_tag "Search", class: "app__wrapper__topwrapper__topbar__search__submit" %>
+          <% end %>
+
+          <% if logged_in? %>
+          <div class="app__wrapper__topwrapper__topbar__userbar">
+            <img class="app__wrapper__topwrapper__topbar__userbar__picture" width="40" height="40"
+              src="http://lorempixel.com/40/40/people/"/>
+
+            <div class="app__wrapper__topwrapper__topbar__userbar__name">
+              <%= link_to controller: 'user', action: 'read', id: current_user.id do %>
+                <%= current_user.name %>
+              <% end %>
+            </div>
+
+            <%= link_to controller: 'user', action: 'logout' do %>
+              <%= image_tag("/img/exit.png", size: "30") %>
+            <% end %>
+          </div>
+          <% end %>
+        </header>
+      </div>
+      <div class="app__wrapper__content">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
