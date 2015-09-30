@@ -23,7 +23,7 @@
 
           <%= form_tag("/search", method: "get", class: "app__wrapper__topwrapper__topbar__search") do %>
             <%= text_field_tag :q, nil, class: "app__wrapper__topwrapper__topbar__search__input" %>
-            <%= submit_tag "Search", class: "app__wrapper__topwrapper__topbar__search__submit" %>
+            <%= button_tag "Search", class: "app__wrapper__topwrapper__topbar__search__submit" %>
           <% end %>
 
           <% if logged_in? %>

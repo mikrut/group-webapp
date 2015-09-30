@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924165510) do
+ActiveRecord::Schema.define(version: 20150928085102) do
+
+  create_table "disciplines", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "materials", force: :cascade do |t|
     t.string   "title",                 limit: 255
@@ -22,7 +29,12 @@ ActiveRecord::Schema.define(version: 20150924165510) do
     t.string   "document_content_type", limit: 255
     t.integer  "document_file_size",    limit: 4
     t.datetime "document_updated_at"
+    t.integer  "user_id",               limit: 4
+    t.integer  "discipline_id",         limit: 4
   end
+
+  add_index "materials", ["discipline_id"], name: "index_materials_on_discipline_id", using: :btree
+  add_index "materials", ["user_id"], name: "index_materials_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",            limit: 255

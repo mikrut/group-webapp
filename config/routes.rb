@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'discipline/create'
+
+  get 'discipline/read'
+
+  get 'discipline/update'
+
+  get 'discipline/delete'
+
+  get 'discipline/listMaterials'
+
+  get 'discipline/listPublications'
+
   get 'materials/download/:id' => 'materials#download'
 
   get 'materials/create'
@@ -6,7 +18,7 @@ Rails.application.routes.draw do
 
   get 'materials/read/:id' => 'materials#read'
 
-  get 'materials/update'
+  post 'materials/update'
 
   get 'materials/delete'
 

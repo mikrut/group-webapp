@@ -2,6 +2,7 @@ class MaterialsController < ApplicationController
   def create
     if request.method_symbol == :post
       uploaded = Material.new(material_params)
+      uploaded.user = current_user
       uploaded.save
 
       redirect_to action: 'read', id: uploaded.id
@@ -31,6 +32,15 @@ class MaterialsController < ApplicationController
   end
 
   def update
+    begin
+      mat = Material.find params[:material][:id]
+      if mat.user == current_user || current_user.admin?
+        mat.update params.require(:material).permit(:title, :description)
+      end
+      redirect_to action: 'read', id: mat.id
+    rescue
+      redirect_to '/'
+    end
   end
 
   def delete

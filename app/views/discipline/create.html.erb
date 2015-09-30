@@ -1,0 +1,13 @@
+<div class="discipline__create">
+
+  <%= form_for :discipline, method: 'POST' do |form| %>
+    <%= form.label :name, class:"discipline__create__label" %>
+    <%= form.text_field :name, class:"discipline__create__title", value: "Discipline" %>
+
+    <%= form.label :description, class:"discipline__create__label" %>
+    <%= form.text_area :description, class:"discipline__create__description" %>
+
+    <%= form.submit "Create discipline" %>
+  <% end %>
+
+</div>

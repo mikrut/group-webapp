@@ -1,6 +1,19 @@
 <h1>Materials#read</h1>
 <p>Find me in app/views/materials/read.html.erb</p>
 
-<%= @mat.title %>
-<%= @mat.description %>
-<%= link_to 'Download', @mat.document.url %>
+<% if current_user == @mat.user then %>
+  <%= form_for :material, url: {action: :update}, method: 'POST' do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title, value: @mat.title %>
+  <%= form.label :description %>
+  <%= form.text_field :description, value: @mat.description %>
+  <%= form.hidden_field :id, value: @mat.id %>
+  <%= form.submit "Update file info" %>
+<% end %>
+<% else %>
+  <%= @mat.title %>
+  <%= @mat.description %>
+<% end %>
+  <%= @mat.user.name %>
+  <%= link_to 'Download', @mat.document.url %>
+

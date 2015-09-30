@@ -1,0 +1,80 @@
+// Place all the styles related to the discipline controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$top-divider-color: #FFED74;
+
+.title {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  font-size: 24pt;
+}
+
+.description {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14pt;
+  display: block;
+  width: 100%;
+  min-height: 200px;
+  resize: none;
+}
+
+.discipline {
+  &__info {
+    &__title {
+      @extend .title;
+    }
+
+    &__section {
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: normal;
+      margin-bottom: 5px;
+    }
+
+
+    &__description {
+      @extend .description;
+    }
+
+    &__lecturers {
+      margin: 10px 0;
+      padding: 10px 0;
+      border-top: 1px solid $top-divider-color;
+      border-bottom: 1px solid $top-divider-color;
+
+      &__person {
+        display: block;
+        width: 100px;
+        text-align: center;
+        margin: 0 5px;
+
+        &__img {
+          display: block;
+          margin: 0 auto;
+        }
+
+        &__name {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  &__create {
+    &__label {
+      display: block;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 14pt;
+      margin-top: 10px;
+    }
+
+    &__title {
+      @extend .title;
+    }
+
+    &__description {
+      @extend .description;
+    }
+  }
+}

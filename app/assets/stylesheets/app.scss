@@ -15,7 +15,7 @@ $input-focus-shadow: #FFD774;
 
 $button-bg-color: #FFED74;
 $button-bg-color-hover: #FFC841;
-$button-border-color: #FFE641;
+$button-border-color: #7D6D00;
 $button-font-color: #26006F;
 
 $username-font-color: #FFDE00;
@@ -108,13 +108,15 @@ html, body {
           }
 
           &__submit {
-            border-color: $button-border-color;
+            border: 2px solid $button-border-color;
             background-color: $button-bg-color;
+            background-image: linear-gradient(to bottom, #FFD774, $button-bg-color);
             color: $button-font-color;
-            padding: 5px 15px;
+            padding: 3px 12px;
 
             &:hover {
               background-color: $button-bg-color-hover;
+              background-image: linear-gradient(to bottom, darken(#FFD774, 15%), darken($button-bg-color, 15%));
             }
           }
         }
@@ -147,12 +149,12 @@ html, body {
 
     &__content {
       display: block;
-      padding: 25px 0;
+      padding: 25px 25px;
       margin: 0 auto;
       width: $primary-width;
       // background-color: #66A1D2;
       overflow: auto;
-      height: 100%;
+      min-height: 100%;
     }
   }
 }
