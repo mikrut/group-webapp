@@ -4,7 +4,7 @@ class Material < ActiveRecord::Base
   validates :title, :description, length: {minimum: 1, maximum: 128}
 
   has_attached_file :document,
-    :path => ":rails_root/uploads/:class/:basename:extension",
+    :path => ":rails_root/uploads/:class/:id/:basename:extension",
     :url  => '/materials/download/:id'
 
   validates_attachment_presence :document

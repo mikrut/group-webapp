@@ -11,11 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928085102) do
+ActiveRecord::Schema.define(version: 20151006101000) do
+
+  create_table "articles", force: :cascade do |t|
+    t.string   "title",         limit: 255
+    t.text     "contents",      limit: 65535
+    t.integer  "author_id",     limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "discipline_id", limit: 4
+  end
+
+  add_index "articles", ["author_id"], name: "fk_rails_6fc3b668ee", using: :btree
+  add_index "articles", ["discipline_id"], name: "index_articles_on_discipline_id", using: :btree
 
   create_table "disciplines", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "group_id",    limit: 4
+  end
+
+  add_index "disciplines", ["group_id"], name: "index_disciplines_on_group_id", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.integer  "semester",      limit: 4
+    t.integer  "cathedra",      limit: 4
+    t.string   "faculty",       limit: 255
+    t.string   "faculty_name",  limit: 255
+    t.string   "cathedra_name", limit: 255
+    t.integer  "index",         limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
@@ -44,6 +70,13 @@ ActiveRecord::Schema.define(version: 20150928085102) do
     t.datetime "updated_at",                  null: false
     t.integer  "role",            limit: 4
     t.string   "password_digest", limit: 255
+    t.integer  "group_id",        limit: 4
   end
 
+  add_index "users", ["group_id"], name: "index_users_on_group_id", using: :btree
+
+  add_foreign_key "articles", "disciplines"
+  add_foreign_key "articles", "users", column: "author_id"
+  add_foreign_key "disciplines", "groups"
+  add_foreign_key "users", "groups"
 end

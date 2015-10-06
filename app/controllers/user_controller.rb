@@ -1,14 +1,17 @@
 class UserController < ApplicationController
+  skip_before_filter :authorize, only: [:create, :login]
+
   def create
+    redirect_to action: :read, id: current_user.id if logged_in?
   end
 
   def login
     user = User.find_by(name: params[:user][:name])
     if user && user.authenticate(params[:user][:password])
       log_in user
-      redirect_to action: 'read', id: user.id
+      redirect_to action: :read, id: user.id
     else
-      redirect_to '/user/login'
+      redirect_to action: :create
     end
   end
 
@@ -29,11 +32,12 @@ class UserController < ApplicationController
   end
 
   def updatePOST
-    required = [:name, :email, :date_of_birth]
+    permitted = [:name, :email, :date_of_birth]
+    permitted.push(:role) if current_user.admin?
     begin
-      if logged_in? and params.has_key? :id and params.has_key? :user then
-        user = User.find(params[:id])
-        user.update(params[:user]) if (current_user == user or current_user.admin?) and (current_user.admin? == params[:user].has_key?(:role))
+      user = User.find(params[:id])
+      if (current_user == user or current_user.admin?) then
+        user.update(params.require(:user).permit(permitted))
       end
     rescue
     end
@@ -44,7 +48,7 @@ class UserController < ApplicationController
     begin
       if logged_in?
         user = User.find(id: params[:id])
-        user.delete if user and (user == current_user or current_user.admin?)
+        user.delete if user == current_user or current_user.admin?
         log_out
       end
     rescue

@@ -10,14 +10,14 @@ class MaterialsController < ApplicationController
   end
 
   def material_params
-    params.require(:material).permit(:title, :description, :document)
+    params.require(:material).permit(:title, :description, :document, :discipline_id)
   end
 
   def read
     begin
       @mat = Material.find(params[:id])
     rescue
-      redirect_to '/'
+      raise ActionController::RoutingError.new('Not Found')
     end
   end
 
@@ -27,7 +27,7 @@ class MaterialsController < ApplicationController
 
     send_file @document.document.path, :type => @document.document_content_type, :disposition => 'inline'
     rescue
-      redirect_to '/'
+      raise ActionController::RoutingError.new('Not Found')
     end
   end
 
@@ -35,14 +35,24 @@ class MaterialsController < ApplicationController
     begin
       mat = Material.find params[:material][:id]
       if mat.user == current_user || current_user.admin?
-        mat.update params.require(:material).permit(:title, :description)
+        mat.update params.require(:material).permit(:title, :description, :discipline_id)
       end
       redirect_to action: 'read', id: mat.id
     rescue
-      redirect_to '/'
+      raise ActionController::RoutingError.new('Not Found')
     end
   end
 
   def delete
+    begin
+      material = Material.find params[:material][:id]
+      material.delete if current_user.admin? or current_user == material.user
+    rescue
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def list_materials
+    @materials = Material.limit(10)
   end
 end

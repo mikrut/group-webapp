@@ -2,18 +2,28 @@
 <p>Find me in app/views/materials/read.html.erb</p>
 
 <% if current_user == @mat.user then %>
-  <%= form_for :material, url: {action: :update}, method: 'POST' do |form| %>
-  <%= form.label :title %>
-  <%= form.text_field :title, value: @mat.title %>
-  <%= form.label :description %>
-  <%= form.text_field :description, value: @mat.description %>
-  <%= form.hidden_field :id, value: @mat.id %>
-  <%= form.submit "Update file info" %>
-<% end %>
+  <%= form_for :material, url: {action: :update}, method: 'POST', html: {autocomplete: 'off'} do |form| %>
+
+    <%= form.label :title %>
+    <%= form.text_field :title, value: @mat.title %>
+
+    <%= form.label :description %>
+    <%= form.text_field :description, value: @mat.description %>
+
+    <%= form.label :discipline %>
+    <%= form.select :discipline_id,
+      options_for_select(Discipline.all.map{|d|[d.name, d.id]}.insert(0, ["None", nil]), @mat.discipline_id) %>
+
+
+    <%= form.hidden_field :id, value: @mat.id %>
+
+    <%= form.submit "Update file info" %>
+  <% end %>
 <% else %>
   <%= @mat.title %>
   <%= @mat.description %>
 <% end %>
   <%= @mat.user.name %>
   <%= link_to 'Download', @mat.document.url %>
+  <%= link_to 'Delete', action: :delete, id: @mat.id %>
 

@@ -1,2 +1,14 @@
-<h1>Discipline#listPublications</h1>
-<p>Find me in app/views/discipline/listPublications.html.erb</p>
+<div class="discipline__listPublications">
+
+<h1 class="discipline__listPublications__title">Discipline#listPublications</h1>
+
+<%= link_to "new!", controller: :article, action: :create %>
+
+<ul class="discipline__listPublications__list">
+<% @discipline.articles.each do |article| %>
+  <li class="discipline__listPublications__list__article">
+    <%= link_to article.title, controller: :article, action: :read, id: article.id %>
+  </li>
+<% end %>
+</ul>
+</div>

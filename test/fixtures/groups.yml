@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  semester: 1
+  cathedra: 1
+  faculty: 1
+  faculty_name: MyString
+  cathedra_name: MyString
+  index: 1
+  disciplines_id: 
+  users_id: 
+
+two:
+  semester: 1
+  cathedra: 1
+  faculty: 1
+  faculty_name: MyString
+  cathedra_name: MyString
+  index: 1
+  disciplines_id: 
+  users_id: 

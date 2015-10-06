@@ -1,0 +1,23 @@
+<div class="article__read">
+
+<%= form_tag_or_nothing current_user.admin?, {action: :update, id: @article.id}, method: 'POST' do %>
+
+
+  <%= input_or_read :article, :title, current_user.admin?,
+    'h1', :text_field,
+    @article.title,
+    class: "article__read__title" %>
+  <br/>
+
+  <%= input_or_read :article, :contents, current_user.admin?,
+    'div', :text_area,
+    @article.contents,
+    class: "article__read__contents" %>
+  <br/>
+
+  <% if current_user.admin? %>
+    <%= submit_tag "Save changes", class: "article__read_save" %>
+  <% end %>
+<% end %>
+
+</div>

@@ -1,11 +1,17 @@
-<h1>Materials#create</h1>
-<p>Find me in app/views/materials/create.html.erb</p>
+<h1>Upload your materials</h1>
 
 <%= form_for :material, method: 'POST', html: {multipart: true} do |form| %>
   <%= form.label :title %>
   <%= form.text_field :title, default: "My material" %>
+
   <%= form.label :description %>
   <%= form.text_field :description, default: "Hello, world!" %>
+
+  <%= form.label :discipline %>
+  <%= form.select :discipline_id,
+    options_for_select(Discipline.all.map{|d|[d.name, d.id]}.insert(0, ["None", nil])) %>
+
   <%= form.file_field :document %>
+
   <%= form.submit "Upload file" %>
 <% end %>

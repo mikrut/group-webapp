@@ -1,0 +1,15 @@
+<div class="materials">
+  <div class="materials__title">Загруженные материалы</div>
+
+  <%= link_to 'Upload', action: :create, class: "materials__upload" %>
+
+  <ul class="materials__list">
+  <% @materials.each do |material| %>
+    <li class="materials__list__item">
+      <%= link_to material.title, action: :read, id: material.id %>
+      <%= material.description %>
+      <%= link_to 'Download', material.document.url %>
+    </li>
+  <% end %>
+  </ul>
+</div>

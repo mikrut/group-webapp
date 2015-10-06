@@ -1,2 +1,13 @@
-<h1>Discipline#listMaterials</h1>
-<p>Find me in app/views/discipline/listMaterials.html.erb</p>
+<div class="discipline__listMaterials">
+
+<h1 class="discipline__listMaterials__title">Discipline#listMaterials</h1>
+
+<ul class="discipline__listMaterials__list">
+<% @discipline.materials.each do |material| %>
+  <li class="discipline__listMaterials__list__material">
+    <%= material.title %>
+    <%= link_to 'Download', material.document.url %>
+  </li>
+<% end %>
+</ul>
+</div>

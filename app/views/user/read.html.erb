@@ -7,13 +7,17 @@
         class="userpage__info__who__image"/>
       <div class="userpage__info__who__name">
         <%= @user.name %>
+
+        <% if current_user == @user or current_user.admin? %>
+        <%= link_to 'Edit', action: :update, id: @user.id %>
+        <% end %>
       </div>
       <div class="userpage__info__who__role">
         <%= if @user.admin? then "Administrator"
             else "User" end %>
       </div>
       <div class="userpage__info__who__group">
-        Л2-42
+        <%= @user.group.title %>
       </div>
       <div class="userpage__info__who__birthday">
         Was born: <time><%= @user.date_of_birth %></time>

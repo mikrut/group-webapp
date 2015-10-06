@@ -77,4 +77,16 @@ $top-divider-color: #FFED74;
       @extend .description;
     }
   }
+
+  &__listMaterials {
+    &__title {
+      @extend .title;
+    }
+
+    &__list {
+      &__material {
+        font-family: Helvetica, Arial, sans-serif;
+      }
+    }
+  }
 }

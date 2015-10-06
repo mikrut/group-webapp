@@ -1,0 +1,18 @@
+<div class="article__create">
+
+
+  <%= form_for :article, url: {action: :new}, method: 'POST' do |a| %>
+    <%= a.label :title, class:"article__create__label" %>
+    <%= a.text_field :title, class:"article__create__title", value: "New article" %>
+
+    <%= a.label :contents, class:"article_create__contents" %>
+    <%= a.text_area :contents, class:"discipline__create__contents" %>
+
+    <%= a.select :discipline_id,
+    options_for_select(Discipline.all.map{|d|[d.name, d.id]}.insert(0, ["None", nil])) %>
+
+
+    <%= a.submit "Publish an article" %>
+  <% end %>
+
+</div>

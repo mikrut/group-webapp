@@ -1,6 +1,6 @@
 <div class="discipline__create">
 
-  <%= form_for :discipline, method: 'POST' do |form| %>
+  <%= form_for :discipline, url: {action: :new}, method: 'POST' do |form| %>
     <%= form.label :name, class:"discipline__create__label" %>
     <%= form.text_field :name, class:"discipline__create__title", value: "Discipline" %>
 
