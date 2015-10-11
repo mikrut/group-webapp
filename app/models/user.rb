@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+﻿class User < ActiveRecord::Base
   validates :name, :email, presence: true
   validates :name, :email, length: { minimum: 2, maximum: 128 }
   validates :email, uniqueness: { case_sensitive: false }

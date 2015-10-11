@@ -12,7 +12,11 @@
 
     <%= form.label :discipline %>
     <%= form.select :discipline_id,
-      options_for_select(Discipline.all.map{|d|[d.name, d.id]}.insert(0, ["None", nil]), @mat.discipline_id) %>
+                    options_for_select(
+                      Discipline.all.map{|d|[d.name, d.id]}
+                        .insert(0, ["None", nil]),
+                      @mat.discipline_id
+                    ) %>
 
 
     <%= form.hidden_field :id, value: @mat.id %>

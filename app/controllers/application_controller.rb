@@ -11,4 +11,14 @@ class ApplicationController < ActionController::Base
   def authorize
     redirect_to controller: :user, action: :login unless logged_in?
   end
+
+  def check_admin
+    unless logged_in?
+      redirect_to controller: :user, action: :login
+    else
+      unless current_user.admin?
+        redirect_to controller: :user, action: :show, id: current_user.id
+      end
+    end
+  end
 end

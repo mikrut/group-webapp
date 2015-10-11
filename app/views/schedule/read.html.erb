@@ -1,0 +1,47 @@
+<div class="schedule">
+<h1 class="schedule__title">Schedule for group <%= Group.first.title %></h1>
+
+<%= @lessons %>
+
+<table class="schedule__timetable">
+  <tbody>
+
+    <% Lesson::WEEKDAY_NAMES[0..-2].each_with_index do |weekday_name, weekday_index| %>
+      <tr class="schedule__timetable__weekday">
+        <td colspan="2"><%= weekday_name %></td>
+      </tr>
+
+      <% Lesson::TIMES.each_with_index do |time, pair_index| %>
+
+      <% current_row = @lessons[weekday_index][pair_index] %>
+
+      <%= content_tag :tr, class: "schedule__timetable__timerow", data: {pair_wday: weekday_index, pair_time: pair_index} do %>
+        <%= content_tag :td, class: "schedule__timetable__timerow__time", rowspan: current_row.class == Array ? 2 : 1 do %>
+          <%= "%02d:%02d" % [time[:begin][:hour], time[:begin][:minute]] %><br/>
+          <%= "%02d:%02d" % [time[:end][:hour], time[:end][:minute]] %>
+        <% end %>
+        <td class="schedule__timetable__timerow__pair">
+          <%= if current_row.class == Array and not current_row[0].nil?
+                current_row[0].discipline.name
+             elsif current_row.class == Lesson
+                current_row.discipline.name
+             else
+              ""
+             end %>
+        </td>
+      <% end %>
+
+      <% if current_row.class == Array %>
+      <tr class="schedule__timetable__timerow">
+        <td class="schedule__timetable__timerow__pair">
+          <%= current_row[1].discipline.name %>
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+    <% end %>
+
+  </tbody>
+</table>
+
+</div>

@@ -1,0 +1,55 @@
+<div class="schedule">
+<h1 class="schedule__title">Schedule for group <%= Group.first.title %></h1>
+
+<table class="schedule__timetable">
+  <tbody>
+
+    <% Lesson::WEEKDAY_NAMES[0..-2].each_with_index do |weekday_name, weekday_index| %>
+      <tr class="schedule__timetable__weekday">
+        <td colspan="2"><%= weekday_name %></td>
+      </tr>
+
+      <% Lesson::TIMES.each_with_index do |time, pair_index| %>
+
+      <% current_row = @lessons[weekday_index][pair_index] %>
+
+      <%= content_tag :tr, class: "schedule__timetable__timerow", data: {pair_wday: weekday_index, pair_time: pair_index} do %>
+        <%= content_tag :td, class: "schedule__timetable__timerow__time", rowspan: current_row.class == Array ? 2 : 1 do %>
+          <%= "%02d:%02d" % [time[:begin][:hour], time[:begin][:minute]] %><br/>
+          <%= "%02d:%02d" % [time[:end][:hour], time[:end][:minute]] %>
+
+          <br/><button class="schedule__timetable__timerow__time__split">Split</button>
+        <% end %>
+        <td class="schedule__timetable__timerow__pair">
+          <% current_lesson = case current_row.class
+              when Array
+                current_row[0]
+              when Lesson
+                current_row
+              else
+                nil
+              end
+              occurence_type = current_lesson.occurence_type if current_lesson
+              lesson_type = current_lesson.lesson_type if current_lesson %>
+
+          <%= update_form_for_row current_row, 0, weekday_index, pair_index,
+                (occurence_type || Lesson.occurence_types[:weekly]),
+                (lesson_type || Lesson.lesson_types[:lecture])%>
+          <br/>
+        </td>
+      <% end %>
+
+      <% if current_row.class == Array %>
+      <tr class="schedule__timetable__timerow">
+        <td class="schedule__timetable__timerow__pair">
+          <%= update_form_for_row current_row, 1, weekday_index, pair_index, occurence_type: Lesson.occurence_types[:denominator] %>
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+    <% end %>
+
+  </tbody>
+</table>
+
+</div>

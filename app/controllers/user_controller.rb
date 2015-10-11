@@ -3,6 +3,7 @@ class UserController < ApplicationController
 
   def create
     redirect_to action: :read, id: current_user.id if logged_in?
+    render layout: 'empty'
   end
 
   def login

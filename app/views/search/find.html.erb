@@ -5,7 +5,7 @@
   <div class="search__results">
   <% @results.each do |result| %>
     <div class="search__results__item">
-      <%= result.title %>
+      <%= link_to result.title, controller: :materials, action: :read, id: result.id %>
     </div>
   <% end %>
   </div>

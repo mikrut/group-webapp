@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006101000) do
+ActiveRecord::Schema.define(version: 20151008185009) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",         limit: 255
@@ -46,6 +46,18 @@ ActiveRecord::Schema.define(version: 20151006101000) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "lessons", force: :cascade do |t|
+    t.integer "discipline_id",  limit: 4
+    t.integer "group_id",       limit: 4
+    t.integer "weekday",        limit: 4
+    t.integer "occurence_type", limit: 4
+    t.integer "time_index",     limit: 4
+    t.integer "lesson_type",    limit: 4
+  end
+
+  add_index "lessons", ["discipline_id"], name: "index_lessons_on_discipline_id", using: :btree
+  add_index "lessons", ["group_id"], name: "index_lessons_on_group_id", using: :btree
+
   create_table "materials", force: :cascade do |t|
     t.string   "title",                 limit: 255
     t.text     "description",           limit: 65535
@@ -78,5 +90,7 @@ ActiveRecord::Schema.define(version: 20151006101000) do
   add_foreign_key "articles", "disciplines"
   add_foreign_key "articles", "users", column: "author_id"
   add_foreign_key "disciplines", "groups"
+  add_foreign_key "lessons", "disciplines"
+  add_foreign_key "lessons", "groups"
   add_foreign_key "users", "groups"
 end

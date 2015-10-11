@@ -1,0 +1,11 @@
+{
+  code: 200,
+  disciplines: [
+  <% @disciplines.each do |dis| %>
+    {
+     title: <%= dis.title %>,
+     id: <%= dis.id %>
+    }
+  <% end %>
+  ]
+}

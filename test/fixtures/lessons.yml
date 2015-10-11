@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  discipline_id: 
+  group_id: 
+  weekday: 1
+  repeat_type: 1
+  time_index: 1
+  lesson_type: 1
+
+two:
+  discipline_id: 
+  group_id: 
+  weekday: 1
+  repeat_type: 1
+  time_index: 1
+  lesson_type: 1

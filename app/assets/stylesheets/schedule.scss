@@ -1,0 +1,34 @@
+// Place all the styles related to the Schedule controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.schedule {
+  &__title {
+    @extend .title;
+  }
+
+  &__timetable {
+    &, & tr, & td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    &__weekday {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    &__timerow {
+      &__time {
+
+      }
+
+      &__pair {
+        min-width: 100px;
+        height: 20px;
+        font-size: 1.1em;
+      }
+    }
+  }
+}

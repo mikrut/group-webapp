@@ -54,4 +54,9 @@ class DisciplineController < ApplicationController
       raise ActionController::RoutingError.new('Not Found')
     end
   end
+
+  def listDisciplines
+    @disciplines = Discipline.all.map {|d| [d.name, d.id]}
+    render :json => {code: 200, data: @disciplines}
+  end
 end

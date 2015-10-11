@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'schedule/read'
+
+  get 'schedule/update'
+
+  post 'schedule/updateItem'
+
   get 'search' => 'search#find'
 
   get 'article/create'
@@ -15,6 +21,7 @@ Rails.application.routes.draw do
   get 'discipline/read/:id' => 'discipline#read'
   get 'discipline/listMaterials/:id' => 'discipline#listMaterials'
   get 'discipline/listPublications/:id' => 'discipline#listPublications'
+  get 'discipline/listDisciplines.json' => 'discipline#listDisciplines'
 
   post 'discipline/new'
   post 'discipline/update/:id' => 'discipline#update'
