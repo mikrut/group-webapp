@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008185009) do
+ActiveRecord::Schema.define(version: 20151012134715) do
+
+  create_table "absenses", force: :cascade do |t|
+    t.integer "user_id",           limit: 4
+    t.integer "lesson_id",         limit: 4
+    t.integer "week",              limit: 4
+    t.text    "reason_commentary", limit: 65535
+  end
+
+  add_index "absenses", ["lesson_id"], name: "index_absenses_on_lesson_id", using: :btree
+  add_index "absenses", ["user_id"], name: "index_absenses_on_user_id", using: :btree
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",         limit: 255

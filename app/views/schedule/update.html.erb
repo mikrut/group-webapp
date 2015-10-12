@@ -18,7 +18,10 @@
           <%= "%02d:%02d" % [time[:begin][:hour], time[:begin][:minute]] %><br/>
           <%= "%02d:%02d" % [time[:end][:hour], time[:end][:minute]] %>
 
-          <br/><button class="schedule__timetable__timerow__time__split">Split</button>
+          <br/>
+          <button class="schedule__timetable__timerow__time__split">
+            <%= current_row.class == Lesson ? 'Split' : 'Join' %>
+          </button>
         <% end %>
         <td class="schedule__timetable__timerow__pair">
           <% current_lesson = case current_row.class

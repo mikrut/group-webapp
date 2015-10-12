@@ -19,6 +19,7 @@ class Lesson < ActiveRecord::Base
 
   belongs_to :discipline
   belongs_to :group
+  has_many   :absenses
 
   ['occurence_type', 'weekday', 'lesson_type'].each do |attr|
     alias_method "old_#{attr}", "#{attr}="

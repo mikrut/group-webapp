@@ -2,9 +2,12 @@
 
 class Group < ActiveRecord::Base
   attr_accessor :title
+  validates :faculty, :cathedra, :semester, :index, presence: true
 
   has_many :disciplines
   has_many :users
+  has_many :students, class_name: :User
+  has_many :lessons
 
   public
   def title=(value)

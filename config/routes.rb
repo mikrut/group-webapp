@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   post 'article/new'
 
   post 'group/update'
-  get 'group/view'
+  get  'group/view'
+  get  'group/view_absenses'
+  get  'group/get_updated_view_absenses'
+  post 'group/create_absense'
+  post 'group/delete_absense/:id' => 'group#delete_absense'
 
   get 'discipline/create'
   get 'discipline/read/:id' => 'discipline#read'

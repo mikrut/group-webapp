@@ -1,34 +1,43 @@
 module ScheduleHelper
-  def update_form_for_row(row, index, weekday_index, pair_index,
+  include DisciplineHelper
+
+  def lesson_type_selector form, default_type = 0
+    lesson_types = Lesson::LESSON_TYPES.map.with_index {|t,i| [t, i]}
+    form.select :lesson_type,
+                options_for_select(lesson_types, default_type),
+                {},
+                {id: nil}
+  end
+
+  def update_form_for_row(row, index, weekday_index, time_index,
     occurence_type = Lesson.occurence_types[:weekly],
     lesson_type = Lesson.lesson_types[:lecture])
 
-    discipline_id = nil
-    if row.class == Array
+    discipline_id = 0
+    if row.class == Array and not row[index].nil?
       discipline_id = row[index].discipline_id
-    else
+    elsif row.class == Lesson
       discipline_id = row.discipline_id if row.class == Lesson
     end
 
-    disciplines = Discipline.all.map{|d| [d.name, d.id]}.insert(0, ["None", nil])
-    lesson_types = Lesson::LESSON_TYPES.map.with_index {|t,i| [t, i]}
-
     form_for :lesson, url: {action: :updateItem}, method: 'POST',
-      html: {autocomplete: 'off'} do |form|
+      html: {autocomplete: 'off', id: nil} do |form|
       discipline_id ||= disciplines[0][1]
-      form.select(
-        :discipline_id, options_for_select(disciplines, discipline_id)
+      discipline_selector(form, discipline_id).concat(
+        lesson_type_selector form, lesson_type
       ).concat(
-        form.select :lesson_type, options_for_select(lesson_types, lesson_type)
+        form.hidden_field :weekday,
+                          value: weekday_index,
+                          id: nil
       ).concat(
-      form.hidden_field :weekday, value: weekday_index
+        form.hidden_field :time_index,
+                          value: time_index,
+                          id: nil
       ).concat(
-      form.hidden_field :time_index, value: pair_index
-      ).concat(
-      form.hidden_field :occurence_type, value: occurence_type
-      ).concat(
-      form.submit "Update item"
-      )
+        form.hidden_field :occurence_type,
+                          value: occurence_type,
+                          id: nil
+      ).concat(form.submit "Update item", id: nil)
     end
   end
 end

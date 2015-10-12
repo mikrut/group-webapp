@@ -1,0 +1,59 @@
+<div class="group__absenses">
+  <div class="group__absenses__groupname">Группа <%= @group.title %></div>
+  <div class="group__absenses__discipline">
+    Учёт посещаемости по дисциплине
+
+    <%= form_for :absenses_table,
+                html: {
+                  autocomplete: false,
+                  class: 'group__absenses__discipline__selector'
+                } do |form| %>
+      <%= discipline_selector form, @discipline.id %>
+      Тип занятия: <%= lesson_type_selector form %>
+    <% end %>
+  </div>
+
+  <table class="group__absenses__table">
+    <thead class="group__absenses__table__header">
+      <tr class="group__absenses__table__header__row">
+        <th class="group__absenses__table__header__row__item">№</th>
+        <th class="group__absenses__table__header__row__item">Студент</th>
+
+        <% @semester.each_with_index do |week, week_index|%>
+          <% week.each do |week_lesson| %>
+        <th class="group__absenses__table__header__row__item">
+          W<%= week_index + 1 %><br/>
+          D<%= week_lesson[:weekday] + 1 %><br/>
+          T<%= week_lesson[:time_index] + 1 %>
+        </th>
+          <% end %>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody class="group__absenses__table__body">
+      <% @group.students.each_with_index do |student, student_index| %>
+      <tr class="group__absenses__table__body__row">
+        <td class="group__absenses__table__body__row__item"><%= student_index %></td>
+        <td class="group__absenses__table__body__row__item"><%= student.name %></td>
+
+        <% @semester.each_with_index do |week, week_index|%>
+          <% week.each do |week_lesson| %>
+        <td class="group__absenses__table__body__row__item">
+          <% if @absenses.has_key?(student.name) and
+                @absenses[student.name].has_key?({
+                  week: week_index,
+                  weekday: week_lesson[:weekday],
+                  time: week_lesson[:time_index]
+                }) %>
+          Н
+          <% else %>
+          &nbsp;
+          <% end %>
+        </td>
+          <% end %>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
