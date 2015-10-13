@@ -7,10 +7,7 @@ class GroupController < ApplicationController
 
   def view_absenses
     @group = Group.first
-    @students = @group.students
     @discipline = Discipline.first
-    @absenses = get_absences_for_discipline_json @discipline
-    @semester = get_semestral_discipline_lessons @discipline
   end
 
   def get_updated_view_absenses
@@ -30,7 +27,7 @@ class GroupController < ApplicationController
         render :json => {
           code: 200,
           response: {
-            students: students.map{|s| s.name},
+            students: students.map{|s| {name: s.name, id: s.id}},
             discipline: discipline.name,
             absenses: absenses,
             semester: semester
@@ -62,19 +59,34 @@ class GroupController < ApplicationController
   end
 
   def create_absense
-    absense = Absense.new params.require(:absense).permit(:user_id, :lesson_id, :week, :reason_commentary)
-    absense.save
+    needed = [:user_id, :lesson_id, :week]
+    got = params.require(:absense)
+    begin
+      needed.each {|n| got.require n}
+      absense = Absense.new (got.permit needed)
+      absense.save
 
-    render :json => {code: 200, response: get_absense_json(absense)}
+      render :json => {code: 200, response: get_absense_json(absense)}
+    rescue Exception => e
+      render :json => {code: 400, response: {explaination: e.message}}
+    end
   end
 
   def delete_absense
     begin
-      absense = Absense.find params[:id]
+      lesson = Lesson.find_by! ({
+        time_index: params.require(:absense).require(:time_index),
+        weekday: params.require(:absense).require(:weekday)
+      })
+      absense = Absense.find_by! ({
+        week: params.require(:absense).require(:week),
+        user_id: params.require(:absense).require(:user_id),
+        lesson_id: lesson.id
+      })
       buf = get_absense_json absense
       absense.delete
       render :json => {code: 200, response: buf}
-    rescue e
+    rescue Exception => e
       render :json => {
         code: 400,
         response: {
@@ -115,7 +127,7 @@ class GroupController < ApplicationController
     semester = [].fill nil, 0, 17
     semester.map! {|v| []}
     discipline.lessons.where(lesson_type: lesson_type).order(:weekday, :time_index).each do |l|
-      data = {time_index: l.time_index, weekday: l.weekday}
+      data = {time_index: l.time_index, weekday: l.weekday, lesson_id: l.id}
       case l.occurence_type
       when 0
         semester.each {|w| w.push data}

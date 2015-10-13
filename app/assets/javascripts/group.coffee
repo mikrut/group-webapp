@@ -41,24 +41,57 @@ build_body = (body, response) ->
     tr = $('<tr class="group__absenses__table__body__row"></tr>')
     body.append tr
     tr.append("<td class=\"group__absenses__table__body__row__item\">#{student_index}</td>")
-    tr.append("<td class=\"group__absenses__table__body__row__item\">#{student}</td>")
+    tr.append("<td class=\"group__absenses__table__body__row__item\">#{student.name}</td>")
 
     for week, week_index in response.semester
       for week_lesson in week
-        td = $('<td class="group__absenses__table__body__row__item"></td>')
+        td = $('<td class="group__absenses__table__body__row__item group__absenses__table__body__row__item_visit"></td>')
         tr.append(td)
         content = ''
-        if student of response.absenses
+        if student.name of response.absenses
           obj = "{:week=>#{week_index}, :weekday=>#{week_lesson.weekday}, :time=>#{week_lesson.time_index}}"
-          if obj of response.absenses[student]
+          if obj of response.absenses[student.name]
             content = 'Н'
+            td.addClass('group__absenses__table__body__row__item_missing')
         td.text content
+        td.data('week', week_index)
+        td.data('weekday', week_lesson.weekday)
+        td.data('time_index', week_lesson.time_index)
+        td.data('user_id', student.id)
+        td.data('lesson_id', week_lesson.lesson_id)
+
+  hang_methods()
+  return
+
+hang_methods = ->
+  $('.group__absenses__table__body__row__item_visit')
+  .click (eventObject) ->
+    td = $(eventObject.target)
+    switch_absense(td)
+    return
+
+switch_absense = (td) ->
+  if td.hasClass('group__absenses__table__body__row__item_missing')
+    $.post '/group/delete_absense',
+      { absense: td.data() },
+      (response) ->
+        if response.code == 200
+          td.removeClass('group__absenses__table__body__row__item_missing')
+          td.text ''
+  else
+    $.post '/group/create_absense',
+      { absense: td.data() },
+      (response) ->
+        if response.code == 200
+          td.addClass('group__absenses__table__body__row__item_missing')
+          td.text 'Н'
   return
 
 $(document).ready ->
+  selection_form = $('.group__absenses__discipline__selector')
+  load_absenses selection_form.serialize()
   $('.group__absenses__discipline__selector select[name="absenses_table[discipline_id]"], select[name="absenses_table[lesson_type]"]')
   .change (eventObject) ->
-    #debugger;
     selection_form = $('.group__absenses__discipline__selector')
     load_absenses selection_form.serialize()
     return
