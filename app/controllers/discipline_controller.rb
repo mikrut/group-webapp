@@ -56,7 +56,10 @@ class DisciplineController < ApplicationController
   end
 
   def listDisciplines
-    @disciplines = Discipline.all.map {|d| [d.name, d.id]}
-    render :json => {code: 200, data: @disciplines}
+    @disciplines = Discipline.all
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 end

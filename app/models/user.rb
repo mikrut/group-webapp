@@ -1,4 +1,6 @@
-﻿class User < ActiveRecord::Base
+﻿#encoding=utf-8
+
+class User < ActiveRecord::Base
   validates :name, :email, presence: true
   validates :name, :email, length: { minimum: 2, maximum: 128 }
   validates :email, uniqueness: { case_sensitive: false }
@@ -15,5 +17,6 @@
   has_secure_password
 
   has_many :materials
+  has_many :absenses # Жизненно...
   belongs_to :group
 end

@@ -1,11 +1,11 @@
 <div class="search">
-<h1>Search#find</h1>
-<p>Find me in app/views/search/find.html.erb</p>
+<h1>Search</h1>
+<p>Your query: <%= @query %></p>
 
   <div class="search__results">
   <% @results.each do |result| %>
     <div class="search__results__item">
-      <%= link_to result.title, controller: :materials, action: :read, id: result.id %>
+      <%= display_small result %>
     </div>
   <% end %>
   </div>

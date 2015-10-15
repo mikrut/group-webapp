@@ -1,0 +1,3 @@
+<%= link_to lesson.discipline.name, controller: :discipline, action: :read, id: lesson.discipline.id %>
+<br/>
+<%= Lesson::LESSON_TYPES[lesson.lesson_type] %>

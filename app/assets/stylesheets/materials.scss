@@ -1,3 +1,70 @@
 // Place all the styles related to the materials controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.material {
+  &s {
+    &__title {
+      @extend .title;
+      display: inline-block;
+    }
+
+    &__upload {
+      background-color: #8ac007;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 5px;
+      margin-left: 10px;
+      display: inline-block;
+
+      &:hover {
+        background-color: darken(#ffffff, 8%);
+        color: #8ac007;
+      }
+    }
+
+    &__list {
+      list-style: outside none none;
+
+      &__item {
+
+      }
+    }
+  }
+
+  &__small {
+    &__header {
+      @extend .title;
+    }
+
+    &__main {
+      &__text {
+        @extend .text;
+      }
+
+      &__bar {
+        min-height: 40px;
+        border: 1px solid #ebeaea;
+        border-radius: 5px;
+        padding: 10px 20px;
+        vertical-algin: middle;
+
+        &__element {
+          height: 100%;
+          display: inline-block;
+          vertical-align: middle;
+          line-height: 30px;
+          box-sizing: border-box;
+          border-left: 1px solid #ebeaea;
+          padding: 0 10px;
+
+          &:first-child {
+            border-left: none;
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+}

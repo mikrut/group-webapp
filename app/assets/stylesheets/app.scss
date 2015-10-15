@@ -1,6 +1,6 @@
 @import 'https://fonts.googleapis.com/css?family=Kelly+Slab|Forum|Jura&subset=latin,cyrillic';
 
-$primary-width: 1080px;
+$primary-width: 1180px;
 
 $top-background-color: #0024E2;
 $top-background-color2: #3D59F1;
@@ -74,7 +74,11 @@ html, body {
 
             &__item {
               display: inline;
-              color: $top-font-color;
+
+              & a {
+                color: $top-font-color;
+                text-decoration: none;
+              }
 
               padding: 5px 15px;
               margin: 10px 0px;

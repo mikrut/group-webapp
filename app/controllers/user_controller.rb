@@ -16,6 +16,25 @@ class UserController < ApplicationController
     end
   end
 
+  def view_stat
+    @user = current_user
+    @absenses = {}
+    Lesson.all.each do |lesson|
+      disc_n = lesson.discipline.name
+      @absenses[disc_n] ||= {}
+      less_t = lesson.lesson_type
+      @absenses[disc_n][less_t] ||= {count: 0, total: 0}
+      factor = less_t == 0 ? 1 : 2;
+      @absenses[disc_n][less_t][:total] += 17 / factor
+    end
+
+    @user.absenses.each do |absense|
+      disc_n = absense.lesson.discipline.name
+      less_t = absense.lesson.lesson_type
+      @absenses[disc_n][less_t][:count] += 1
+    end
+  end
+
   def read
     begin
       @user = User.find(params[:id])
@@ -61,4 +80,5 @@ class UserController < ApplicationController
     log_out
     redirect_to '/user/login'
   end
+
 end

@@ -1,5 +1,10 @@
 class SearchController < ApplicationController
   def find
-    @results = Material.search params[:q]
+    @query = nil
+    @results = []
+    if params.has_key? :q
+      @query = params[:q]
+      @results = ThinkingSphinx.search params[:q]
+    end
   end
 end

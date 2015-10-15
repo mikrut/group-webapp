@@ -15,9 +15,10 @@
           <nav class="app__wrapper__topwrapper__topbar__menu">
             <a class="app__wrapper__topwrapper__topbar__menu__main">MyWebSite</a>
             <ul class="app__wrapper__topwrapper__topbar__menu__list">
-              <li class="app__wrapper__topwrapper__topbar__menu__list__item">Timetable</li>
-              <li class="app__wrapper__topwrapper__topbar__menu__list__item">About group</li>
-              <li class="app__wrapper__topwrapper__topbar__menu__list__item">Files</li>
+              <li class="app__wrapper__topwrapper__topbar__menu__list__item"><%= link_to 'Timetable', controller: :schedule, action: :read %></li>
+              <li class="app__wrapper__topwrapper__topbar__menu__list__item"><%= link_to 'About group', controller: :group, action: :view %></li>
+              <li class="app__wrapper__topwrapper__topbar__menu__list__item"><%= link_to 'Files', controller: :materials, action: :list_materials %></li>
+              <li class="app__wrapper__topwrapper__topbar__menu__list__item"><%= link_to 'Disciplines', controller: :discipline, action: :listDisciplines %></li>
             </ul>
           </nav>
 

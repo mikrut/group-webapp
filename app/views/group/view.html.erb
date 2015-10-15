@@ -19,17 +19,20 @@
     class: "group_cathedraName" %>
   <br/>
 
-<h2 class="group__subitem">Disciplines</h2>
-<div class="group__disciplines"%>
-  <% @group.disciplines.each do |discipline| %>
-    <div class="group__disciplines__item"><%= discipline.name %></div>
-  <% end %>
-</div>
-
   <% if current_user.admin? %>
     <%= submit_tag "Save changes", class: "group_save" %>
   <% end %>
 
 <% end %>
+
+<h2 class="group__subitem">Disciplines</h2>
+<div class="group__disciplines"%>
+  <% @group.disciplines.each do |discipline| %>
+    <div class="group__disciplines__item">
+      <%= render partial: 'discipline/small', locals: {discipline: discipline} %>
+    </div>
+  <% end %>
+</div>
+
 
 </div>

@@ -25,19 +25,18 @@
     </div>
   </div>
 
-  <h2 class="discipline__info__section">Материалы</h2>
+  <h2 class="discipline__info__section"><%= link_to 'Материалы', action: :listMaterials %></h2>
   <ul class="discipline__info__materials">
     <% @discipline.materials.each do |material| %>
-    <li class="discipline__info__materials__element">Титульник к курсовой</li>
-    <li class="discipline__info__materials__element">ДЗ №1</li>
-    <li class="discipline__info__materials__element">МУ к выполнению ЛР...</li>
+    <li class="discipline__info__materials__element"><%= link_to material.title, controller: :materials, action: :read, id: material.id %></li>
     <% end %>
   </ul>
 
-  <h2 class="discipline__info__section">Публикации</h2>
+  <h2 class="discipline__info__section"><%= link_to 'Публикации', action: :listPublications %></h2>
   <ul class="discipline__info__pulications">
-    <li class="discipline__info__pulications__element">Расписание приёма Пугачёва Е.К.</li>
-    <li class="discipline__info__pulications__element">Распределение на подгруппы</li>
+    <% @discipline.articles.each do |article| %>
+    <li class="discipline__info__pulications__element"><%= link_to article.title, controller: :article, action: :read, id: article.id %></li>
+    <% end %>
   </ul>
 
 </div>

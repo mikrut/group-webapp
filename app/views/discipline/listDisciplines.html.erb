@@ -1,0 +1,12 @@
+<div class="discipline__listDisciplines">
+
+<h1 class="discipline__listDisciplines__title">Discipline#listDisciplines</h1>
+
+<ul class="discipline__listDisciplines__list">
+<% @disciplines.each do |discipline| %>
+  <li class="discipline__listDisciplines__list__material">
+    <%= render partial: 'small', locals: {discipline: discipline} %>
+  </li>
+<% end %>
+</ul>
+</div>

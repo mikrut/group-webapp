@@ -40,4 +40,26 @@ module ScheduleHelper
       ).concat(form.submit "Update item", id: nil)
     end
   end
+
+  def display_small model
+    case model
+    when Article
+      render partial: "article/small", locals:{article: model}
+    when Material
+      render partial: "materials/small", locals:{material: model}
+    else
+      ""
+    end
+  end
+
+  def display_lesson_for_row row, row_index = 0
+    lesson = nil
+    case row
+    when Array
+      lesson = row[row_index] if not row[row_index].nil?
+    when Lesson
+      lesson = row
+    end
+    render partial: 'timetable_lesson', locals: {lesson: lesson} if not lesson.nil?
+  end
 end

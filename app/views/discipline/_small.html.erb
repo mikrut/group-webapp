@@ -1,0 +1,14 @@
+<div class="discipline__small">
+  <div class="discipline__small__name">
+    <%= link_to discipline.name, controller: :discipline, action: :read, id: discipline.id %>
+  </div>
+  <div class="discipline__small__info">
+    <div class="discipline__small__info__text">
+      <%= truncate discipline.description, length: 200 %>
+    </div>
+    <div class="discipline__small__info__stat">
+      Прикреплёно материалов: <%= discipline.materials.count %><br/>
+      Написано статей: <%= discipline.articles.count %>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,6 @@
 <div class="schedule">
 <h1 class="schedule__title">Schedule for group <%= Group.first.title %></h1>
 
-<%= @lessons %>
-
 <table class="schedule__timetable">
   <tbody>
 
@@ -21,20 +19,14 @@
           <%= "%02d:%02d" % [time[:end][:hour], time[:end][:minute]] %>
         <% end %>
         <td class="schedule__timetable__timerow__pair">
-          <%= if current_row.class == Array and not current_row[0].nil?
-                current_row[0].discipline.name
-             elsif current_row.class == Lesson
-                current_row.discipline.name
-             else
-              ""
-             end %>
+          <%= display_lesson_for_row current_row %>
         </td>
       <% end %>
 
       <% if current_row.class == Array %>
       <tr class="schedule__timetable__timerow">
         <td class="schedule__timetable__timerow__pair">
-          <%= current_row[1].discipline.name %>
+          <%= display_lesson_for_row current_row, 1 %>
         </td>
       </tr>
       <% end %>

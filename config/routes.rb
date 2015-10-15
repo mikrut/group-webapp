@@ -19,12 +19,13 @@ Rails.application.routes.draw do
   get  'group/view_absenses'
   get  'group/get_updated_view_absenses'
   post 'group/create_absense'
-  post 'group/delete_absense/:id' => 'group#delete_absense'
+  post 'group/delete_absense' => 'group#delete_absense'
 
   get 'discipline/create'
   get 'discipline/read/:id' => 'discipline#read'
   get 'discipline/listMaterials/:id' => 'discipline#listMaterials'
   get 'discipline/listPublications/:id' => 'discipline#listPublications'
+  get 'discipline/listDisciplines'
   get 'discipline/listDisciplines.json' => 'discipline#listDisciplines'
 
   post 'discipline/new'
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
   post 'user/login'
 
   get 'user/read/:id' => 'user#read'
+  get 'user/view_stat'
 
   get 'user/update/:id' => 'user#update'
   post 'user/update/:id' => 'user#updatePOST'

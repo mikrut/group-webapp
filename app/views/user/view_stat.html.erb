@@ -1,0 +1,15 @@
+<div class="user__statistics">
+  <div class="user__statistics__username"><%= @user.name %></div>
+
+  <div class="user__statistics__data">
+    <% @absenses.each do |discipline, by_type| %>
+      <% by_type.each do |lesson_type, info| %>
+    <div class="user__statistics__data__discipline">
+      <%= discipline %> (<%= Lesson::LESSON_TYPES[lesson_type] %>)
+      Пропущено: <%= info[:count] %>
+      Всего: <%= info[:total] %>
+    </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
