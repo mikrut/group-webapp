@@ -98,12 +98,11 @@ html, body {
           border-right: 1px solid $top-divider-color;
           padding: 0 20px;
 
-          margin: 0 5px;
-
           &__input {
             border: 3px solid $input-border-color;
             border-radius: 5px 5px 5px 5px;
-
+            margin: 0px !important;
+            font-size: 11pt !important;
             padding: 3px;
 
             &:focus {
@@ -117,6 +116,7 @@ html, body {
             background-image: linear-gradient(to bottom, #FFD774, $button-bg-color);
             color: $button-font-color;
             padding: 3px 12px;
+            margin: 0 !important;
 
             &:hover {
               background-color: $button-bg-color-hover;

@@ -1,0 +1,88 @@
+
+.entity {
+  &__title {
+    @extends.title;
+    display: inline-block;
+    margin: 0 10px;
+  }
+  &__subtitle {
+    @extend .title;
+    font-size: $title-size*3/5;
+    color: lighten(#000000, 30%);
+  }
+
+
+  &__content {
+    @extend .description;
+  }
+
+  &__form {
+
+    &__input-group {
+      &__label {
+        text-size: 1em;
+      }
+
+      &__control {
+        &_string, &_password {
+          margin: 2px 0;
+          @extend .text;
+        }
+
+        &_text {
+          @extend .entity__content;
+
+          min-height: 200px;
+          display: block;
+          width: 100%;
+          resize: none;
+        }
+      }
+    }
+  }
+
+  &__smallest {
+    border-top: 2px solid #ebeaea;
+    border-bottom: 2px solid #ebeaea;
+    padding: 10px;
+    width: 100%;
+    margin: 2px;
+    overflow: auto;
+
+    &__data {
+      &__name {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 16pt;
+      }
+      float: left;
+    }
+
+    &__options {
+      text-align: right;
+      float: right;
+
+      &__element {
+        height: 40px;
+        display: inline-block;
+
+        & a {
+          text-decoration: none;
+        }
+
+        &__icon {
+          display: inline-block;
+          vertical-align: top;
+          height: 40px;
+          width: 40px;
+        }
+
+        &__data {
+          display: inline-block;
+          vertical-align: bottom;
+          line-height: 40px;
+          height: 100%;
+        }
+      }
+    }
+  }
+}

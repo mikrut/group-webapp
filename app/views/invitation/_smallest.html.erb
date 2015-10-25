@@ -1,0 +1,23 @@
+<div class="entity__smallest">
+  <div class="entity__smallest__data">
+    <span class="entity__smallest__data__element">
+      #<%= invitation.id %>
+    </span>
+    <span class="entity__smallest__data__name">
+      <%= invitation.email %>
+    </span>
+    <span class="entity__smallest__data__element">
+      <%= invitation.username %>
+    </span>
+  </div>
+  <div class="entity__smallest__options">
+    <div class="entity__smallest__options__element">
+      <%= link_to 'Resend', {action: :resend, id: invitation.id},
+          {class: 'button_control'}%>
+    </div>
+    <div class="entity__smallest__options__element">
+      <%= link_to '_x_', {action: :delete, id: invitation.id},
+          {class: 'button_red'}%>
+    </div>
+  </div>
+</div>

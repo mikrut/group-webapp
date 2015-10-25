@@ -6,4 +6,5 @@ class Discipline < ActiveRecord::Base
   has_many :materials
   has_many :articles
   has_many :lessons
+  belongs_to :group
 end

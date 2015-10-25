@@ -1,35 +1,28 @@
-<div class="group">
+<div class="entity">
 
+<hgroup>
 
-<%= form_tag_or_nothing current_user.admin?, {action: :update}, method: 'POST' do %>
-
-<%= input_or_read :group, :title, current_user.admin?, 'h1', :text_field,
-    @group.title,
-    class: "group_name" %>
-  <br/>
-
-<%= input_or_read :group, :faculty_name, current_user.admin?, 'div',
-    :text_field,
-    @group.faculty_name,
-    class: "group_facultyName" %>
-  <br/>
-
-<%= input_or_read :group, :cathedra_name, current_user.admin?, 'div', :text_field,
-    @group.cathedra_name,
-    class: "group_cathedraName" %>
-  <br/>
-
-  <% if current_user.admin? %>
-    <%= submit_tag "Save changes", class: "group_save" %>
-  <% end %>
-
+<div class="entity__title">
+  <h1><%= @group.title %></h1>
+</div><% if current_user.admin? %>
+  <%= link_to 'Редактировать', {action: :view_update}, {class: 'button button_ok'} %>
 <% end %>
+
+<div class="entity__subtitle">
+  <%= @group.faculty_name %>
+</div>
+
+<div class="entity__subtitle">
+  <%= @group.cathedra_name %>
+</div>
+
+</hgroup>
 
 <h2 class="group__subitem">Disciplines</h2>
 <div class="group__disciplines"%>
   <% @group.disciplines.each do |discipline| %>
     <div class="group__disciplines__item">
-      <%= render partial: 'discipline/small', locals: {discipline: discipline} %>
+      <%= render partial: 'discipline/smallest', locals: {discipline: discipline} %>
     </div>
   <% end %>
 </div>

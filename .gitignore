@@ -21,6 +21,9 @@
 
 # Ignore all secrets
 /config/secrets.yml
+/config/vk_api.yml
+/config/initializers/setup_mail.rb
+/config/email.yml
 
 # Ignore uploads
 uploads/*

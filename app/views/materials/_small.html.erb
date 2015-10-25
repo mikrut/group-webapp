@@ -1,5 +1,7 @@
 <div class="material__small">
   <h2 class="material__small__header"><%= link_to material.title, controller: :materials, action: :read, id: material.id %></h2>
+  <%= link_to 'Download', material.document.url, class: 'button_ok' %>
+
   <div class="material__small__main">
     <div class="material__small__main__text">
       <%= truncate(material.description, length: 200) %>

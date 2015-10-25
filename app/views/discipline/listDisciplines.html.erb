@@ -1,6 +1,10 @@
 <div class="discipline__listDisciplines">
 
-<h1 class="discipline__listDisciplines__title">Discipline#listDisciplines</h1>
+<h1 class="discipline__listDisciplines__title">Our disciplines</h1>
+
+<% if current_user.admin? %>
+<%= link_to 'Создать', {action: :create}, {class: "button_ok"} %>
+<% end %>
 
 <ul class="discipline__listDisciplines__list">
 <% @disciplines.each do |discipline| %>

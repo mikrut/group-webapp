@@ -1,0 +1,33 @@
+<%= form_for :user, url: {action: :do_register}, method: 'POST',
+    html:{class: 'entity__form'} do |u| %>
+  <%= u.hidden_field :key, value: @invitation.secret_key %>
+
+  <div class="entity__form__input-group">
+    <%= u.label :name, class:"entity__form__input-group__label" %>
+    <%= u.text_field :name,
+        class:"entity__form__input-group__control_string",
+        value: @invitation.username %>
+  </div>
+
+  <div class="entity__form__input-group">
+    <%= u.label :email, class:"entity__form__input-group__label" %>
+    <%= u.text_field :email,
+        class:"entity__form__input-group__control_string",
+        value: @invitation.email %>
+  </div>
+
+  <div class="entity__form__input-group">
+    <%= u.label :password, class:"entity__form__input-group__label" %>
+    <%= u.password_field :password,
+        class:"entity__form__input-group__control_string" %>
+  </div>
+
+  <div class="entity__form__input-group">
+    <%= u.label :password_confirmation, class:"entity__form__input-group__label" %>
+    <%= u.password_field :password_confirmation,
+        class:"entity__form__input-group__control_string" %>
+  </div>
+
+  <%= u.submit "Create a profile!", class: 'button_ok'%>
+
+<% end %>

@@ -1,2 +1,32 @@
-<h1>Group#update</h1>
-<p>Find me in app/views/group/update.html.erb</p>
+<%= form_for :group, action: :update, method: 'POST', html: {class: 'entity__form'} do |g| %>
+
+<div class="entity__form__input-group">
+
+  <div class="entity__form__input-group__label">Индекс группы</div>
+  <%= g.text_field :title, default: @group.title,
+    class: ["entity__form__input-group__control",
+            "entity__form__input-group__control_string"] %>
+
+</div>
+
+<div class="entity__form__input-group">
+
+  <div class="entity__form__input-group__label">Название факультета (полностью)</div>
+  <%= g.text_field :faculty_name, default: @group.faculty_name,
+    class: ["entity__form__input-group__control",
+            "entity__form__input-group__control_string"] %>
+
+</div>
+
+<div class="entity__form__input-group">
+
+  <div class="entity__form__input-group__label">Название кафедры (полностью)</div>
+  <%= g.text_field :cathedra_name, default: @group.cathedra_name,
+    class: ["entity__form__input-group__control",
+            "entity__form__input-group__control_string"] %>
+
+</div>
+
+<%= g.submit "Save changes", class: "group_save" %>
+
+<% end %>

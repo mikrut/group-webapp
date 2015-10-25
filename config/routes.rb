@@ -1,20 +1,30 @@
 Rails.application.routes.draw do
 
+  get 'invitation/create'
+  get 'invitation/delete'
+  get 'invitation/list'
+  post 'invitation/resend'
+  post 'invitation/create' => 'invitation#new_invitation'
+
+  post 'invitation/register_user' => 'invitation#do_register'
+  get 'invitation/register'
+
   get 'schedule/read'
-
   get 'schedule/update'
-
   post 'schedule/updateItem'
 
   get 'search' => 'search#find'
+  get 'search_h' => 'search#find_helper'
 
   get 'article/create'
   get 'article/read/:id' => 'article#read'
+  get 'article/update/:id' => 'article#view_update'
   post 'article/update/:id' => 'article#update'
   get 'article/delete'
   post 'article/new'
 
-  post 'group/update'
+  post 'group/update' => 'group#do_update'
+  get  'group/update' => 'group#view_update'
   get  'group/view'
   get  'group/view_absenses'
   get  'group/get_updated_view_absenses'

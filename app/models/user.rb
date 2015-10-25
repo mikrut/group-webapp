@@ -6,7 +6,10 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: { case_sensitive: false }
   validate :email_has_one_atSign?
 
-  before_save { self.email = email.downcase }
+  before_save do
+    self.email = email.downcase
+    self.group = Group.first
+  end
 
   def email_has_one_atSign?
     errors.add(:email, "is not valid") unless (email.count "@") == 1
@@ -17,6 +20,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :materials
+  has_many :articles
   has_many :absenses # Жизненно...
   belongs_to :group
 end

@@ -1,0 +1,19 @@
+<%= form_for :invitation, url:{action: :new_invitation},
+   method: 'POST',
+   html:{class: 'entity__form'} do |i| %>
+
+  <div class="entity__form__input-group">
+    <%= i.label :username, class:"entity__form__input-group__label" %>
+    <%= i.text_field :username,
+        class:"entity__form__input-group__control_string" %>
+  </div>
+
+  <div class="entity__form__input-group">
+    <%= i.label :email, class:"entity__form__input-group__label" %>
+    <%= i.text_field :email,
+        class:"entity__form__input-group__control_string" %>
+  </div>
+
+  <%= i.submit "Create an invitation", class: 'button_ok'%>
+
+<% end %>

@@ -1,18 +1,38 @@
-<div class="article__create">
+<div class="entity">
+
+  <% if @article.nil? %>
+    <% @article = Article.new %>
+    <% action = :new %>
+  <% else %>
+    <% action = :update %>
+  <% end %>
+
+  <%= form_for :article, url: {action: action, id: @article.id},
+      method: 'POST', html: {class: 'entity__form'} do |a| %>
+
+    <div class="entity__form__input-group">
+      <%= a.label :title, class:"entity__form__input-group__label" %>
+      <%= a.text_field :title,
+          class:"entity__form__input-group__control_string",
+          default: @article.title %>
+    </div>
+
+    <div class="entity__form__input-group">
+      <%= a.label :contents, class:"entity__form__input-group__label" %>
+      <%= a.text_area :contents,
+          class:"entity__form__input-group__control_text",
+          default: @article.contents %>
+    </div>
+
+    <div class="entity__form__input-group">
+      <%= a.select :discipline_id,
+      Discipline.all.collect {|d|[d.name, d.id]},
+      {include_blank: "None"},
+      class: "entity__form__input-group__control" %>
+    </div>
 
 
-  <%= form_for :article, url: {action: :new}, method: 'POST' do |a| %>
-    <%= a.label :title, class:"article__create__label" %>
-    <%= a.text_field :title, class:"article__create__title", value: "New article" %>
-
-    <%= a.label :contents, class:"article_create__contents" %>
-    <%= a.text_area :contents, class:"discipline__create__contents" %>
-
-    <%= a.select :discipline_id,
-    options_for_select(Discipline.all.map{|d|[d.name, d.id]}.insert(0, ["None", nil])) %>
-
-
-    <%= a.submit "Publish an article" %>
+    <%= a.submit "Publish an article", class: 'button_ok'%>
   <% end %>
 
 </div>

@@ -1,0 +1,30 @@
+<div class="entity__smallest">
+  <div class="entity__smallest__data">
+    <%= link_to discipline.name,
+        {controller: :discipline, action: :read, id: discipline.id},
+        {class: 'entity__smallest__data__name'}%>
+  </div>
+  <div class="entity__smallest__options">
+    <div class="entity__smallest__options__element">
+      <%= link_to controller: :discipline, action: :listMaterials, id: discipline.id do %>
+      <span class="entity__smallest__options__element__icon">
+        <img src="/img/download.svg" width="30px" height="30px"/>
+      </span>
+      <span class="entity__smallest__options__element__data">
+        <%= discipline.materials.count %>
+      </span>
+      <% end %>
+    </div>
+    <div class="entity__smallest__options__element">
+      <%= link_to controller: :discipline, action: :listPublications, id: discipline.id do %>
+      <span class="entity__smallest__options__element__icon">
+        <img src="/img/document.svg" width="38px" height="38px"/>
+      </span>
+      <span class="entity__smallest__options__element__data">
+        <%= discipline.articles.count %>
+      </span>
+      <% end %>
+    </div>
+  </div>
+  <div style="clear: both;"></div>
+</div>

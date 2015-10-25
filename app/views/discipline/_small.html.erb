@@ -1,14 +1,29 @@
 <div class="discipline__small">
-  <div class="discipline__small__name">
+  <h2 class="discipline__small__name">
     <%= link_to discipline.name, controller: :discipline, action: :read, id: discipline.id %>
-  </div>
+  </h2>
   <div class="discipline__small__info">
-    <div class="discipline__small__info__text">
-      <%= truncate discipline.description, length: 200 %>
-    </div>
+    <div class="discipline__small__info__text"><%= truncate discipline.description, length: 200 %></div>
     <div class="discipline__small__info__stat">
-      Прикреплёно материалов: <%= discipline.materials.count %><br/>
-      Написано статей: <%= discipline.articles.count %>
+      <div class="discipline__smallest__info__element">
+      <%= link_to controller: :discipline, action: :listMaterials, id: discipline.id do %>
+      <span class="discipline__smallest__info__element__icon">
+        <img src="/img/download.svg" width="30px" height="30px"/>
+      </span>
+      <span class="discipline__smallest__info__element__data">
+        <%= discipline.materials.count %>
+      </span>
+      <% end %>
+    </div>
+    <div class="discipline__smallest__info__element">
+      <%= link_to controller: :discipline, action: :listPublications, id: discipline.id do %>
+      <span class="discipline__smallest__info__element__icon">
+        <img src="/img/document.svg" width="38px" height="38px"/>
+      </span>
+      <span class="discipline__smallest__info__element__data">
+        <%= discipline.articles.count %>
+      </span>
+      <% end %>
     </div>
   </div>
 </div>

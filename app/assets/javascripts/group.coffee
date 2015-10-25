@@ -89,7 +89,8 @@ switch_absense = (td) ->
 
 $(document).ready ->
   selection_form = $('.group__absenses__discipline__selector')
-  load_absenses selection_form.serialize()
+  if selection_form.length
+    load_absenses selection_form.serialize()
   $('.group__absenses__discipline__selector select[name="absenses_table[discipline_id]"], select[name="absenses_table[lesson_type]"]')
   .change (eventObject) ->
     selection_form = $('.group__absenses__discipline__selector')

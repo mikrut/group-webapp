@@ -1,13 +1,13 @@
 <div class="discipline__listPublications">
 
-<h1 class="discipline__listPublications__title">Discipline#listPublications</h1>
+<h1 class="discipline__listPublications__title"><%= @discipline.name %>: Публикации</h1>
 
-<%= link_to "new!", controller: :article, action: :create %>
+<%= link_to "Написать", {controller: :article, action: :create}, {class: "button_ok"} %>
 
 <ul class="discipline__listPublications__list">
 <% @discipline.articles.each do |article| %>
   <li class="discipline__listPublications__list__article">
-    <%= link_to article.title, controller: :article, action: :read, id: article.id %>
+    <%= render partial: 'article/small', locals: {article: article} %>
   </li>
 <% end %>
 </ul>

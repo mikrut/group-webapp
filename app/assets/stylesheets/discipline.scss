@@ -18,7 +18,7 @@ $top-divider-color: #FFED74;
 
 
     &__description {
-      @extend .description;
+      @extend .description_edit;
     }
 
     &__lecturers {
@@ -71,6 +71,21 @@ $top-divider-color: #FFED74;
     &__list {
       &__material {
         font-family: Helvetica, Arial, sans-serif;
+      }
+    }
+  }
+
+  &__small {
+    &__name {}
+    &__info {
+      &__text {
+        @extend .description;
+      }
+
+      &__stat {
+        border: 1px solid darken(white, 8%);
+        border-radius: 3px;
+        padding: 5px;
       }
     }
   }

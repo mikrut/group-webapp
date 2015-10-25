@@ -51,11 +51,16 @@ class GroupController < ApplicationController
     end
   end
 
-  def update
+  def do_update
     group = Group.first
     group.update(params.require(:group).permit(:semester, :cathedra,
       :faculty, :faculty_name, :cathedra_name, :index, :title))
     redirect_to action: :view
+  end
+
+  def view_update
+    @group = Group.first
+    render 'update'
   end
 
   def create_absense

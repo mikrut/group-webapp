@@ -58,7 +58,7 @@ class DisciplineController < ApplicationController
   def listDisciplines
     @disciplines = Discipline.all
     respond_to do |format|
-      format.js
+      format.json
       format.html
     end
   end

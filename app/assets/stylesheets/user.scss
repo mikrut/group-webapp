@@ -14,6 +14,7 @@
     padding: 30px;
 
     &__caption {
+      @extend .title;
       text-align: center;
       text-transform: uppercase;
     }
@@ -29,27 +30,16 @@
         margin: 10px;
 
         &__name {
-
+          @extend .entity__form__input-group__label;
         }
         &__input {
-
+          @extend .entity__form__input-group__control_string;
         }
       }
 
       &__submit {
-        margin: 7px;
-
-        &__button {
-          background-color: #16D060;
-          padding: 5px;
-          border: 5px solid #108C41;
-          color: white;
-
-          &:active {
-            border-color: #16D060;
-            background-color: #108C41;
-          }
-        }
+        @extend .button_ok;
+        margin: 0 auto;
       }
     }
   }

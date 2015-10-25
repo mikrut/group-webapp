@@ -29,7 +29,25 @@ class ArticleController < ApplicationController
     redirect_to action: :read, id: article.id
   end
 
+  def view_update
+    begin
+      @article = Article.find params[:id]
+      render 'create'
+    rescue
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def delete
+    begin
+      article = Article.find params[:id]
+      discipline_id = article.discipline_id
+      article.delete
+    rescue
+      raise ActionController::RoutingError.new('Not Found')
+    end
+    redirect_to controller: :discipline, action: :listPublications,
+                id: discipline_id
   end
 
   private

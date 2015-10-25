@@ -1,0 +1,11 @@
+<div class="entity">
+<h1 class="entity__title">Список приглашений</h1>
+<%= link_to 'Создать', {action: :create}, {class: 'button_ok'} %>
+
+<div class="entity__list">
+<% @invitations.each do |invitation| %>
+  <%= render partial: 'smallest', locals: {invitation: invitation} %>
+<% end %>
+</div>
+
+</div>

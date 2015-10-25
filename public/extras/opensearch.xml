@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+    <ShortName>localhost</ShortName>
+    <Description>Сайт учебной группы</Description>
+    <Contact>admin@example.com</Contact>
+    <Url type="application/x-suggestions+json"
+     method="GET"
+     template="http://localhost:3000/search_h?q={searchTerms}"/>
+    <InputEncoding>UTF-8</InputEncoding>
+    <Url type="text/html"
+     method="GET"
+     template="http://localhost:3000/search?q={searchTerms}"/>
+    <InputEncoding>UTF-8</InputEncoding>
+</OpenSearchDescription>

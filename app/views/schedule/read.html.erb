@@ -1,5 +1,10 @@
 <div class="schedule">
-<h1 class="schedule__title">Schedule for group <%= Group.first.title %></h1>
+<h1 class="schedule__title">Schedule for group
+  <%= link_to Group.first.title, {controller: :group, action: :view} %></h1>
+<% if current_user.admin? %>
+  <%= link_to 'Редактировать', {action: :update},
+      {class: 'button_ok'} %>
+<% end %>
 
 <table class="schedule__timetable">
   <tbody>

@@ -1,5 +1,4 @@
-<h1>Materials#read</h1>
-<p>Find me in app/views/materials/read.html.erb</p>
+<h1><%= @mat.title %></h1> <%= link_to 'Download', @mat.document.url, class: 'button_ok' %>
 
 <% if current_user == @mat.user then %>
   <%= form_for :material, url: {action: :update}, method: 'POST', html: {autocomplete: 'off'} do |form| %>
@@ -24,10 +23,8 @@
     <%= form.submit "Update file info" %>
   <% end %>
 <% else %>
-  <%= @mat.title %>
   <%= @mat.description %>
 <% end %>
   <%= @mat.user.name %>
-  <%= link_to 'Download', @mat.document.url %>
-  <%= link_to 'Delete', action: :delete, id: @mat.id %>
+  <%= link_to 'Delete', {action: :delete, id: @mat.id}, class: 'button_red' %>
 

@@ -1,21 +1,85 @@
+$title-size: 24pt;
+$text-size: 14pt;
+
 
 .title {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: normal;
-  font-size: 24pt;
+  font-size: $title-size;
 }
 
 .text {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 14pt;
+  font-size: $text-size;
   margin: 20px 0;
+}
+
+h1, h2, h3 {
+  @extend .title;
+  display: inline-block;
+  margin: 0;
+  margin-top: 5px;
+}
+
+h2 {
+  font-size: $title-size*4/5;
+}
+
+p, span, div {
+  @extend .text;
+  margin: 0;
 }
 
 .description {
   @extend .text;
 
+  white-space: pre;
+}
+
+.description_edit {
+  @extend .description;
+
+  min-height: 200px;
   display: block;
   width: 100%;
-  min-height: 200px;
   resize: none;
+}
+
+@mixin invert-color($bg, $font) {
+  background-color: $bg;
+  color: $font;
+
+  &:hover {
+    color: $bg;
+    background-color: darken($font, 8%);
+  }
+}
+
+.button {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  text-decoration: none;
+  border: none;
+  padding: 5px;
+  margin-left: 10px;
+  display: inline-block;
+  margin: 2px;
+  font-size: $text-size*4/5;
+  cursor: pointer;
+
+  @include invert-color(#ffffff, #000000);
+
+  &_ok {
+    @extend .button;
+    @include invert-color(#8ac007, #ffffff);
+  }
+
+  &_control {
+    @extend .button;
+    @include invert-color(#4861E8, #ffffff);
+  }
+
+  &_red {
+    @extend .button;
+    @include invert-color(#F22922, #ffffff);
+  }
 }

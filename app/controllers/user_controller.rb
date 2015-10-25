@@ -2,7 +2,7 @@ class UserController < ApplicationController
   skip_before_filter :authorize, only: [:create, :login]
 
   def create
-    redirect_to action: :read, id: current_user.id if logged_in?
+    return redirect_to action: :read, id: current_user.id if logged_in?
     render layout: 'empty'
   end
 
