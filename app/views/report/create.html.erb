@@ -1,0 +1,38 @@
+<div class="entity">
+  <h1 class="entity__title">Формирование отчёта</h1>
+
+  <%= form_for :report, url:{action: :form},
+      method: 'POST', html: {class: 'entity__form'} do |r| %>
+    <div class="entity__form__input-group">
+      <%= r.label :date, 'Дата смотра',
+          class: 'entity__form__input-group__label' %>
+      <%= r.date_field :date, start_year: 1980,
+          use_two_digit_numbers:true, order: [:day, :month, :year],
+          class: 'entity__form__input-group__control' %>
+    </div>
+
+    <div class="entity__form__input-group">
+      <%= r.label :mentor, 'Куратор',
+          class: 'entity__form__input-group__label' %>
+      <%= r.text_field :mentor,
+          class: 'entity__form__input-group__control' %>
+    </div>
+
+    <div class="entity__form__input-group">
+      <%= r.label :decanus, 'Декан',
+          class: 'entity__form__input-group__label' %>
+      <%= r.text_field :decanus,
+          class: 'entity__form__input-group__control' %>
+    </div>
+
+    <div class="entity__form__input-group">
+      <%= r.label :zamdecanus, 'Зам. декана',
+          class: 'entity__form__input-group__label' %>
+      <%= r.text_field :zamdecanus,
+          class: 'entity__form__input-group__control' %>
+    </div>
+
+    <%= r.submit "Сформировать отчёт", class: "button_ok" %>
+  <% end %>
+
+</div>

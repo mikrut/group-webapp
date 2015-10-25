@@ -24,9 +24,9 @@
         <%= u.label :date_of_birth, "Date of birth" %>
       </div>
       <div class="user__profile__setup__item__option">
-        <%= u.date_field(:date_of_birth, start_year: 1980,
+        <%= u.date_field :date_of_birth, start_year: 1980,
           use_two_digit_numbers:true, order: [:day, :month, :year],
-          default: @user.date_of_birth) %>
+          default: @user.date_of_birth %>
       </div>
     </div>
   </div>

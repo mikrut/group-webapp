@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'report/create'
+  post 'report/form'
+
   get 'invitation/create'
   get 'invitation/delete'
   get 'invitation/list'

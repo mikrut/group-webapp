@@ -2,6 +2,7 @@
 
 class Group < ActiveRecord::Base
   attr_accessor :title
+  attr_accessor :course
   validates :faculty, :cathedra, :semester, :index, presence: true
 
   has_many :disciplines
@@ -18,5 +19,9 @@ class Group < ActiveRecord::Base
 
   def title
     "#{faculty}#{cathedra}-#{semester}#{index}"
+  end
+
+  def course
+    (semester+1)/2
   end
 end
