@@ -28,6 +28,7 @@ $primary-font: 'Times New Roman', Times, Georgia, serif;
 
   &__university {
     text-align: center;
+    margin-bottom: 20px;
   }
 
   &__title {
@@ -42,7 +43,7 @@ $primary-font: 'Times New Roman', Times, Georgia, serif;
     }
   }
 
-  &__date {
+  &__date, &__subheader {
     text-align: center;
     display: block;
     font {
@@ -104,12 +105,22 @@ $primary-font: 'Times New Roman', Times, Georgia, serif;
       }
     }
 
+    &__body {
+      &__row {
+        &__col {
+          &_h {width: 1.3cm;}
+          &_p {width: 1.3cm};
+        }
+      }
+    }
+
     tr {
       height: 1.2em;
     }
 
     &__num {
       width: 1cm;
+      text-align: center;
     }
 
     &__fam {

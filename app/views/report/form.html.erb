@@ -1,3 +1,5 @@
+<!-- Страница 1 -->
+
 <div class="page page_A4page">
 
 <div class="page__university">
@@ -227,3 +229,155 @@
 </table>
 
 </div>
+
+<!-- Страница 2 -->
+
+<div class="page page_A4page">
+
+<div class="page__university">
+  Московский государственный технический университет им. Н.Э. Баумана
+</div>
+<h2 class="page__title">
+  Приложение к отчёту
+</h2>
+
+<div class="page__subheader">
+  о проведении смотра академической успеваемости в группе <%= @group.title %>
+</div>
+
+<% d = @report[:date].to_date %>
+<time datetime="<%=d.iso8601%>" pubdate="pubdate" class="page__date">
+  <% months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'] %>
+  от “<%= d.day %>” <%= months[d.month-1] %> <%= d.year %>г.
+</time>
+
+<div class="page__timebounds">
+  Срок представления отчета декану факультета <b><%= @group.faculty %></b>: <u>&nbsp;&nbsp; <%= months[d.month-1]%> <%= d.year %> г.</u>
+</div>
+
+<ul class="page__stat">
+  <li class="page__stat__item">Выполнение учебного графика и посещения занятий студентами группы:</li>
+</ul>
+
+<table class="page__table">
+  <thead class="page__table__head">
+    <tr class="page__table__head__row">
+      <th class="page__table__head__row__col page__table__num">N<br/>п/п</th>
+      <th class="page__table__head__row__col page__table__fam">Фамилия И.О.</th>
+      <th class="page__table__head__row__col" colspan="2">
+        Пропущено: лекций, упражнений, семинаров
+        <span class="page__table__head__row__col__helper">
+          [час] / [%]
+        </span>
+      </th>
+      <th class="page__table__head__row__col">
+        Пропущено: лаб. работ
+        <span class="page__table__head__row__col__helper">
+          [количество работ]
+        </span>
+      </th>
+      <th class="page__table__head__row__col">
+        % Выполнения проекта (работы) по курсу:
+      </th>
+      <th class="page__table__head__row__col">
+        Выполнение учебного графика (на дату проведения смотра)
+        <span class="page__table__head__row__col__helper">
+          [%]
+        </span>
+      </th>
+      <th class="page__table__head__row__col">
+        Причины пропуска занятий и невыполнения учебного графика
+      </th>
+    </tr>
+  </thead>
+  <tbody class="page__table__body">
+    <% @group.students.each.with_index do |student, i| %>
+    <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num">
+        <%= i %>
+      </td>
+      <td class="page__table__body__row__col page__table__fam">
+        <%= student.name %>
+      </td>
+      <td class="page__table__body__row__col page__table__body__row__col_h">
+        <%= student.absense_count * 2 %>
+      </td>
+      <td class="page__table__body__row__col page__table__body__row__col_p">
+        <%= student.absense_perc %>%
+      </td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+    </tr>
+    <% end
+    i=0
+    while i<20-@group.students.count do %>
+    <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+    </tr>
+    <% i+=1
+    end %>
+    <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"><i>В среднем по группе:</i></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"></td>
+    </tr>
+  </tbody>
+</table>
+
+<ul class="page__stat">
+  <li class="page__stat__item">
+    Учёт выполнения учебного графика и посещаемости занятий ведётся (не ведётся): <u>ведётся</u>
+  </li>
+  <li class="page__stat__item">
+    Замечания зав. кафедрой, куратора, преподавателей и заместителя декана факультета по организации учебного процесса:
+    <div class="page__stat__item__writing"></div>
+    <div class="page__stat__item__writing"></div>
+    <div class="page__stat__item__writing"></div>
+  </li>
+</ul>
+
+<table class="page__signatures">
+  <tbody class="page__signatures__body">
+    <tr class="page__signatures__body__person">
+      <td class="page__signatures__body__person__position">Зав. кафедрой</td>
+      <td class="page__signatures__body__person__freeplace"></td>
+      <td class="page__signatures__body__person__name">
+        <%= @report[:decanus] %>
+        <div class="page__signatures__body__person__name__helper">Фамилия И.О.</div>
+      </td>
+    </tr>
+    <tr class="page__signatures__body__person">
+      <td class="page__signatures__body__person__position">Куратор</td>
+      <td class="page__signatures__body__person__freeplace"></td>
+      <td class="page__signatures__body__person__name">
+        <%= @report[:mentor] %>
+        <div class="page__signatures__body__person__name__helper">Фамилия И.О.</div>
+      </td>
+    </tr>
+    <tr class="page__signatures__body__person">
+      <td class="page__signatures__body__person__position">Зам. декана факультета по <%= @group.course %> курсу</td>
+      <td class="page__signatures__body__person__freeplace"></td>
+      <td class="page__signatures__body__person__name">
+        <%= @report[:zamdecanus] %>
+        <div class="page__signatures__body__person__name__helper">Фамилия И.О.</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
