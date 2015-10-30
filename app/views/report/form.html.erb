@@ -4,16 +4,18 @@
   Московский государственный технический университет им. Н.Э. Баумана
 </div>
 <h1 class="page__title">
-  Отчет о проведении смотра академической успеваемости в группе: <%= @group.title %>
+  Отчет о проведении смотра академической успеваемости в группе:
+  <span class="page__title__group"><%= @group.title %></span>
 </h1>
-<div class="page__date">
-  <% d = @report[:date].to_date %>
+
+<% d = @report[:date].to_date %>
+<time datetime="<%=d.iso8601%>" pubdate="pubdate" class="page__date">
   <% months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'] %>
   от “<%= d.day %>” <%= months[d.month-1] %> <%= d.year %>г.
-</div>
+</time>
 
 <div class="page__timebounds">
-  Срок представления отчета декану факультета <b>ИУ</b>: <u>&nbsp;&nbsp; <%= months[d.month-1]%> <%= d.year %> г.</u>
+  Срок представления отчета декану факультета <b><%= @group.faculty %></b>: <u>&nbsp;&nbsp; <%= months[d.month-1]%> <%= d.year %> г.</u>
 </div>
 
 <ul class="page__stat">
@@ -24,25 +26,25 @@
 <table class="page__table">
   <thead class="page__table__head">
     <tr class="page__table__head__row">
-      <th class="page__table__head__row__col">N<br/>п/п</th>
-      <th class="page__table__head__row__col">Фамилия И.О.</th>
+      <th class="page__table__head__row__col page__table__num">N<br/>п/п</th>
+      <th class="page__table__head__row__col page__table__fam">Фамилия И.О.</th>
       <th class="page__table__head__row__col">Причина отсутствия</th>
     </tr>
   </thead>
   <tbody class="page__table__body">
     <tr class="page__table__body__row">
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
-    </tr>
-    <tr class="page__table__body__row">
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
     </tr>
     <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
+    </tr>
+    <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
     </tr>
   </tbody>
@@ -55,20 +57,20 @@
 <table class="page__table">
   <thead class="page__table__head">
     <tr class="page__table__head__row">
-      <th class="page__table__head__row__col">N<br/>п/п</th>
-      <th class="page__table__head__row__col">Фамилия И.О.</th>
+      <th class="page__table__head__row__col page__table__num">N<br/>п/п</th>
+      <th class="page__table__head__row__col page__table__fam">Фамилия И.О.</th>
       <th class="page__table__head__row__col">Академические задолженности <span class="page__table__head__row__col__helper">(Дисциплина, кафедра, зачет/экзамен)</span></th>
     </tr>
   </thead>
   <tbody class="page__table__body">
     <tr class="page__table__body__row">
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
     </tr>
     <tr class="page__table__body__row">
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
     </tr>
   </tbody>
@@ -83,28 +85,28 @@
 <table class="page__table">
   <thead class="page__table__head">
     <tr class="page__table__head__row">
-      <th class="page__table__head__row__col">N<br/>п/п</th>
-      <th class="page__table__head__row__col">Фамилия И.О.</th>
+      <th class="page__table__head__row__col page__table__num">N<br/>п/п</th>
+      <th class="page__table__head__row__col page__table__fam">Фамилия И.О.</th>
       <th class="page__table__head__row__col">Поощрение<span class="page__table__head__row__col__helper">(Благодарность по университету / факультету) </span></th>
       <th class="page__table__head__row__col">Основание для поощрения</th>
     </tr>
   </thead>
   <tbody class="page__table__body">
     <tr class="page__table__body__row">
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
-    </tr>
-    <tr class="page__table__body__row">
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
       <td class="page__table__body__row__col"></td>
     </tr>
     <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
       <td class="page__table__body__row__col"></td>
+    </tr>
+    <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
       <td class="page__table__body__row__col"></td>
     </tr>
@@ -118,28 +120,28 @@
 <table class="page__table">
   <thead class="page__table__head">
     <tr class="page__table__head__row">
-      <th class="page__table__head__row__col">N<br/>п/п</th>
-      <th class="page__table__head__row__col">Фамилия И.О.</th>
+      <th class="page__table__head__row__col page__table__num">N<br/>п/п</th>
+      <th class="page__table__head__row__col page__table__fam">Фамилия И.О.</th>
       <th class="page__table__head__row__col">Взыскание<span class="page__table__head__row__col__helper">(Выговор по университету / факультету) </span></th>
       <th class="page__table__head__row__col">Основание для взыскания</th>
     </tr>
   </thead>
   <tbody class="page__table__body">
     <tr class="page__table__body__row">
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
-    </tr>
-    <tr class="page__table__body__row">
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
       <td class="page__table__body__row__col"></td>
     </tr>
     <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
       <td class="page__table__body__row__col"></td>
+    </tr>
+    <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
       <td class="page__table__body__row__col"></td>
     </tr>
@@ -153,36 +155,46 @@
 <table class="page__table">
   <thead class="page__table__head">
     <tr class="page__table__head__row">
-      <th class="page__table__head__row__col">N<br/>п/п</th>
-      <th class="page__table__head__row__col">Фамилия И.О.</th>
+      <th class="page__table__head__row__col page__table__num">N<br/>п/п</th>
+      <th class="page__table__head__row__col page__table__fam">Фамилия И.О.</th>
       <th class="page__table__head__row__col">Основание для отчисления</th>
     </tr>
   </thead>
   <tbody class="page__table__body">
     <tr class="page__table__body__row">
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
-    </tr>
-    <tr class="page__table__body__row">
-      <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
     </tr>
     <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
+    </tr>
+    <tr class="page__table__body__row">
+      <td class="page__table__body__row__col page__table__num"></td>
+      <td class="page__table__body__row__col page__table__fam"></td>
       <td class="page__table__body__row__col"></td>
     </tr>
   </tbody>
 </table>
 
 <ul class="page__stat">
-  <li class="page__stat__item">Замечания студентов по организации учебного процесса:</li>
+  <li class="page__stat__item">
+    Замечания студентов по организации учебного процесса:
+    <div class="page__stat__item__writing"></div>
+    <div class="page__stat__item__writing"></div>
+    <div class="page__stat__item__writing"></div>
+  </li>
 </ul>
 
 <ul class="page__stat">
-  <li class="page__stat__item">Дисциплины, по которым выполнение учебного графика студентами группы менее 50 % с указанием кафедры и Фамилии И.О. преподавателей:</li>
+  <li class="page__stat__item">
+    Дисциплины, по которым выполнение учебного графика студентами группы менее 50 % с указанием кафедры и Фамилии И.О. преподавателей:
+    <div class="page__stat__item__writing"></div>
+    <div class="page__stat__item__writing"></div>
+    <div class="page__stat__item__writing"></div>
+  </li>
 </ul>
 
 <table class="page__signatures">

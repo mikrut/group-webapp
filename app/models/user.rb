@@ -23,4 +23,36 @@ class User < ActiveRecord::Base
   has_many :articles
   has_many :absenses # Жизненно...
   belongs_to :group
+
+  def absense_count
+    self.absenses.count
+  end
+
+  def absense_count_disc discipline
+    dis_abs = Absense.count_by_sql([
+      "SELECT COUNT(*) as cnt FROM absenses\
+        LEFT JOIN lessons ON absenses.lesson_id = lessons.id\
+        WHERE lessons.discipline_id = ?
+        AND absenses.user_id = ?",
+        discipline.id,
+        self.id
+    ])
+  end
+
+  def absense_perc
+    if Lesson.less_in_sem != 0
+      absense_count.to_f / Lesson.less_in_sem
+    else
+      0
+    end
+  end
+
+  def absense_perc_disc discipline
+    lis = discipline.less_in_sem
+    if lis != 0
+      absense_count_disc(discipline).to_f / lis
+    else
+      0
+    end
+  end
 end

@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20151022134046) do
     t.integer  "discipline_id", limit: 4
   end
 
-  add_index "articles", ["author_id"], name: "fk_rails_6fc3b668ee", using: :btree
+  add_index "articles", ["author_id"], name: "fk_rails_e989f92da8", using: :btree
   add_index "articles", ["discipline_id"], name: "index_articles_on_discipline_id", using: :btree
 
   create_table "disciplines", force: :cascade do |t|

@@ -4,8 +4,11 @@
 
 <div class="entity__title">
   <h1><%= @group.title %></h1>
-</div><% if current_user.admin? %>
+</div>
+
+<% if current_user.admin? %>
   <%= link_to 'Редактировать', {action: :view_update}, {class: 'button button_ok'} %>
+  <%= link_to 'Провести смотр', {action: :create, controller: :report}, {class: 'button_control'} %>
 <% end %>
 
 <div class="entity__subtitle">

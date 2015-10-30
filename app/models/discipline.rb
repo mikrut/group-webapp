@@ -7,4 +7,10 @@ class Discipline < ActiveRecord::Base
   has_many :articles
   has_many :lessons
   belongs_to :group
+
+  def less_in_sem
+    self.lessons.inject(0) do |sum, l|
+      sum + 17 * (l.occurence_type == weekly ? 2 : 1)
+    end
+  end
 end

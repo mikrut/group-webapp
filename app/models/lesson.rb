@@ -34,6 +34,12 @@ class Lesson < ActiveRecord::Base
     end
   end
 
+  def self.less_in_sem
+    Lesson.all.inject(0) do |sum, l|
+      sum + 17 * (l.occurence_type == weekly ? 2 : 1);
+    end
+  end
+
   def lesson_types_for_select
     lesson_types.to_a.map.with_index do |t,i|
       [LESSON_TYPES[i],t]

@@ -1,3 +1,150 @@
 // Place all the styles related to the Report controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$primary-font: 'Times New Roman', Times, Georgia, serif;
+
+.page {
+  display: block;
+  box-shadow: 5px 5px 15px black;
+  border: 1px solid black;
+  margin: 30px;
+  overflow: hidden;
+
+  &, p, div, span, h1, h2, h3 {
+    font-family: $primary-font;
+  }
+
+  &, p, div {
+    font-size: 10pt;
+  }
+
+  &_A4page {
+    width: 210mm;
+    height: 297mm;
+
+    padding: 1.7cm 1.5cm 1.6cm 3cm;
+  }
+
+  &__university {
+    text-align: center;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 12pt;
+    text-align: center;
+    display: block;
+
+    &__group {
+      font-weight: normal;
+      font-size: 12pt;
+    }
+  }
+
+  &__date {
+    text-align: center;
+    display: block;
+    font {
+      size: 11pt;
+      family: $primary-font;
+    }
+  }
+
+  &__timebounds {
+    display: block;
+    text-align: center;
+    font-size: 9pt;
+    margin: 6pt 0;
+  }
+
+  &__stat {
+    list-style: disc outside none;
+    margin-left: 0;
+    padding-left: 10px;
+
+    &__item {
+      font-style: italic;
+      font-size: 10pt;
+
+      &__writing {
+        height: 1.2em;
+        border-bottom: 1px solid black;
+      }
+    }
+  }
+
+  &__table {
+    width: 100%;
+
+    &, th, tr, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    &__head {
+      &__row {
+        &__col {
+          font: {
+            style: italic;
+            size: 10pt;
+            weight: bold;
+          }
+
+          &__helper {
+            display: block;
+
+            font: {
+              size: 7pt;
+              style: italic;
+              weight: normal;
+            }
+          }
+        }
+      }
+    }
+
+    tr {
+      height: 1.2em;
+    }
+
+    &__num {
+      width: 1cm;
+    }
+
+    &__fam {
+      width: 3.5cm;
+    }
+  }
+
+  &__signatures {
+    margin: 0 0 0 auto;
+
+    &__body {
+      &__person {
+        &__position {
+          text-align: left;
+        }
+        &__freeplace {
+          width: 30pt;
+        }
+        &__name {
+          text-align: center;
+
+          & &__helper {
+            display: block;
+            font-size: 7pt;
+            text-align: center;
+
+            &:before {
+              content: "(";
+            }
+            &:after {
+              content: ")";
+            }
+          }
+        }
+      }
+    }
+  }
+}
