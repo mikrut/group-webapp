@@ -5,7 +5,7 @@ class ReportController < ApplicationController
   end
 
   def form
-    required = [:date, :mentor, :decanus, :zamdecanus]
+    required = [:date]
     @report = params.require(:report).permit required
     required.each {|p| @report.require p}
     @group = Group.first

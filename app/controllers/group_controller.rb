@@ -54,7 +54,8 @@ class GroupController < ApplicationController
   def do_update
     group = Group.first
     group.update(params.require(:group).permit(:semester, :cathedra,
-      :faculty, :faculty_name, :cathedra_name, :index, :title))
+      :faculty, :faculty_name, :cathedra_name, :index, :title,
+      :supervisor, :decanus, :zamdecanus))
     redirect_to action: :view
   end
 

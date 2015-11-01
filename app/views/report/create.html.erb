@@ -11,27 +11,6 @@
           class: 'entity__form__input-group__control' %>
     </div>
 
-    <div class="entity__form__input-group">
-      <%= r.label :mentor, 'Куратор',
-          class: 'entity__form__input-group__label' %>
-      <%= r.text_field :mentor,
-          class: 'entity__form__input-group__control' %>
-    </div>
-
-    <div class="entity__form__input-group">
-      <%= r.label :decanus, 'Декан',
-          class: 'entity__form__input-group__label' %>
-      <%= r.text_field :decanus,
-          class: 'entity__form__input-group__control' %>
-    </div>
-
-    <div class="entity__form__input-group">
-      <%= r.label :zamdecanus, 'Зам. декана',
-          class: 'entity__form__input-group__label' %>
-      <%= r.text_field :zamdecanus,
-          class: 'entity__form__input-group__control' %>
-    </div>
-
     <%= r.submit "Сформировать отчёт", class: "button_ok" %>
   <% end %>
 

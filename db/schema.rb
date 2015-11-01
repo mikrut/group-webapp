@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030154731) do
+ActiveRecord::Schema.define(version: 20151101100833) do
 
   create_table "absenses", force: :cascade do |t|
     t.integer "user_id",           limit: 4
@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(version: 20151030154731) do
     t.integer  "index",         limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.string   "supervisor",    limit: 255
+    t.string   "decanus",       limit: 255
+    t.string   "zamdecanus",    limit: 255
   end
 
   create_table "invitations", force: :cascade do |t|

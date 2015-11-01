@@ -205,7 +205,7 @@
       <td class="page__signatures__body__person__position">Зав. кафедрой</td>
       <td class="page__signatures__body__person__freeplace"></td>
       <td class="page__signatures__body__person__name">
-        <%= @report[:decanus] %>
+        <%= @group.decanus %>
         <div class="page__signatures__body__person__name__helper">Фамилия И.О.</div>
       </td>
     </tr>
@@ -213,7 +213,7 @@
       <td class="page__signatures__body__person__position">Куратор</td>
       <td class="page__signatures__body__person__freeplace"></td>
       <td class="page__signatures__body__person__name">
-        <%= @report[:mentor] %>
+        <%= @group.supervisor %>
         <div class="page__signatures__body__person__name__helper">Фамилия И.О.</div>
       </td>
     </tr>
@@ -221,7 +221,7 @@
       <td class="page__signatures__body__person__position">Зам. декана факультета по <%= @group.course %> курсу</td>
       <td class="page__signatures__body__person__freeplace"></td>
       <td class="page__signatures__body__person__name">
-        <%= @report[:zamdecanus] %>
+        <%= @group.zamdecanus %>
         <div class="page__signatures__body__person__name__helper">Фамилия И.О.</div>
       </td>
     </tr>
@@ -356,7 +356,7 @@
       <td class="page__signatures__body__person__position">Зав. кафедрой</td>
       <td class="page__signatures__body__person__freeplace"></td>
       <td class="page__signatures__body__person__name">
-        <%= @report[:decanus] %>
+        <%= @group.decanus %>
         <div class="page__signatures__body__person__name__helper">Фамилия И.О.</div>
       </td>
     </tr>
@@ -364,7 +364,7 @@
       <td class="page__signatures__body__person__position">Куратор</td>
       <td class="page__signatures__body__person__freeplace"></td>
       <td class="page__signatures__body__person__name">
-        <%= @report[:mentor] %>
+        <%= @group.supervisor %>
         <div class="page__signatures__body__person__name__helper">Фамилия И.О.</div>
       </td>
     </tr>
@@ -372,7 +372,7 @@
       <td class="page__signatures__body__person__position">Зам. декана факультета по <%= @group.course %> курсу</td>
       <td class="page__signatures__body__person__freeplace"></td>
       <td class="page__signatures__body__person__name">
-        <%= @report[:zamdecanus] %>
+        <%= @group.zamdecanus %>
         <div class="page__signatures__body__person__name__helper">Фамилия И.О.</div>
       </td>
     </tr>

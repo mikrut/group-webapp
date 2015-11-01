@@ -27,6 +27,33 @@
 
 </div>
 
+<div class="entity__form__input-group">
+
+  <div class="entity__form__input-group__label">Куратор (Фамилия И.О.)</div>
+  <%= g.text_field :supervisor, default: @group.supervisor,
+    class: ["entity__form__input-group__control",
+            "entity__form__input-group__control_string"] %>
+
+</div>
+
+<div class="entity__form__input-group">
+
+  <div class="entity__form__input-group__label">Декан (Фамилия И.О.)</div>
+  <%= g.text_field :decanus, default: @group.decanus,
+    class: ["entity__form__input-group__control",
+            "entity__form__input-group__control_string"] %>
+
+</div>
+
+<div class="entity__form__input-group">
+
+  <div class="entity__form__input-group__label">Зам. декана (Фамилия И.О.)</div>
+  <%= g.text_field :zamdecanus, default: @group.zamdecanus,
+    class: ["entity__form__input-group__control",
+            "entity__form__input-group__control_string"] %>
+
+</div>
+
 <%= g.submit "Save changes", class: "group_save" %>
 
 <% end %>
