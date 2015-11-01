@@ -1,7 +1,7 @@
 
 .entity {
   &__title {
-    @extends.title;
+    @extend .title;
     display: inline-block;
     margin: 0 10px;
   }
@@ -11,9 +11,23 @@
     color: lighten(#000000, 30%);
   }
 
+  &__section {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    margin-bottom: 5px;
+  }
+
 
   &__content {
     @extend .description;
+  }
+
+  &__list {
+    list-style: outside none none;
+    &__material {
+      @extend .text;
+
+    }
   }
 
   &__form {
@@ -36,6 +50,14 @@
           display: block;
           width: 100%;
           resize: none;
+        }
+
+        &_select {
+
+        }
+
+        &_file {
+
         }
       }
     }

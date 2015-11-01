@@ -18,6 +18,15 @@ class DisciplineController < ApplicationController
     end
   end
 
+  def view_update
+    begin
+      @discipline = Discipline.find(params[:id])
+      render 'update'
+    rescue
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def update
     begin
       discipline = Discipline.find(params[:id])

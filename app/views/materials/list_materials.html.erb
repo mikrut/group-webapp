@@ -1,11 +1,11 @@
-<div class="materials">
-  <div class="materials__title">Загруженные материалы</div>
+<div class="entity">
+  <div class="entity__title">Загруженные материалы</div>
 
-  <%= link_to 'Upload', {action: :create}, {class: "materials__upload"} %>
+  <%= link_to 'Upload', {action: :create}, {class: "button_ok"} %>
 
-  <ul class="materials__list">
+  <ul class="entity__list">
   <% @materials.each do |material| %>
-    <li class="materials__list__item">
+    <li class="entity__list__material">
       <%= render partial: 'small', locals: {material: material} %>
     </li>
   <% end %>

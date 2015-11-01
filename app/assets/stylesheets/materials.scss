@@ -3,25 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .material {
-  &s {
-    &__title {
-      @extend .title;
-      display: inline-block;
-    }
-
-    &__upload {
-      @extend .button_ok;
-    }
-
-    &__list {
-      list-style: outside none none;
-
-      &__item {
-
-      }
-    }
-  }
-
   &__small {
     &__header {
       @extend .title;

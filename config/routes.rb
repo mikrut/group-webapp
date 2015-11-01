@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   get 'discipline/listDisciplines.json' => 'discipline#listDisciplines'
 
   post 'discipline/new'
+  get  'discipline/update/:id' => 'discipline#view_update'
   post 'discipline/update/:id' => 'discipline#update'
   post 'discipline/delete/:id' => 'discipline#delete'
 
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
   get 'materials/list_materials'
   post 'materials/delete/:id' => 'materials#delete'
   post 'materials/create'
+  get  'materials/update/:id' => 'materials#view_update'
   post 'materials/update/:id' => 'materials#update'
 
   get 'user/login' => 'user#create'

@@ -1,2 +1,19 @@
-<h1>Discipline#update</h1>
-<p>Find me in app/views/discipline/update.html.erb</p>
+<%= form_for @discipline,
+    url: {action: :update, id: @discipline.id},
+    html: {method: 'POST', class: 'entity__form'} do |d| %>
+
+  <div class="entity__form__input-group">
+    <%= d.label :name, class: "entity__form__input-group__label"%>
+    <%= d.text_field :name,
+        class: "entity__form__input-group__control_string" %>
+  </div>
+
+  <div class="entity__form__input-group">
+    <%= d.label :description,
+        class: "entity__form__input-group__label"%>
+    <%= d.text_area :description,
+        class: "entity__form__input-group__control_text" %>
+  </div>
+
+  <%= d.submit "Save changes", class: "button_control" %>
+<% end %>

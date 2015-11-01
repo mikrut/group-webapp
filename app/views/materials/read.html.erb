@@ -1,30 +1,24 @@
-<h1><%= @mat.title %></h1> <%= link_to 'Download', @mat.document.url, class: 'button_ok' %>
+<div class="entity">
 
-<% if current_user == @mat.user then %>
-  <%= form_for :material, url: {action: :update}, method: 'POST', html: {autocomplete: 'off'} do |form| %>
+  <h1 class="entity__title"><%= @mat.title %></h1>
+  <%= link_to 'Download', @mat.document.url, class: 'button_ok' %>
 
-    <%= form.label :title %>
-    <%= form.text_field :title, value: @mat.title %>
-
-    <%= form.label :description %>
-    <%= form.text_field :description, value: @mat.description %>
-
-    <%= form.label :discipline %>
-    <%= form.select :discipline_id,
-                    options_for_select(
-                      Discipline.all.map{|d|[d.name, d.id]}
-                        .insert(0, ["None", nil]),
-                      @mat.discipline_id
-                    ) %>
-
-
-    <%= form.hidden_field :id, value: @mat.id %>
-
-    <%= form.submit "Update file info" %>
+  <% if current_user == @mat.user || current_user.admin? %>
+  <%= link_to 'Edit',
+      {action: :view_update, id: @mat.id},
+      class: 'button_control' %>
+  <%= link_to 'Delete',
+      {action: :delete, id: @mat.id},
+      class: 'button_red' %>
   <% end %>
-<% else %>
-  <%= @mat.description %>
-<% end %>
-  <%= @mat.user.name %>
-  <%= link_to 'Delete', {action: :delete, id: @mat.id}, class: 'button_red' %>
+
+  <div class="entity__content"><%= @mat.description %></div>
+
+  Uploader: <%= @mat.user.name %>
+
+</div>
+
+
+
+
 

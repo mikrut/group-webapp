@@ -1,22 +1,13 @@
-<div class="discipline__info">
-<%= form_tag_or_nothing current_user.admin?, {action: :update, id: @discipline.id}, method: 'POST' do %>
-
-  <%= input_or_read :discipline, :name, current_user.admin?, 'h1', :text_field,
-    @discipline.name,
-    class: "discipline__info__title" %>
-  <br/>
-
-  <%= input_or_read :discipline, :description, current_user.admin?, 'div', :text_area,
-    @discipline.description,
-    class: "discipline__info__description" %>
-  <br/>
-
+<div class="entity">
+  <h1 class="entity__title"><%= @discipline.name %></h1>
   <% if current_user.admin? %>
-    <%= submit_tag "Save changes", class: "button_control" %>
+  <%= link_to 'Редактировать',
+      {action: :update, id: @discipline.id}, class: 'button_control' %>
   <% end %>
-<% end %>
 
-  <h2 class="discipline__info__section">Преподаватели</h2>
+  <div class="entity__content"><%= @discipline.description %></div>
+
+  <h2 class="entity__section">Преподаватели</h2>
   <div class="discipline__info__lecturers">
     <div class="discipline__info__lecturers__person">
       <img class="discipline__info__lecturers__person__img"
@@ -25,17 +16,27 @@
     </div>
   </div>
 
-  <h2 class="discipline__info__section"><%= link_to 'Материалы', action: :listMaterials %></h2>
-  <ul class="discipline__info__materials">
+  <h2 class="entity__section">
+    <%= link_to 'Материалы', action: :listMaterials %>
+  </h2>
+  <ul class="entity__list">
     <% @discipline.materials.each do |material| %>
-    <li class="discipline__info__materials__element"><%= link_to material.title, controller: :materials, action: :read, id: material.id %></li>
+    <li class="entity__list__material">
+      <%= link_to material.title,
+          {controller: :materials, action: :read}, id: material.id %>
+    </li>
     <% end %>
   </ul>
 
-  <h2 class="discipline__info__section"><%= link_to 'Публикации', action: :listPublications %></h2>
-  <ul class="discipline__info__pulications">
+  <h2 class="entity__section">
+    <%= link_to 'Публикации', action: :listPublications %>
+  </h2>
+  <ul class="entity__list">
     <% @discipline.articles.each do |article| %>
-    <li class="discipline__info__pulications__element"><%= link_to article.title, controller: :article, action: :read, id: article.id %></li>
+    <li class="entity__list__material">
+      <%= link_to article.title,
+          {controller: :article, action: :read}, id: article.id %>
+    </li>
     <% end %>
   </ul>
 

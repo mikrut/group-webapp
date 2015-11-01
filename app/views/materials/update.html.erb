@@ -1,2 +1,33 @@
-<h1>Materials#update</h1>
-<p>Find me in app/views/materials/update.html.erb</p>
+<%= form_for @material,
+    url: {action: :update},
+    html: {
+      autocomplete: 'off',
+      method: 'POST',
+      class: 'entity__form'
+    } do |form| %>
+
+    <div class="entity__form__input-group">
+    <%= form.label :title, class: "entity__form__input-group__label" %>
+    <%= form.text_field :title,
+        class: "entity__form__input-group__control_string" %>
+    </div>
+
+    <div class="entity__form__input-group">
+    <%= form.label :description,
+        class: "entity__form__input-group__label" %>
+    <%= form.text_area :description,
+        class: "entity__form__input-group__control_text" %>
+    </div>
+
+    <div class="entity__form__input-group">
+    <%= form.label :discipline,
+        class: "entity__form__input-group__label" %>
+    <%= form.select :discipline_id,
+        options_from_collection_for_select(Discipline.all, :id, :name),
+        include_blank: "None",
+        class: "entity__form__input-group__control_select" %>
+    </div>
+
+    <%= form.submit "Update file info", class: 'button_ok' %>
+
+<% end %>

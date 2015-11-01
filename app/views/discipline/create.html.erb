@@ -1,13 +1,19 @@
-<div class="discipline__create">
+<div class="entity">
 
-  <%= form_for :discipline, url: {action: :new}, method: 'POST' do |form| %>
-    <%= form.label :name, class:"discipline__create__label" %>
-    <%= form.text_field :name, class:"discipline__create__title", value: "Discipline" %>
+  <%= form_for :discipline, url: {action: :new}, method: 'POST',
+        html:{class: 'entity__form'} do |form| %>
+    <%= form.label :name,
+        class:"entity__form__input-group__label" %>
+    <%= form.text_field :name,
+        class:"entity__form__input-group__control_string",
+        value: "Discipline" %>
 
-    <%= form.label :description, class:"discipline__create__label" %>
-    <%= form.text_area :description, class:"discipline__create__description" %>
+    <%= form.label :description,
+        class:"entity__form__input-group__label" %>
+    <%= form.text_area :description,
+        class:"entity__form__input-group__control_string" %>
 
-    <%= form.submit "Create discipline" %>
+    <%= form.submit "Create discipline", class: 'button_ok' %>
   <% end %>
 
 </div>

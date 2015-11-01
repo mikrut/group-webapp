@@ -3,10 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .schedule {
-  &__title {
-    @extend .title;
-  }
-
   &__timetable {
     &, & tr, & td {
       border: 1px solid black;

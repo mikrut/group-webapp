@@ -1,5 +1,5 @@
-<div class="schedule">
-<h1 class="schedule__title">Schedule for group
+<div class="entity">
+<h1 class="entity__title">Schedule for group
   <%= link_to Group.first.title, {controller: :group, action: :view} %></h1>
 <% if current_user.admin? %>
   <%= link_to 'Редактировать', {action: :update},

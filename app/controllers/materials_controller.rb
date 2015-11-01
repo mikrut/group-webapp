@@ -1,4 +1,6 @@
 class MaterialsController < ApplicationController
+  before_filter :can_manage, only: [:update, :delete, :view_update]
+
   def create
     if request.method_symbol == :post
       uploaded = Material.new(material_params)
@@ -9,16 +11,16 @@ class MaterialsController < ApplicationController
     end
   end
 
-  def material_params
-    params.require(:material).permit(:title, :description, :document, :discipline_id)
-  end
-
   def read
     begin
       @mat = Material.find(params[:id])
     rescue
       raise ActionController::RoutingError.new('Not Found')
     end
+  end
+
+  def view_update
+    render 'update'
   end
 
   def download
@@ -32,27 +34,32 @@ class MaterialsController < ApplicationController
   end
 
   def update
-    begin
-      mat = Material.find params[:material][:id]
-      if mat.user == current_user || current_user.admin?
-        mat.update params.require(:material).permit(:title, :description, :discipline_id)
-      end
-      redirect_to action: 'read', id: mat.id
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
-    end
+    @material.update params.require(:material).permit(:title, :description, :discipline_id)
+    redirect_to action: 'read', id: @material.id
   end
 
   def delete
-    begin
-      material = Material.find params[:material][:id]
-      material.delete if current_user.admin? or current_user == material.user
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
-    end
+    @material.delete
   end
 
   def list_materials
     @materials = Material.limit(10)
+  end
+
+  private
+
+  def can_manage
+    begin
+      @material = Material.find params[:id]
+    rescue
+      raise ActionController::RoutingError.new('Not Found')
+    end
+    unless current_user.admin? || current_user == @material.user
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def material_params
+    params.require(:material).permit(:title, :description, :document, :discipline_id)
   end
 end

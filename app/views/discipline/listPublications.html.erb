@@ -1,14 +1,19 @@
-<div class="discipline__listPublications">
+<div class="entity">
 
-<h1 class="discipline__listPublications__title"><%= @discipline.name %>: Публикации</h1>
+  <h1 class="entity__title">
+    Публикации по дисциплине
+    <%= link_to @discipline.name, action: :read, id: @discipline.id %>
+  </h1>
 
-<%= link_to "Написать", {controller: :article, action: :create}, {class: "button_ok"} %>
+  <%= link_to "Написать",
+    {controller: :article, action: :create},
+    {class: "button_ok"} %>
 
-<ul class="discipline__listPublications__list">
-<% @discipline.articles.each do |article| %>
-  <li class="discipline__listPublications__list__article">
-    <%= render partial: 'article/small', locals: {article: article} %>
-  </li>
-<% end %>
-</ul>
+  <ul class="entity__list">
+  <% @discipline.articles.each do |article| %>
+    <li class="entity__list__article">
+      <%= render partial: 'article/small', locals: {article: article} %>
+    </li>
+  <% end %>
+  </ul>
 </div>

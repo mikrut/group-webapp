@@ -1,10 +1,10 @@
-<div class="search">
-<h1>Search</h1>
+<div class="entity">
+<h1 class="entity__title">Search</h1>
 <p>Your query: <%= @query %></p>
 
-  <div class="search__results">
+  <div class="entity__list">
   <% @results.each do |result| %>
-    <div class="search__results__item">
+    <div class="entity__list__material">
       <%= display_small result %>
     </div>
   <% end %>

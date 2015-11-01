@@ -1,17 +1,42 @@
-<h1>Upload your materials</h1>
+<div class="entity">
+<h1 class="entity__title">Upload your materials</h1>
 
-<%= form_for :material, method: 'POST', html: {multipart: true} do |form| %>
-  <%= form.label :title %>
-  <%= form.text_field :title, default: "My material" %>
+<%= form_for :material,
+  html: {
+    method: 'POST',
+    multipart: true,
+    class: 'entity__form'
+    } do |form| %>
 
-  <%= form.label :description %>
-  <%= form.text_field :description, default: "Hello, world!" %>
+  <div class="entity__form__input-group">
+    <%= form.label :title,
+        class: "entity__form__input-group__control_label" %>
+    <%= form.text_field :title,
+        class: "entity__form__input-group__control_string",
+        value: "My material" %>
+  </div>
 
-  <%= form.label :discipline %>
-  <%= form.select :discipline_id,
-    options_for_select(Discipline.all.map{|d|[d.name, d.id]}.insert(0, ["None", nil])) %>
+  <div class="entity__form__input-group">
+    <%= form.label :description,
+        class: "entity__form__input-group__control_label" %>
+    <%= form.text_area :description, value: "Hello, world!",
+        class: "entity__form__input-group__control_text" %>
+  </div>
 
-  <%= form.file_field :document %>
+  <div class="entity__form__input-group">
+    <%= form.label :discipline,
+        class: "entity__form__input-group__control_label" %>
+    <%= form.select :discipline_id,
+        options_from_collection_for_select(Discipline.all, :id, :name),
+        include_blank: "None",
+        class: "entity__form__input-group__control_select" %>
+  </div>
 
-  <%= form.submit "Upload file" %>
+  <div class="entity__form__input-group">
+    <%= form.file_field :document,
+        class: "entity__form__input-group__control_file" %>
+  </div>
+
+  <%= form.submit "Upload file", class: 'button_ok' %>
 <% end %>
+</div>
