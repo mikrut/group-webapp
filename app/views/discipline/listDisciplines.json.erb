@@ -1,11 +1,7 @@
 {
-  code: 200,
-  disciplines: [
-  <% @disciplines.each do |dis| %>
-    {
-     title: <%= dis.name %>,
-     id: <%= dis.id %>
-    }
-  <% end %>
-  ]
+  "code": 200,
+  "disciplines": <%== JSON.generate(@disciplines.collect{|dis| {
+   name: dis.name,
+   id: dis.id
+  }}) %>
 }

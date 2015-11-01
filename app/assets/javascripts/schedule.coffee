@@ -15,10 +15,10 @@ get_schedule_form = (inflatee, time_index, weekday_index, occurence_type = 0) ->
     success: (data) ->
       discipline_select = $('<select name="lesson[discipline_id]"></select>')
       discipline_select.append '<option value="" selected="selected">None</option>'
-      for discipline in data.data
+      for discipline in data.disciplines
         option = $('<option></option>')
-        option.val discipline[1]
-        option.text discipline[0]
+        option.val discipline.id
+        option.text discipline.name
         discipline_select.append option
 
       lesson_type_select = $('<select name="lesson[lesson_type]">\
