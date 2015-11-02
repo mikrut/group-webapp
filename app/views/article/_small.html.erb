@@ -1,24 +1,7 @@
-<div class="article__small">
-  <h2 class="article__small__header"><%= link_to article.title, controller: :article, action: :read, id: article.id %></h2>
-  <div class="article__small__main">
-    <div class="article__small__main__text"><%= truncate(article.contents, length: 200) %></div>
-    <div class="article__small__main__bar">
-      <div class="article__small__main__bar__element">
-        <div class="article__small__main__bar__element__icon">
-          <img src="/img/user.svg" width="25px" height="25px" />
-        </div>
-        <div class="article__small__main__bar__element__text">
-          <%= link_to article.author.name, controller: :user, action: :read, id: article.author.id %>
-        </div>
-      </div>
-      <div class="article__small__main__bar__element">
-        <div class="article__small__main__bar__element__icon">
-          <img src="/img/calendar.svg" width="25px" height="25px" />
-        </div>
-        <div class="article__small__main__bar__element__text">
-          <%= article.created_at %>
-        </div>
-      </div>
-    </div>
+<div class="entity__small">
+  <h2 class="entity__small__header"><%= link_to article.title, controller: :article, action: :read, id: article.id %></h2>
+  <div class="entity__small__main">
+    <div class="entity__small__main__text"><%= truncate(article.contents, length: 200) %></div>
+    <%= render partial: 'article/bar', locals: {article: article} %>
   </div>
 </div>

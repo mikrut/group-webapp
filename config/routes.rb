@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'article/create'
   get 'article/read/:id' => 'article#read'
   get 'article/update/:id' => 'article#view_update'
+  get 'article/listArticles'
   post 'article/update/:id' => 'article#update'
   get 'article/delete'
   post 'article/new'

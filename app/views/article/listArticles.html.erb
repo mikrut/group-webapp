@@ -1,0 +1,18 @@
+<div class="entity">
+
+  <h1 class="entity__title">
+    Последние публикации
+  </h1>
+
+  <%= link_to "Написать",
+    {controller: :article, action: :create},
+    {class: "button_ok"} %>
+
+  <ul class="entity__list">
+  <% @articles.each do |article| %>
+    <li class="entity__list__material">
+      <%= render partial: 'small', locals: {article: article} %>
+    </li>
+  <% end %>
+  </ul>
+</div>

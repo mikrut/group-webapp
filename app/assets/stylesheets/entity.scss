@@ -107,4 +107,55 @@
       }
     }
   }
+
+  &__small {
+    &__header {
+      @extend .title;
+    }
+
+    &__main {
+      &__text {
+        @extend .description;
+      }
+    }
+  }
+
+  &__bar {
+    min-height: 30px;
+    border: 1px solid #ebeaea;
+    border-radius: 5px;
+    padding: 5px 20px;
+    vertical-algin: middle;
+
+    &__element {
+      height: 100%;
+      display: inline-block;
+      border-left: 1px solid #ebeaea;
+      padding: 0 10px;
+      text-decoration: none;
+
+      &:first-child {
+        padding-left: 0;
+        border-left: none;
+      }
+
+      &__icon {
+        height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        padding-top: 5px;
+        &, &:hover, &:active, &:visited {color: black;}
+        text-decoration: none;
+      }
+
+      &__text {
+        display: inline-block;
+        height: 100%;
+        line-height: 30px;
+        vertical-align: top;
+        margin-top: 5px;
+        padding-left: 3px;
+      }
+    }
+  }
 }

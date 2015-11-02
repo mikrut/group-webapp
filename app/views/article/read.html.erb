@@ -11,8 +11,8 @@
       class: 'button_red' %>
 <% end %>
 
-<div class="entity__content">
-  <%= @article.contents %>
-</div>
+<div class="entity__content"><%= @article.contents %></div>
+
+<%= render partial: 'bar', locals: {article: @article} %>
 
 </div>

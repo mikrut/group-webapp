@@ -1,18 +1,11 @@
-<div class="material__small">
-  <h2 class="material__small__header"><%= link_to material.title, controller: :materials, action: :read, id: material.id %></h2>
+<div class="entity__small">
+  <h2 class="entity__small__header"><%= link_to material.title, controller: :materials, action: :read, id: material.id %></h2>
   <%= link_to 'Download', material.document.url, class: 'button_ok' %>
 
-  <div class="material__small__main">
-    <div class="material__small__main__text">
+  <div class="entity__small__main">
+    <div class="entity__small__main__text">
       <%= truncate(material.description, length: 200) %>
     </div>
-    <div class="material__small__main__bar">
-      <div class="material__small__main__bar__element material__small__main__bar__element_author">
-        <%= link_to material.author.name, controller: :user, action: :read, id: material.author.id %>
-      </div>
-      <div class="material__small__main__bar__element material__small__main__bar__element_author">
-        <%= material.created_at %>
-      </div>
-    </div>
   </div>
+  <%= render partial: 'article/bar', locals: {article: material} %>
 </div>

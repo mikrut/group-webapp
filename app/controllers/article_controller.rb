@@ -50,6 +50,10 @@ class ArticleController < ApplicationController
                 id: discipline_id
   end
 
+  def listArticles
+    @articles = Article.all
+  end
+
   private
 
   def can_edit

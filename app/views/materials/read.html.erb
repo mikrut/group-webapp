@@ -1,20 +1,27 @@
 <div class="entity">
 
   <h1 class="entity__title"><%= @mat.title %></h1>
-  <%= link_to 'Download', @mat.document.url, class: 'button_ok' %>
+  <%= link_to @mat.document.url, class: 'button_ok' do %>
+    <span class="fa fa-download"></span>
+    Download
+  <% end %>
 
   <% if current_user == @mat.user || current_user.admin? %>
-  <%= link_to 'Edit',
-      {action: :view_update, id: @mat.id},
-      class: 'button_control' %>
-  <%= link_to 'Delete',
-      {action: :delete, id: @mat.id},
-      class: 'button_red' %>
+  <%= link_to options={action: :view_update, id: @mat.id},
+      html_options={class: 'button_control'} do %>
+    <span class="fa fa-pencil"></span>
+    Edit
+  <% end %>
+  <%= link_to options={action: :delete, id: @mat.id},
+      html_options={class: 'button_red'} do %>
+      <span class="fa fa-trash"></span>
+      Delete
+  <% end %>
   <% end %>
 
   <div class="entity__content"><%= @mat.description %></div>
 
-  Uploader: <%= @mat.user.name %>
+  <%= render partial: 'article/bar', locals: {article: @mat} %>
 
 </div>
 

@@ -1,0 +1,30 @@
+<div class="entity__bar">
+  <div class="entity__bar__element">
+    <div class="entity__bar__element__icon">
+      <span class="fa fa-user"></span>
+    </div>
+    <div class="entity__bar__element__text">
+      <%= link_to article.author.name, controller: :user, action: :read, id: article.author.id %>
+    </div>
+  </div>
+  <div class="entity__bar__element">
+    <div class="entity__bar__element__icon">
+      <span class="fa fa-calendar"></span>
+    </div>
+    <div class="entity__bar__element__text">
+      <%= article.created_at %>
+    </div>
+  </div>
+  <div class="entity__bar__element">
+    <div class="entity__bar__element__icon">
+      <span class="fa fa-book"></span>
+    </div>
+    <div class="entity__bar__element__text">
+      <% unless article.discipline.nil? %>
+        <%= link_to article.discipline.name, controller: :discipline, action: :read, id: article.discipline.id %>
+      <% else %>
+        Unattached
+      <% end %>
+    </div>
+  </div>
+</div>

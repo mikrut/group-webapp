@@ -13,8 +13,7 @@
   <ul class="entity__list">
   <% @discipline.materials.each do |material| %>
     <li class="entity__list__material">
-      <%= material.title %>
-      <%= link_to 'Download', material.document.url %>
+      <%= render partial: 'materials/small', locals: {material: material} %>
     </li>
   <% end %>
   </ul>

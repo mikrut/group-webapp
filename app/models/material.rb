@@ -13,5 +13,6 @@ class Material < ActiveRecord::Base
   do_not_validate_attachment_file_type :document
 
   belongs_to :user
+  belongs_to :discipline
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
 end
