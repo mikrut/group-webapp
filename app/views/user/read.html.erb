@@ -9,7 +9,10 @@
         <%= @user.name %>
 
         <% if current_user == @user or current_user.admin? %>
-        <%= link_to 'Edit', action: :update, id: @user.id %>
+        <%= link_to action: :update, id: @user.id do %>
+          <span class="fa fa-pencil"></span>
+          Edit
+        <% end %>
         <% end %>
       </div>
       <div class="userpage__info__who__role">
@@ -27,10 +30,11 @@
   <div class="userpage__info__subscriptions">
     <span class="userpage__info__subscriptions__title">Учебные дисциплины</span>
     <ul class="userpage__info__subscriptions__list">
-      <li class="userpage__info__subscriptions__list__item">Матан</li>
-      <li class="userpage__info__subscriptions__list__item">Линал</li>
-      <li class="userpage__info__subscriptions__list__item">ООП</li>
-      <li class="userpage__info__subscriptions__list__item">ИНО</li>
+      <% @disciplines.each do |discipline| %>
+      <li class="userpage__info__subscriptions__list__item">
+        <%= link_to discipline.name, {controller: :discipline, action: :read, id: discipline.id} %>
+      </li>
+      <% end %>
       <li class="userpage__info__subscriptions__list__item
         userpage__info__subscriptions__list__item_more">10 more...</li>
     </ul>

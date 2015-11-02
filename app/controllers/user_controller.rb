@@ -38,6 +38,7 @@ class UserController < ApplicationController
   def read
     begin
       @user = User.find(params[:id])
+      @disciplines = @user.group.disciplines
     rescue
       redirect_to '/'
     end

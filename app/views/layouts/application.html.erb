@@ -17,7 +17,7 @@
       <div class="app__wrapper__topwrapper">
         <header class="app__wrapper__topwrapper__topbar">
           <nav class="app__wrapper__topwrapper__topbar__menu">
-            <a class="app__wrapper__topwrapper__topbar__menu__main">MyWebSite</a>
+            <a class="app__wrapper__topwrapper__topbar__menu__main"><%= Group.first.title %></a>
             <ul class="app__wrapper__topwrapper__topbar__menu__list">
               <li class="app__wrapper__topwrapper__topbar__menu__list__item"><%= link_to 'Timetable', controller: :schedule, action: :read %></li>
               <li class="app__wrapper__topwrapper__topbar__menu__list__item"><%= link_to 'About group', controller: :group, action: :view %></li>
@@ -33,18 +33,18 @@
 
           <% if logged_in? %>
           <div class="app__wrapper__topwrapper__topbar__userbar">
-            <img class="app__wrapper__topwrapper__topbar__userbar__picture" width="40" height="40"
+
+            <%= link_to controller: :user,
+                  action: 'read',
+                  id: current_user.id,
+                class: "app__wrapper__topwrapper__topbar__userbar__name" do %>
+                <img class="app__wrapper__topwrapper__topbar__userbar__picture" width="40" height="40"
               src="http://lorempixel.com/40/40/people/"/>
-
-            <div class="app__wrapper__topwrapper__topbar__userbar__name">
-              <%= link_to controller: 'user', action: 'read', id: current_user.id do %>
                 <%= current_user.name %>
-              <% end %>
-            </div>
-
-            <%= link_to controller: 'user', action: 'logout' do %>
-              <%= image_tag("/img/exit.png", size: "30") %>
             <% end %>
+
+            <%= link_to ' ', {controller: 'user', action: 'logout'},
+                class: 'app__wrapper__topwrapper__topbar__userbar__logout fa fa-key' %>
           </div>
           <% end %>
         </header>
