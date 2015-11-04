@@ -25,5 +25,7 @@
 /config/initializers/setup_mail.rb
 /config/email.yml
 
+/config/environments/*.rb
+
 # Ignore uploads
 uploads/*
