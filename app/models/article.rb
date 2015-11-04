@@ -14,6 +14,6 @@ class Article < ActiveRecord::Base
   private
 
   def call_mr_postman
-    InfoMailer.article_published(self) if self.send_messages
+    InfoMailer.article_published(self).deliver_now if self.send_messages
   end
 end
