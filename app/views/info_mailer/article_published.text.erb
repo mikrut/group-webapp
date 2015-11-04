@@ -1,0 +1,13 @@
+An awesome article: <%= @article.title %>
+
+Hello, <%= @user.name %>!
+We'd like to inform you that we have an awesome article published on localhost!
+It's written by <%= @article.author.name %> just on <%= @article.created_at %>.
+<% if @article.created_at != @article.updated_at %>
+ It's been updated just on <%= @article.updated_at %>.
+<% end %>
+ You certainly should read it!
+
+<%= url_for controller: :article, action: :read, id: @article.id %>
+
+Sincerely yours, InfoMailer.

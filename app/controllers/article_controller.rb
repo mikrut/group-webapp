@@ -5,7 +5,7 @@ class ArticleController < ApplicationController
   end
 
   def new
-    article = Article.new params.require(:article).permit(:title, :contents, :discipline_id)
+    article = Article.new params.require(:article).permit(permitted)
     article.author = current_user
     article.save
     redirect_to action: :read, id: article.id
@@ -22,7 +22,7 @@ class ArticleController < ApplicationController
   def update
     begin
       article = Article.find params[:id]
-      article.update params.require(:article).permit(:title, :contents, :discipline_id)
+      article.update params.require(:article).permit(permitted)
     rescue
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -60,5 +60,11 @@ class ArticleController < ApplicationController
     unless logged_in? and current_user.admin?
       redirect_to controller: :user, action: :login
     end
+  end
+
+  def permitted
+    perm = [:title, :contents, :discipline_id]
+    perm.push :send_messages if current_user.admin?
+    return perm
   end
 end

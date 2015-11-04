@@ -1,0 +1,23 @@
+<h1>An awesome article: <%= @article.title %></h1>
+
+<p>Hello, <%= @user.name %>!</p>
+
+<p>We'd like to inform you that we have an awesome article published on localhost!</p>
+
+<p>It's written by <%= @article.author.name %> just on <%= @article.created_at %>.
+<% if @article.created_at != @article.updated_at %>
+  It's been updated just on <%= @article.updated_at %>.
+<% end %>
+You certainly should read it!
+</p>
+
+<p>
+<% url = url_for(controller: :article, action: :read, id: @article.id)%>
+<%= link_to url do %>
+  <%= url %>
+<% end %>
+</p>
+
+<p>
+Sincerely yours, InfoMailer.
+</p>

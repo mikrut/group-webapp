@@ -31,6 +31,12 @@
       class: "entity__form__input-group__control" %>
     </div>
 
+    <% if current_user.admin? %>
+    <div class="entity__form__input-group">
+    <%= a.check_box :send_messages, class: "entity__form__input-group__control" %>
+    <%= a.label :send_messages, class:"entity__form__input-group__label" %>
+    </div>
+    <% end %>
 
     <%= a.submit "Publish an article", class: 'button_ok'%>
   <% end %>
