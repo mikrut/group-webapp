@@ -55,14 +55,29 @@ class UserController < ApplicationController
   def updatePOST
     permitted = [:name, :email, :date_of_birth]
     permitted.push(:role) if current_user.admin?
-    begin
-      user = User.find(params[:id])
-      if (current_user == user or current_user.admin?) then
-        user.update(params.require(:user).permit(permitted))
+
+    respond_to do |format|
+      rendered = false
+      begin
+        @user = User.find(params[:id])
+        if (current_user == @user or current_user.admin?) then
+          rendered = true
+          if @user.update(params.require(:user).permit(permitted))
+            format.html {redirect_to action: :read, id: params[:id]}
+            format.json {}
+          else
+            format.html {render action: :update}
+            format.json {render json: @user.errors, status: :unprocessable_entity}
+          end
+        end
+      rescue
       end
-    rescue
+
+      if not rendered
+        format.html {redirect_to action: :read, id: params[:id], status: :unprocessable_entity}
+        format.json {render json: {message: 'Failed'}}
+      end
     end
-    redirect_to :action => 'read', id: params[:id]
   end
 
   def delete

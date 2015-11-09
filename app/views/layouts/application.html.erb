@@ -19,7 +19,6 @@
           <nav class="app__wrapper__topwrapper__topbar__menu">
             <a class="app__wrapper__topwrapper__topbar__menu__main"><%= Group.first.title %></a>
             <ul class="app__wrapper__topwrapper__topbar__menu__list">
-              <li class="app__wrapper__topwrapper__topbar__menu__list__item"><%= link_to 'Timetable', controller: :schedule, action: :read %></li>
               <li class="app__wrapper__topwrapper__topbar__menu__list__item"><%= link_to 'About group', controller: :group, action: :view %></li>
               <li class="app__wrapper__topwrapper__topbar__menu__list__item"><%= link_to 'Files', controller: :materials, action: :list_materials %></li>
               <li class="app__wrapper__topwrapper__topbar__menu__list__item"><%= link_to 'Publications', controller: :article, action: :listArticles %></li>
@@ -35,13 +34,12 @@
           <% if logged_in? %>
           <div class="app__wrapper__topwrapper__topbar__userbar">
 
-            <%= link_to controller: :user,
+            <%= link_to options={controller: :user,
                   action: 'read',
-                  id: current_user.id,
-                class: "app__wrapper__topwrapper__topbar__userbar__name" do %>
+                  id: current_user.id} do %>
                 <img class="app__wrapper__topwrapper__topbar__userbar__picture" width="40" height="40"
               src="http://lorempixel.com/40/40/people/"/>
-                <%= current_user.name %>
+                <span class="app__wrapper__topwrapper__topbar__userbar__name"><%= truncate(current_user.name, length: 16) %></span>
             <% end %>
 
             <%= link_to ' ', {controller: 'user', action: 'logout'},

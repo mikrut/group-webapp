@@ -8,13 +8,15 @@
   <% end %>
 
   <%= form_for :article, url: {action: action, id: @article.id},
-      method: 'POST', html: {class: 'entity__form'} do |a| %>
+      method: 'POST', html: {class: 'entity__form', id: 'article_form', autocomplete: 'off'},
+      remote: true do |a| %>
 
     <div class="entity__form__input-group">
       <%= a.label :title, class:"entity__form__input-group__label" %>
       <%= a.text_field :title,
           class:"entity__form__input-group__control_string",
           default: @article.title %>
+      <div id="article_title_err" class="entity__form__input-group__err"></div>
     </div>
 
     <div class="entity__form__input-group">
@@ -22,6 +24,7 @@
       <%= a.text_area :contents,
           class:"entity__form__input-group__control_text",
           default: @article.contents %>
+      <div id="article_contents_err" class="entity__form__input-group__err"></div>
     </div>
 
     <div class="entity__form__input-group">
@@ -29,6 +32,7 @@
       Discipline.all.collect {|d|[d.name, d.id]},
       {include_blank: "None"},
       class: "entity__form__input-group__control" %>
+      <div id="article_discipline_id_err" class="entity__form__input-group__err"></div>
     </div>
 
     <% if current_user.admin? %>

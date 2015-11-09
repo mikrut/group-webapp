@@ -1,7 +1,7 @@
 <div class="user__profile">
 <h1 class="user__profile__title">Настройки профиля</h1>
 
-<%= form_for(:user, method: 'POST', :html => {autocomplete: 'off'}) do |u| %>
+<%= form_for :user, method: 'POST', :html => {autocomplete: 'off'}, remote:true do |u| %>
   <div class="user__profile__setup">
     <div class="user__profile__setup__item">
       <div class="user__profile__setup__item__label">
@@ -10,6 +10,7 @@
       <div class="user__profile__setup__item__option">
         <%= u.text_field(:name, default: @user.name) %>
       </div>
+      <div id="user_name_err" class="entity__form__input-group__err"></div>
     </div>
     <div class="user__profile__setup__item">
       <div class="user__profile__setup__item__label">
@@ -18,6 +19,7 @@
       <div class="user__profile__setup__item__option">
         <%= u.text_field(:email, default: @user.email) %>
       </div>
+      <div id="user_email_err" class="entity__form__input-group__err"></div>
     </div>
     <div class="user__profile__setup__item">
       <div class="user__profile__setup__item__label">
@@ -28,6 +30,7 @@
           use_two_digit_numbers:true, order: [:day, :month, :year],
           default: @user.date_of_birth %>
       </div>
+      <div id="user_date_of_birth_err" class="entity__form__input-group__err"></div>
     </div>
   </div>
 

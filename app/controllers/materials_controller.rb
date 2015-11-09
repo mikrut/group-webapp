@@ -5,9 +5,16 @@ class MaterialsController < ApplicationController
     if request.method_symbol == :post
       uploaded = Material.new(material_params)
       uploaded.user = current_user
-      uploaded.save
 
-      redirect_to action: 'read', id: uploaded.id
+      respond_to do |format|
+        if uploaded.save
+          format.html {redirect_to action: :read, id: uploaded.id}
+          format.json {render json: {redirect: url_for(action: :read, id: uploaded.id)}}
+        else
+          format.html {redirect_to action: :create}
+          format.json {render json: uploaded.errors, status: :unprocessable_entity}
+        end
+      end
     end
   end
 
@@ -43,7 +50,7 @@ class MaterialsController < ApplicationController
   end
 
   def list_materials
-    @materials = Material.limit(10)
+    @materials = Material.order("created_at DESC")
   end
 
   private

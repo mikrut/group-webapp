@@ -7,8 +7,15 @@ class ArticleController < ApplicationController
   def new
     article = Article.new params.require(:article).permit(permitted)
     article.author = current_user
-    article.save
-    redirect_to action: :read, id: article.id
+    respond_to do |format|
+      if article.save
+        format.html {redirect_to action: :read, id: article.id}
+        format.json {render json: {redirect: url_for(action: :read, id: article.id)}}
+      else
+        format.html {redirect_to action: :create}
+        format.json {render json: article.errors, status: :unprocessable_entity}
+      end
+    end
   end
 
   def read
@@ -20,13 +27,25 @@ class ArticleController < ApplicationController
   end
 
   def update
-    begin
-      article = Article.find params[:id]
-      article.update params.require(:article).permit(permitted)
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
+    respond_to do |format|
+      rendered = false
+      begin
+        article = Article.find params[:id]
+        if article.update params.require(:article).permit(permitted)
+          format.html {redirect_to action: :read, id: article.id}
+          format.json {render json: {redirect: url_for(action: :read, id: article.id)}}
+        else
+          format.html {redirect_to action: :update, id: article.id}
+          format.json {render json: article.errors, status: :unprocessable_entity}
+        end
+      rescue
+      end
+
+      if not rendered
+        format.html {redirect_to action: :listArticles}
+        format.json {render json: {redirect: url_for(action: :listArticles)}}
+      end
     end
-    redirect_to action: :read, id: article.id
   end
 
   def view_update
@@ -51,7 +70,7 @@ class ArticleController < ApplicationController
   end
 
   def listArticles
-    @articles = Article.all
+    @articles = Article.order("created_at DESC")
   end
 
   private

@@ -1,0 +1,7 @@
+<%== {
+  name: @user.name,
+  short_name: truncate(@user.name, length: 16),
+  date_of_birth: @user.date_of_birth,
+  email: @user.email,
+  role: @user.role
+}.to_json %>

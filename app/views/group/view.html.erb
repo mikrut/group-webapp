@@ -2,9 +2,11 @@
 
 <h1 class="entity__title"><%= @group.title %></h1>
 
+  <%= link_to 'Timetable', {controller: :schedule, action: :read}, {class: 'button_control'} %>
 <% if current_user.admin? %>
   <%= link_to 'Редактировать', {action: :view_update}, {class: 'button button_ok'} %>
   <%= link_to 'Провести смотр', {action: :create, controller: :report}, {class: 'button_control'} %>
+  <%= link_to 'Приглашения', {action: :list, controller: :invitation}, {class: 'button_control'} %>
 <% end %>
 
 <div class="entity__subtitle">
@@ -21,10 +23,10 @@
   Зам. декана: <%= @group.zamdecanus %><br/>
 </div>
 
-<h2 class="group__subitem">Disciplines</h2>
-<div class="group__disciplines"%>
+<h2 class="entity__section">Disciplines</h2>
+<div class="entity__list"%>
   <% @group.disciplines.each do |discipline| %>
-    <div class="group__disciplines__item">
+    <div class="entity__list__material">
       <%= render partial: 'discipline/smallest', locals: {discipline: discipline} %>
     </div>
   <% end %>

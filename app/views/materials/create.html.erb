@@ -5,8 +5,9 @@
   html: {
     method: 'POST',
     multipart: true,
-    class: 'entity__form'
-    } do |form| %>
+    class: 'entity__form',
+    id: 'material_form'
+    }, remote: true do |form| %>
 
   <div class="entity__form__input-group">
     <%= form.label :title,
@@ -14,6 +15,7 @@
     <%= form.text_field :title,
         class: "entity__form__input-group__control_string",
         value: "My material" %>
+    <div id="material_title_err" class="entity__form__input-group__err"></div>
   </div>
 
   <div class="entity__form__input-group">
@@ -21,6 +23,7 @@
         class: "entity__form__input-group__control_label" %>
     <%= form.text_area :description, value: "Hello, world!",
         class: "entity__form__input-group__control_text" %>
+    <div id="material_description_err" class="entity__form__input-group__err"></div>
   </div>
 
   <div class="entity__form__input-group">
@@ -30,11 +33,13 @@
         options_from_collection_for_select(Discipline.all, :id, :name),
         include_blank: "None",
         class: "entity__form__input-group__control_select" %>
+    <div id="material_discipline_id_err" class="entity__form__input-group__err"></div>
   </div>
 
   <div class="entity__form__input-group">
     <%= form.file_field :document,
         class: "entity__form__input-group__control_file" %>
+    <div id="material_document_err" class="entity__form__input-group__err"></div>
   </div>
 
   <%= form.submit "Upload file", class: 'button_ok' %>

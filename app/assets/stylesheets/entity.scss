@@ -60,6 +60,13 @@
 
         }
       }
+
+      &__err {
+        background-color: #f2dede;
+        padding: 5px;
+        box-sizing: border-box;
+        display: none;
+      }
     }
   }
 
@@ -76,12 +83,10 @@
         font-family: Helvetica, Arial, sans-serif;
         font-size: 16pt;
       }
-      float: left;
+
     }
 
     &__options {
-      text-align: right;
-      float: right;
 
       &__element {
         height: 40px;
