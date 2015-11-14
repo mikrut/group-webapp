@@ -8,7 +8,8 @@
                   autocomplete: false,
                   class: 'group__absenses__discipline__selector'
                 } do |form| %>
-      <%= discipline_selector form, @discipline.id %>
+      <% disciplines = Discipline.all.map{|d| [d.name, d.id]} %>
+      <%= form.select :discipline_id,options_for_select(disciplines, @discipline.id) %>
       Тип занятия: <%= lesson_type_selector form %>
     <% end %>
   </div>

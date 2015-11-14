@@ -44,7 +44,7 @@ get_tr2 = (time_index, weekday_index) ->
   get_schedule_form tr2.find('td'), time_index, weekday_index, 2
   tr2
 
-$(document).ready ->
+ready = ->
   $('.schedule__timetable__timerow__time__split').click (eventObject) ->
     button_texts = ['Split', 'Join']
     button = $(eventObject.target)
@@ -62,3 +62,6 @@ $(document).ready ->
     time_cell.attr('rowspan', 3 - rowspan)
     tr1.find('input[name="lesson[occurence_type]"]').val(2 - rowspan)
     button.text button_texts[2 - rowspan]
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

@@ -6,7 +6,7 @@ $.ajaxSetup({
   dataType: 'json'
 })
 
-$(document).ready ->
+ready = ->
   form = $("#material_form").first().on("ajax:send", (event, xhr, options) ->
     $(event.target).find(".entity__form__input-group__err")
       .empty()
@@ -24,3 +24,6 @@ $(document).ready ->
         helper.append "<br/>"
       helper.show()
   )
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

@@ -21,14 +21,25 @@ class GroupController < ApplicationController
         group = Group.first
         students = group.students
         discipline = Discipline.find discipline_id
-        absenses = get_absences_for_discipline_json discipline, lesson_type
+        absenses = Absense.find_by_sql [
+          "SELECT absenses.id AS id, absenses.user_id AS user_id,\
+           absenses.lesson_id AS lesson_id, absenses.week AS week,\
+           absenses.reason_commentary AS commentary, lessons.weekday AS weekday,\
+           lessons.time_index AS time_index FROM lessons LEFT JOIN absenses
+           ON lessons.id = absenses.lesson_id\
+           WHERE lessons.discipline_id = ? AND lessons.lesson_type = ?",
+           discipline.id, lesson_type]
         semester = get_semestral_discipline_lessons discipline, lesson_type
+        progresses = Progress.find_by_sql ["SELECT user_id, percentage FROM progresses
+          WHERE discipline_id = ?", discipline.id]
 
         render :json => {
           code: 200,
           response: {
             students: students.map{|s| {name: s.name, id: s.id}},
             discipline: discipline.name,
+            discipline_id: discipline.id,
+            progresses: progresses,
             absenses: absenses,
             semester: semester
           }
@@ -41,7 +52,7 @@ class GroupController < ApplicationController
           }
         }
       end
-    rescue e
+    rescue Exception => e
       render :json => {
           code: 400,
           response: {
@@ -66,8 +77,8 @@ class GroupController < ApplicationController
 
   def create_absense
     needed = [:user_id, :lesson_id, :week]
-    got = params.require(:absense)
     begin
+      got = params.require(:absense)
       needed.each {|n| got.require n}
       absense = Absense.new (got.permit needed)
       absense.save
@@ -92,6 +103,35 @@ class GroupController < ApplicationController
       buf = get_absense_json absense
       absense.delete
       render :json => {code: 200, response: buf}
+    rescue Exception => e
+      render :json => {
+        code: 400,
+        response: {
+        explaination: e.message
+      }}
+    end
+  end
+
+  def update_percentage
+    needed = [:user_id, :discipline_id, :percentage]
+    begin
+      got = params.require(:progress)
+      needed.each {|n| got.require n}
+
+      user_progress = Progress.find_or_create_by ({
+        user_id: got[:user_id],
+        discipline_id: got[:discipline_id]
+      })
+
+      user_progress.percentage = got[:percentage]
+      user_progress.save
+
+      render :json => {
+        code: 200,
+        response: {
+          explaination: "OK"
+        }
+      }
     rescue Exception => e
       render :json => {
         code: 400,

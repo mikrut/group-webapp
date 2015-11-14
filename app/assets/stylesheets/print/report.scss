@@ -1,0 +1,43 @@
+// Place all the styles related to the Report controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$primary-font: 'Timew New Roman', Times, Georgia, serif;
+
+.page {
+  display: block;
+  box-shadow: none;
+  border: none;
+  margin: 0;
+  overflow: visible;
+
+  &_A4page {
+    width: 210mm-1.5cm-3cm;
+    height: 297mm-1.5cm-1.2cm;
+    padding: 0;
+  }
+
+  &__stat {
+    list-style: disc outside none;
+    margin-left: 3px;
+  }
+
+}
+
+@page
+{
+    size: 210mm 297mm;
+    margin: 1.3cm 1.5cm 1.2cm 2.8cm;
+}
+
+#header {
+  display: table-header-group;
+}
+
+#main {
+  display: table-row-group;
+}
+
+#footer {
+  display: table-footer-group;
+}

@@ -2,14 +2,16 @@
   <div class="user__statistics__username"><%= @user.name %></div>
 
   <div class="user__statistics__data">
-    <% @absenses.each do |discipline, by_type| %>
-      <% by_type.each do |lesson_type, info| %>
-    <div class="user__statistics__data__discipline">
-      <%= discipline %> (<%= Lesson::LESSON_TYPES[lesson_type] %>)
-      Пропущено: <%= info[:count] %>
-      Всего: <%= info[:total] %>
-    </div>
+    <% @absenses.each do |discipline_id, record| %>
+      <%= record[:name] %>
+      <% record[:by_type].each do |lesson_type, info| %>
+      <div class="user__statistics__data__discipline">
+        <%= Lesson::LESSON_TYPES[lesson_type] %>
+        Пропущено: <%= info[:count] %>
+        Всего: <%= info[:total] %>
+      </div>
       <% end %>
+       % успеваемости: <%= record[:percentage] %>
     <% end %>
   </div>
 </div>

@@ -291,28 +291,28 @@
     </tr>
   </thead>
   <tbody class="page__table__body">
-    <% @group.students.each.with_index do |student, i| %>
+    <% @students.each.with_index do |student, i| %>
     <tr class="page__table__body__row">
       <td class="page__table__body__row__col page__table__num">
-        <%= i %>
+        <%= i + 1 %>
       </td>
       <td class="page__table__body__row__col page__table__fam">
-        <%= student.name %>
+        <%= student['name'] %>
       </td>
       <td class="page__table__body__row__col page__table__body__row__col_h">
-        <%= student.absense_count * 2 %>
+        <%= student['absense_num'] * 2 %>
       </td>
       <td class="page__table__body__row__col page__table__body__row__col_p">
-        <%= student.absense_perc %>%
+        <%= student['absense_perc'].round(0) %>%
       </td>
       <td class="page__table__body__row__col"></td>
       <td class="page__table__body__row__col"></td>
-      <td class="page__table__body__row__col"></td>
+      <td class="page__table__body__row__col"><%= student['percentage'].round(0) %></td>
       <td class="page__table__body__row__col"></td>
     </tr>
     <% end
     i=0
-    while i<20-@group.students.count do %>
+    while i<20-@students_num do %>
     <tr class="page__table__body__row">
       <td class="page__table__body__row__col page__table__num"></td>
       <td class="page__table__body__row__col page__table__fam"></td>

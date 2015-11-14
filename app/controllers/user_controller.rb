@@ -20,18 +20,27 @@ class UserController < ApplicationController
     @user = current_user
     @absenses = {}
     Lesson.all.each do |lesson|
-      disc_n = lesson.discipline.name
-      @absenses[disc_n] ||= {}
+      disc_id = lesson.discipline_id
+      @absenses[disc_id] ||= {by_type: {}, percentage: 0, name: lesson.discipline.name}
       less_t = lesson.lesson_type
-      @absenses[disc_n][less_t] ||= {count: 0, total: 0}
+      @absenses[disc_id][:by_type][less_t] ||= {count: 0, total: 0}
       factor = less_t == 0 ? 1 : 2;
-      @absenses[disc_n][less_t][:total] += 17 / factor
+      @absenses[disc_id][:by_type][less_t][:total] += 17 / factor
     end
 
     @user.absenses.each do |absense|
-      disc_n = absense.lesson.discipline.name
+      disc_id = absense.lesson.discipline_id
       less_t = absense.lesson.lesson_type
-      @absenses[disc_n][less_t][:count] += 1
+      @absenses[disc_id][:by_type][less_t][:count] += 1
+    end
+
+    @absenses.each do |discipline_id, record|
+      progress = Progress.find_by ({
+        user: @user,
+        discipline_id: discipline_id
+      })
+      percentage ||= 0
+      record[:percentage] = progress.percentage
     end
   end
 

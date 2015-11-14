@@ -2,8 +2,8 @@
 <h1 class="entity__title">Schedule for group
   <%= link_to Group.first.title, {controller: :group, action: :view} %></h1>
 <% if current_user.admin? %>
-  <%= link_to 'Редактировать', {action: :update},
-      {class: 'button_ok'} %>
+  <%= link_to 'Редактировать', {action: :update}, {class: 'button_ok'} %>
+  <%= link_to 'Журнал', {controller: :group, action: :view_absenses}, {class: 'button_control'} %>
 <% end %>
 
 <table class="schedule__timetable">
