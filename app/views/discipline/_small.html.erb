@@ -13,7 +13,7 @@
         <span class="fa fa-download"></span>
       </span>
       <span class="entity__bar__element__text">
-        Материалов <%= discipline.materials.count %>
+        Материалов <%= discipline.materials_count %>
       </span>
     <% end %>
     <%= link_to options={controller: :discipline, action: :listPublications, id: discipline.id},
@@ -22,7 +22,7 @@
         <span class="fa fa-file"></span>
       </span>
       <span class="entity__bar__element__text">
-        Публикаций <%= discipline.articles.count %>
+        Публикаций <%= discipline.articles_count %>
       </span>
     <% end %>
   </div>

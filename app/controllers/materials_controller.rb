@@ -41,16 +41,25 @@ class MaterialsController < ApplicationController
   end
 
   def update
-    @material.update params.require(:material).permit(:title, :description, :discipline_id)
-    redirect_to action: 'read', id: @material.id
+    respond_to do |format|
+      if @material.update params.require(:material).permit(:title, :description, :discipline_id)
+        format.html {redirect_to action: :read, id: @material.id}
+        format.json {render json: {redirect: url_for(action: :read, id:  @material.id)}}
+      else
+        format.html {redirect_to action: :update, id: @material.id}
+        format.json {render json: @material.errors, status: :unprocessable_entity}
+      end
+    end
   end
 
   def delete
     @material.delete
+    redirect_to action: :list_materials
   end
 
   def list_materials
-    @materials = Material.order("created_at DESC")
+    @materials = Material.eager_load(:user, :discipline)
+                  .order(created_at: :desc)
   end
 
   private

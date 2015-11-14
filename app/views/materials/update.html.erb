@@ -3,13 +3,15 @@
     html: {
       autocomplete: 'off',
       method: 'POST',
-      class: 'entity__form'
-    } do |form| %>
+      class: 'entity__form',
+      id: 'material_form'
+    }, remote: true do |form| %>
 
     <div class="entity__form__input-group">
     <%= form.label :title, class: "entity__form__input-group__label" %>
     <%= form.text_field :title,
         class: "entity__form__input-group__control_string" %>
+    <div id="material_title_err" class="entity__form__input-group__err"></div>
     </div>
 
     <div class="entity__form__input-group">
@@ -17,6 +19,7 @@
         class: "entity__form__input-group__label" %>
     <%= form.text_area :description,
         class: "entity__form__input-group__control_text" %>
+    <div id="material_description_err" class="entity__form__input-group__err"></div>
     </div>
 
     <div class="entity__form__input-group">
@@ -26,6 +29,7 @@
         options_from_collection_for_select(Discipline.all, :id, :name),
         include_blank: "None",
         class: "entity__form__input-group__control_select" %>
+    <div id="material_discipline_id_err" class="entity__form__input-group__err"></div>
     </div>
 
     <%= form.submit "Update file info", class: 'button_ok' %>

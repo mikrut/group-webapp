@@ -39,7 +39,7 @@ class ScheduleController < ApplicationController
   def getLessonsArray
     array = [].fill nil, 0, Lesson::WEEKDAY_NAMES.length - 1
     array.map! {|e| [].fill nil, 0, Lesson::TIMES.length}
-    Lesson.all.each do |l|
+    Lesson.eager_load(:discipline).all.each do |l|
       if l.occurence_type == Lesson.occurence_types[:weekly]
         array[l.weekday][l.time_index] = l
       else

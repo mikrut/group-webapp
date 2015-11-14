@@ -25,7 +25,7 @@
 
 <h2 class="entity__section">Disciplines</h2>
 <div class="entity__list"%>
-  <% @group.disciplines.each do |discipline| %>
+  <% @disciplines.each do |discipline| %>
     <div class="entity__list__material">
       <%= render partial: 'discipline/smallest', locals: {discipline: discipline} %>
     </div>

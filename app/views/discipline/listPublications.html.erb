@@ -10,7 +10,7 @@
     {class: "button_ok"} %>
 
   <ul class="entity__list">
-  <% @discipline.articles.each do |article| %>
+  <% @articles.each do |article| %>
     <li class="entity__list__article">
       <%= render partial: 'article/small', locals: {article: article} %>
     </li>

@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get 'article/update/:id' => 'article#view_update'
   get 'article/listArticles'
   post 'article/update/:id' => 'article#update'
-  get 'article/delete'
+  post 'article/delete/:id' => 'article#delete'
   post 'article/new'
 
   post 'group/update' => 'group#do_update'

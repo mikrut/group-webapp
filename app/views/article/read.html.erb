@@ -8,7 +8,7 @@
       class: 'button_ok' %>
   <%= link_to 'Удалить',
       {action: :delete, id: @article.id},
-      class: 'button_red' %>
+      class: 'button_red', method: :post %>
 <% end %>
 
 <div class="entity__content"><%= @article.contents %></div>

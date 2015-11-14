@@ -20,7 +20,8 @@ class ArticleController < ApplicationController
 
   def read
     begin
-      @article = Article.find params[:id]
+      @article = Article.eager_load(:author, :discipline)
+                        .find_by_id!(params[:id])
     rescue
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -70,7 +71,8 @@ class ArticleController < ApplicationController
   end
 
   def listArticles
-    @articles = Article.order("created_at DESC")
+    @articles = Article.eager_load(:author, :discipline)
+                       .order(created_at: :desc)
   end
 
   private

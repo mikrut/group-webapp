@@ -11,7 +11,7 @@
 
 
   <ul class="entity__list">
-  <% @discipline.materials.each do |material| %>
+  <% @materials.each do |material| %>
     <li class="entity__list__material">
       <%= render partial: 'materials/small', locals: {material: material} %>
     </li>

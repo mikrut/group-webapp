@@ -51,6 +51,8 @@ class DisciplineController < ApplicationController
   def listMaterials
     begin
       @discipline = Discipline.find(params[:id])
+      @materials = Material.eager_load(:user, :discipline)
+                        .where("discipline_id = ?", @discipline.id)
     rescue
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -59,13 +61,19 @@ class DisciplineController < ApplicationController
   def listPublications
     begin
       @discipline = Discipline.find(params[:id])
+      @articles = Article.eager_load(:author, :discipline)
+                        .where("discipline_id = ?", @discipline.id)
     rescue
       raise ActionController::RoutingError.new('Not Found')
     end
   end
 
   def listDisciplines
-    @disciplines = Discipline.all
+    @disciplines = Discipline.select("disciplines.*,\
+      (select count(materials.id) from materials\
+       where materials.discipline_id = disciplines.id) materials_count,\
+      (select count(articles.id) from articles\
+       where articles.discipline_id = disciplines.id) articles_count")
     respond_to do |format|
       format.json
       format.html

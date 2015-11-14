@@ -3,6 +3,11 @@ class GroupController < ApplicationController
 
   def view
     @group = Group.first
+    @disciplines = Discipline.select("disciplines.*,\
+      (select count(materials.id) from materials\
+       where materials.discipline_id = disciplines.id) materials_count,\
+      (select count(articles.id) from articles\
+       where articles.discipline_id = disciplines.id) articles_count")
   end
 
   def view_absenses

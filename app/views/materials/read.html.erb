@@ -13,7 +13,7 @@
     Edit
   <% end %>
   <%= link_to options={action: :delete, id: @mat.id},
-      html_options={class: 'button_red'} do %>
+      html_options={class: 'button_red', method: :post} do %>
       <span class="fa fa-trash"></span>
       Delete
   <% end %>
