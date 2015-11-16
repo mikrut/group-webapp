@@ -2,20 +2,9 @@
 
 one:
   semester: 1
-  cathedra: 1
-  faculty: 1
-  faculty_name: MyString
-  cathedra_name: MyString
+  cathedra: 3
+  faculty: IBM
+  faculty_name: Engineering Business and Management
+  cathedra_name: Some cathedra
   index: 1
-  disciplines_id: 
-  users_id: 
-
-two:
-  semester: 1
-  cathedra: 1
-  faculty: 1
-  faculty_name: MyString
-  cathedra_name: MyString
-  index: 1
-  disciplines_id: 
-  users_id: 
+  id: 1

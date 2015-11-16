@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :materials
-  has_many :articles
+  has_many :articles, foreign_key: :author_id
   has_many :absenses # Жизненно...
   belongs_to :group
 

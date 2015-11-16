@@ -42,7 +42,6 @@ Rails.application.routes.draw do
   get 'discipline/listPublications/:id' => 'discipline#listPublications'
   get 'discipline/listDisciplines'
   get 'discipline/listDisciplines.json' => 'discipline#listDisciplines'
-
   post 'discipline/new'
   get  'discipline/update/:id' => 'discipline#view_update'
   post 'discipline/update/:id' => 'discipline#update'

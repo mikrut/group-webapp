@@ -1,5 +1,5 @@
 class ArticleController < ApplicationController
-  before_action :can_edit, only: [:update, :delete]
+  before_action :can_edit, only: [:view_update, :update, :delete]
 
   def create
   end
@@ -23,7 +23,7 @@ class ArticleController < ApplicationController
       @article = Article.eager_load(:author, :discipline)
                         .find_by_id!(params[:id])
     rescue
-      raise ActionController::RoutingError.new('Not Found')
+      redirect_to action: :listArticles, status: :not_found
     end
   end
 
@@ -50,11 +50,20 @@ class ArticleController < ApplicationController
   end
 
   def view_update
+    status = :forbidden
+    success = false
+
     begin
       @article = Article.find params[:id]
-      render 'create'
+      success = true
     rescue
-      raise ActionController::RoutingError.new('Not Found')
+      status = :not_found
+    end
+
+    if success
+      render 'create'
+    else
+      redirect_to action: :listArticles, status: status
     end
   end
 
@@ -79,7 +88,7 @@ class ArticleController < ApplicationController
 
   def can_edit
     unless logged_in? and current_user.admin?
-      redirect_to controller: :user, action: :login
+      redirect_to controller: :user, action: :login, status: :forbidden
     end
   end
 

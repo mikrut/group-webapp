@@ -1,7 +1,7 @@
 class InvitationController < ApplicationController
-  before_filter :check_admin, except: [:register_user, :registration]
-  skip_before_filter :authorize, only: [:register_user, :registration]
-  before_filter :invitation_exists, only: [:register_user, :registration]
+  before_filter :check_admin, except: [:register, :do_register]
+  skip_before_filter :authorize, only: [:register, :do_register]
+  before_filter :invitation_exists, only: [:register, :do_register]
 
   def new_invitation
     invitation = Invitation.create params.require(:invitation).permit(:email, :username)
@@ -37,6 +37,9 @@ class InvitationController < ApplicationController
 
   def register
     @invitation = Invitation.find_by secret_key: params.require(:key)
+    if @invitation.nil?
+      redirect_to controller: :user, action: :create, status: :forbidden
+    end
   end
 
   def do_register

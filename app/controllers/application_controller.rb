@@ -9,15 +9,17 @@ class ApplicationController < ActionController::Base
   private
 
   def authorize
-    redirect_to controller: :user, action: :login unless logged_in?
+    redirect_to  controller: :user,
+                 action: :login, status: :forbidden unless logged_in?
   end
 
   def check_admin
     unless logged_in?
-      redirect_to controller: :user, action: :login
+      redirect_to controller: :user, action: :login, status: :forbidden
     else
       unless current_user.admin?
-        redirect_to controller: :user, action: :show, id: current_user.id
+        redirect_to controller: :user, action: :read,
+                    id: current_user.id,  status: :forbidden
       end
     end
   end

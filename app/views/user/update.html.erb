@@ -23,6 +23,33 @@
     </div>
     <div class="user__profile__setup__item">
       <div class="user__profile__setup__item__label">
+        <%= u.label :first_name, "Имя" %>
+      </div>
+      <div class="user__profile__setup__item__option">
+        <%= u.text_field(:first_name, default: @user.first_name) %>
+      </div>
+      <div id="user_first_name_err" class="entity__form__input-group__err"></div>
+    </div>
+    <div class="user__profile__setup__item">
+      <div class="user__profile__setup__item__label">
+        <%= u.label :middle_name, "Отчество" %>
+      </div>
+      <div class="user__profile__setup__item__option">
+        <%= u.text_field(:middle_name, default: @user.middle_name) %>
+      </div>
+      <div id="user_last_name_err" class="entity__form__input-group__err"></div>
+    </div>
+    <div class="user__profile__setup__item">
+      <div class="user__profile__setup__item__label">
+        <%= u.label :last_name, "Фамилия" %>
+      </div>
+      <div class="user__profile__setup__item__option">
+        <%= u.text_field(:last_name, default: @user.last_name) %>
+      </div>
+      <div id="user_last_name_err" class="entity__form__input-group__err"></div>
+    </div>
+    <div class="user__profile__setup__item">
+      <div class="user__profile__setup__item__label">
         <%= u.label :date_of_birth, "Date of birth" %>
       </div>
       <div class="user__profile__setup__item__option">

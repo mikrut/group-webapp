@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112131611) do
+ActiveRecord::Schema.define(version: 20151116064526) do
 
   create_table "absenses", force: :cascade do |t|
     t.integer "user_id",           limit: 4
@@ -110,11 +110,14 @@ ActiveRecord::Schema.define(version: 20151112131611) do
     t.string   "name",            limit: 255
     t.string   "email",           limit: 255
     t.date     "date_of_birth"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.integer  "role",            limit: 4
     t.string   "password_digest", limit: 255
     t.integer  "group_id",        limit: 4
+    t.string   "first_name",      limit: 255, default: "Firstname",  null: false
+    t.string   "last_name",       limit: 255, default: "Lastname",   null: false
+    t.string   "middle_name",     limit: 255, default: "Middlename", null: false
   end
 
   add_index "users", ["group_id"], name: "index_users_on_group_id", using: :btree

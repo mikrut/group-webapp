@@ -1,13 +1,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: Vasily Alibabaevich
+  id: 1
+  name: vasily_alibabaevich
+  first_name: Vasily
+  middle_name: Alibabaevich
+  last_name: Ivanov
   email: vasya@ali.com
-  password_digest: foobar
+  password_digest: <%= BCrypt::Password.create("foobar", cost: 4) %>
   date_of_birth: 2015-09-18
+  role: <%= User.roles[:user] %>
+  group_id: 1
 
 two:
-  name: MyString
+  id: 2
+  name: petr_petrovich
+  first_name: Petr
+  middle_name: Petrovich
+  last_name: Petrov
   email: My@String2
-  password_digest: baroof
+  password_digest: <%= BCrypt::Password.create("baroof", cost: 4) %>
   date_of_birth: 2015-09-18
+  role: <%= User.roles[:user] %>
+  group_id: 1
+
+three:
+  id: 3
+  name: admin
+  first_name: Admin
+  middle_name: Adminich
+  last_name: Adminov
+  email: admin@example.com
+  password_digest: <%= BCrypt::Password.create("admin", cost: 4) %>
+  date_of_birth: 1995-10-12
+  role: <%= User.roles[:admin] %>
+  group_id: 1

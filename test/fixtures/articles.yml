@@ -4,8 +4,16 @@ one:
   title: MyString
   contents: MyText
   author_id: 1
+  discipline_id: 1
 
 two:
   title: MyString
   contents: MyText
-  author_id: 1
+  author_id: 2
+  discipline_id: 2
+
+two:
+  title: MyString
+  contents: MyText
+  author_id: 3
+  discipline_id: 1

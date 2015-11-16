@@ -9,7 +9,7 @@
       <%= r.date_field :date, start_year: 1980,
           use_two_digit_numbers:true, order: [:day, :month, :year],
           class: 'entity__form__input-group__control',
-          value: Time.now.strftime('%Y-%m-%d') %>
+          value: Time.now.strftime('%Y.%m.%d') %>
     </div>
 
     <%= r.submit "Сформировать отчёт", class: "button_ok" %>

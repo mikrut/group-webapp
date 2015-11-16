@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
   validates :author_id, :discipline_id, presence: true
 
   belongs_to :author, class_name: 'User'
-  belongs_to :user, class_name: 'User', foreign_key: 'user_id'
+  belongs_to :user, class_name: 'User', foreign_key: 'author_id'
   belongs_to :discipline
 
   attr_accessor :send_messages

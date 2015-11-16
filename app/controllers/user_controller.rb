@@ -12,16 +12,20 @@ class UserController < ApplicationController
       log_in user
       redirect_to action: :read, id: user.id
     else
-      redirect_to action: :create
+      redirect_to action: :create, status: :forbidden
     end
   end
 
   def view_stat
     @user = current_user
     @absenses = {}
+
+    Discipline.all.each do |discipline|
+      @absenses[discipline.id] = {by_type: {}, percentage: 0, name: discipline.name}
+    end
+
     Lesson.all.each do |lesson|
       disc_id = lesson.discipline_id
-      @absenses[disc_id] ||= {by_type: {}, percentage: 0, name: lesson.discipline.name}
       less_t = lesson.lesson_type
       @absenses[disc_id][:by_type][less_t] ||= {count: 0, total: 0}
       factor = less_t == 0 ? 1 : 2;
@@ -39,8 +43,8 @@ class UserController < ApplicationController
         user: @user,
         discipline_id: discipline_id
       })
-      percentage ||= 0
-      record[:percentage] = progress.percentage
+      percentage = progress ? progress.percentage : 0
+      record[:percentage] = percentage
     end
   end
 
@@ -49,7 +53,7 @@ class UserController < ApplicationController
       @user = User.find(params[:id])
       @disciplines = @user.group.disciplines
     rescue
-      redirect_to '/'
+      redirect_to '/', status: :not_found
     end
   end
 
@@ -58,11 +62,16 @@ class UserController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    begin
+      @user = User.find(params[:id])
+    rescue
+      redirect_to '/', status: :not_found
+    end
   end
 
   def updatePOST
-    permitted = [:name, :email, :date_of_birth]
+    permitted = [:name, :email, :date_of_birth,
+                 :first_name, :last_name, :middle_name]
     permitted.push(:role) if current_user.admin?
 
     respond_to do |format|

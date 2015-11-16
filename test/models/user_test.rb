@@ -31,4 +31,14 @@ class UserTest < ActiveSupport::TestCase
     user = User.new(name: "Name", email: "e@mail.ru", password: "", password_confirmation: "")
     assert user.invalid?
   end
+
+  test "auth is successfull with right login and pwd" do
+    db_user = User.find_by name: "vasily_alibabaevich"
+    assert db_user.authenticate("foobar")
+  end
+
+  test "auth fails with wrong password" do
+    db_user = User.find_by name: "admin"
+    assert_not db_user.authenticate("admin_wrong")
+  end
 end
