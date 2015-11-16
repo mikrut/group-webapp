@@ -49,6 +49,9 @@ gem "paperclip"
 # Use Thinking Sphinx for search queries
 gem "thinking-sphinx"
 
+# Use Backup
+gem 'backup'
+
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
