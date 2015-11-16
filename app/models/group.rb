@@ -2,8 +2,10 @@
 
 class Group < ActiveRecord::Base
   attr_accessor :title
-  attr_accessor :course
-  validates :faculty, :cathedra, :semester, :index, presence: true
+  attr_reader :course
+  validates :faculty, :cathedra, :semester, :index, :faculty_name,
+            :cathedra_name, presence: true
+  validates :faculty_name, :cathedra_name, length: {maximum: 128}
 
   has_many :disciplines
   has_many :users
