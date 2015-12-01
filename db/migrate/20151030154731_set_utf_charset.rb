@@ -1,5 +1,5 @@
 class SetUtfCharset < ActiveRecord::Migration
-  def change_encoding(encoding,collation)
+  def change_encoding(encoding, collation)
     connection = ActiveRecord::Base.connection
     tables = connection.tables
     dbname = connection.current_database
@@ -16,10 +16,10 @@ class SetUtfCharset < ActiveRecord::Migration
   def change
     reversible do |dir|
       dir.up do
-        change_encoding('utf8','utf8_general_ci')
+        change_encoding('utf8', 'utf8_general_ci')
       end
       dir.down do
-        change_encoding('latin1','latin1_swedish_ci')
+        change_encoding('latin1', 'latin1_swedish_ci')
       end
     end
   end

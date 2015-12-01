@@ -1,13 +1,14 @@
 class InvitationController < ApplicationController
-  before_filter :check_admin, except: [:register, :do_register]
-  skip_before_filter :authorize, only: [:register, :do_register]
-  before_filter :invitation_exists, only: [:register, :do_register]
+  before_action :check_admin, except: [:register, :do_register]
+  skip_before_action :authorize, only: [:register, :do_register]
+  before_action :invitation_exists, only: [:register, :do_register]
 
   def new_invitation
-    invitation = Invitation.create params.require(:invitation).permit(:email, :username)
+    invitation = Invitation.create params.require(:invitation)
+                 .permit(:email, :username)
     invitation.save
     invitation.send_invite
-    return redirect_to action: :list
+    redirect_to action: :list
   end
 
   def create
@@ -18,21 +19,14 @@ class InvitationController < ApplicationController
   end
 
   def resend
-    begin
-      invitation = Invitation.find params[:id]
-      invitation.resend
-    rescue
-    end
+    invitation = Invitation.find_by(id: params[:id]) or not_found
+    invitation.resend
   end
 
   def delete
-    begin
-      invitation = Invitation.find params[:id]
-      invitation.delete
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
-    end
-    return redirect_to action: :list
+    invitation = Invitation.find_by(id: params[:id]) or not_found
+    invitation.delete
+    redirect_to action: :list
   end
 
   def register
@@ -43,8 +37,10 @@ class InvitationController < ApplicationController
   end
 
   def do_register
-    invitation = Invitation.find_by secret_key: params.require(:user).require(:key)
-    reg_data = params.require(:user).permit(:name, :email, :date_of_birth, :password, :password_confirmation)
+    invitation = Invitation.find_by(secret_key: params.require(:user)
+                                                .require(:key))
+    reg_data = params.require(:user).permit(:name, :email,
+                                            :date_of_birth, :password, :password_confirmation)
     user = User.create reg_data
     begin
       user.save
@@ -59,7 +55,7 @@ class InvitationController < ApplicationController
 
   def invitation_exists
     data = params
-    data = params[:user] if params.has_key? :user
+    data = params[:user] if params.key? :user
     invitation = Invitation.find_by secret_key: data.require(:key)
     return redirect_to controller: :user, action: :create if invitation.nil?
   end

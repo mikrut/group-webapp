@@ -4,11 +4,10 @@ require 'rails/test_help'
 require File.expand_path('../../app/helpers/session_helper.rb', __FILE__)
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+  # Setup all fixtures in test/fixtures/*.yml for all tests in
+  # alphabetical order.
   fixtures :all
   include SessionHelper
-
-
 
   # Add more helper methods to be used by all tests here...
 
@@ -17,7 +16,7 @@ class ActiveSupport::TestCase
     log_in user
   end
 
-  def get_some_admin
+  def some_admin
     User.find_by(role: User.roles[:admin])
   end
 end

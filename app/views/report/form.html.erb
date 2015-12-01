@@ -21,7 +21,7 @@
 </div>
 
 <ul class="page__stat">
-  <li class="page__stat__item">Место и время проведения смотра: 703а 13:50</li>
+  <li class="page__stat__item">Место и время проведения смотра: <%= @report[:aud] %> <%= @report[:time] %></li>
   <li class="page__stat__item">Количество студентов в группе: <%= @group.students.count %> чел. Отсутствовали: 0 чел.</li>
 </ul>
 
@@ -297,7 +297,9 @@
         <%= i + 1 %>
       </td>
       <td class="page__table__body__row__col page__table__fam">
-        <%= student['name'] %>
+        <%= student['last_name'] %>
+        <%= student['first_name'][0] %>.
+        <%= student['middle_name'][0] %>.
       </td>
       <td class="page__table__body__row__col page__table__body__row__col_h">
         <%= student['absense_num'] * 2 %>

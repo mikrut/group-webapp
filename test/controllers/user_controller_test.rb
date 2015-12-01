@@ -9,25 +9,24 @@ class UserControllerTest < ActionController::TestCase
     log_out
   end
 
-  test "should get create" do
+  test 'should get create' do
     log_out
     get :create
     assert_response :success
   end
 
-  test "should get read" do
+  test 'should get read' do
     get :read, id: current_user.id
     assert_response :success
   end
 
-  test "should get stat" do
+  test 'should get stat' do
     get :view_stat
     assert_response :success
   end
 
-  test "should get update" do
+  test 'should get update' do
     get :update, id: current_user.id
     assert_response :success
   end
-
 end

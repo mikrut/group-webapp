@@ -1,4 +1,7 @@
+# A controller for learning disciplines
 class DisciplineController < ApplicationController
+  before_action :check_admin, only: [:delete, :view_update, :update, :delete]
+
   def create
   end
 
@@ -11,27 +14,19 @@ class DisciplineController < ApplicationController
   end
 
   def read
-    begin
-      @discipline = Discipline.find(params[:id])
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
-    end
+    @discipline = Discipline.find_by(id: params[:id]) or not_found
   end
 
   def view_update
-    begin
-      @discipline = Discipline.find(params[:id])
-      render 'update'
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
-    end
+    @discipline = Discipline.find_by(id: params[:id]) or not_found
+    render 'update'
   end
 
   def update
+    discipline = Discipline.find_by(id: params[:id]) or not_found
     begin
-      discipline = Discipline.find(params[:id])
-      discipline.update params.require(:discipline).permit(:name, :description)
-
+      discipline.update params.require(:discipline)
+        .permit(:name, :description)
       redirect_to action: :read, id: discipline.id
     rescue
       redirect_to '/'
@@ -39,33 +34,20 @@ class DisciplineController < ApplicationController
   end
 
   def delete
-    if current_user.admin?
-      begin
-        discipline = Discipline.find(params[:id])
-        discipline.delete
-      rescue
-      end
-    end
+    discipline = Discipline.find_by(id: params[:id]) or not_found
+    discipline.delete
   end
 
   def listMaterials
-    begin
-      @discipline = Discipline.find(params[:id])
-      @materials = Material.eager_load(:user, :discipline)
-                        .where("discipline_id = ?", @discipline.id)
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
-    end
+    @discipline = Discipline.find_by(id: params[:id]) or not_found
+    @materials = Material.eager_load(:user, :discipline)
+                 .where('discipline_id = ?', @discipline.id)
   end
 
   def listPublications
-    begin
-      @discipline = Discipline.find(params[:id])
-      @articles = Article.eager_load(:author, :discipline)
-                        .where("discipline_id = ?", @discipline.id)
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
-    end
+    @discipline = Discipline.find_by(id: params[:id]) or not_found
+    @articles = Article.eager_load(:author, :discipline)
+                .where('discipline_id = ?', @discipline.id)
   end
 
   def listDisciplines

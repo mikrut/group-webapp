@@ -9,16 +9,15 @@ class ReportControllerTest < ActionController::TestCase
     log_out
   end
 
-  test "should get create" do
-    log_in get_some_admin
+  test 'should get create' do
+    log_in some_admin
     get :create
     assert_response :success
   end
 
-  test "should get form by POST" do
-    log_in get_some_admin
-    post :form, report: {date: Time.now.strftime('%Y.%m.%d')}
+  test 'should get form by POST' do
+    log_in some_admin
+    post :form, report: { date: Time.zone.now.strftime('%Y.%m.%d') }
     assert_response :success
   end
-
 end

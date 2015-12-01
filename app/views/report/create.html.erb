@@ -5,11 +5,25 @@
       method: 'POST', html: {class: 'entity__form'} do |r| %>
     <div class="entity__form__input-group">
       <%= r.label :date, 'Дата смотра',
-          class: 'entity__form__input-group__label' %>
+          class: 'entity__form__input-group__control_label' %>
       <%= r.date_field :date, start_year: 1980,
           use_two_digit_numbers:true, order: [:day, :month, :year],
           class: 'entity__form__input-group__control',
           value: Time.now.strftime('%Y.%m.%d') %>
+    </div>
+    <div class="entity__form__input-group">
+      <%= r.label :aud, 'Аудитория',
+          class: 'entity__form__input-group__control_label' %>
+      <%= r.text_field :aud,
+          class: 'entity__from__input-group__control_string',
+          value: '703а' %>
+    </div>
+    <div class="entity__form__input-group">
+      <%= r.label :time, 'Время',
+          class: 'entity__form__input-group__control_label' %>
+      <%= r.text_field :time,
+          class: 'entity__from__input-group__control_string',
+          value: '13:50' %>
     </div>
 
     <%= r.submit "Сформировать отчёт", class: "button_ok" %>

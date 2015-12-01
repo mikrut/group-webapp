@@ -1,9 +1,10 @@
+# Class describing an article: a text posted by user
 class Article < ActiveRecord::Base
   after_save :call_mr_postman
 
   validates :title, uniqueness: { case_sensitive: false }
-  validates :title, length: {minimum: 2, maximum: 128}
-  validates :contents, length: {maximum: 128}
+  validates :title, length: { minimum: 2, maximum: 128 }
+  validates :contents, length: { maximum: 128 }
   validates :author_id, presence: true
 
   belongs_to :author, class_name: 'User'
@@ -15,6 +16,6 @@ class Article < ActiveRecord::Base
   private
 
   def call_mr_postman
-    InfoMailer.article_published(self).deliver_now if self.send_messages
+    InfoMailer.article_published(self).deliver_now if send_messages
   end
 end

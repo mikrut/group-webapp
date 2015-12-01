@@ -1,5 +1,5 @@
 class MaterialsController < ApplicationController
-  before_filter :can_manage, only: [:update, :delete, :view_update]
+  before_action :can_manage, only: [:update, :delete, :view_update]
 
   def create
     if request.method_symbol == :post
@@ -8,22 +8,20 @@ class MaterialsController < ApplicationController
 
       respond_to do |format|
         if uploaded.save
-          format.html {redirect_to action: :read, id: uploaded.id}
-          format.json {render json: {redirect: url_for(action: :read, id: uploaded.id)}}
+          format.html { redirect_to action: :read, id: uploaded.id }
+          format.json { render json: { redirect: url_for(action: :read, id: uploaded.id) } }
         else
-          format.html {redirect_to action: :create}
-          format.json {render json: uploaded.errors, status: :unprocessable_entity}
+          format.html { redirect_to action: :create }
+          format.json { render json: uploaded.errors, status: :unprocessable_entity }
         end
       end
     end
   end
 
   def read
-    begin
-      @mat = Material.find(params[:id])
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
-    end
+    @mat = Material.find(params[:id])
+  rescue
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   def view_update
@@ -31,23 +29,21 @@ class MaterialsController < ApplicationController
   end
 
   def download
-    begin
     @document = Material.find(params[:id])
 
-    send_file @document.document.path, :type => @document.document_content_type, :disposition => 'inline'
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
-    end
+    send_file @document.document.path, type: @document.document_content_type, disposition: 'inline'
+  rescue
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   def update
     respond_to do |format|
       if @material.update params.require(:material).permit(:title, :description, :discipline_id)
-        format.html {redirect_to action: :read, id: @material.id}
-        format.json {render json: {redirect: url_for(action: :read, id:  @material.id)}}
+        format.html { redirect_to action: :read, id: @material.id }
+        format.json { render json: { redirect: url_for(action: :read, id:  @material.id) } }
       else
-        format.html {redirect_to action: :update, id: @material.id}
-        format.json {render json: @material.errors, status: :unprocessable_entity}
+        format.html { redirect_to action: :update, id: @material.id }
+        format.json { render json: @material.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,7 +55,7 @@ class MaterialsController < ApplicationController
 
   def list_materials
     @materials = Material.eager_load(:user, :discipline)
-                  .order(created_at: :desc)
+                 .order(created_at: :desc)
   end
 
   private
@@ -71,7 +67,7 @@ class MaterialsController < ApplicationController
       raise ActionController::RoutingError.new('Not Found')
     end
     unless current_user.admin? || current_user == @material.user
-      raise ActionController::RoutingError.new('Not Found')
+      fail ActionController::RoutingError.new('Not Found')
     end
   end
 

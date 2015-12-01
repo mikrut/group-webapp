@@ -1,5 +1,4 @@
 class InfoMailer < ApplicationMailer
-
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -7,7 +6,7 @@ class InfoMailer < ApplicationMailer
   #
   def article_published(article)
     @article = article
-    @subject = "New publication"
+    @subject = 'New publication'
     User.all.each do |user|
       @user = user
       mail to: @user.email, subject: @subject

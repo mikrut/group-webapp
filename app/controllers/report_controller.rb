@@ -1,16 +1,18 @@
 class ReportController < ApplicationController
-  before_filter :check_admin
+  before_action :check_admin
 
   def create
   end
 
   def form
-    required = [:date]
+    required = [:date, :aud, :time]
     @report = params.require(:report).permit required
-    required.each {|p| @report.require p}
+    required.each { |p| @report.require p }
     @group = Group.first
     @students = ActiveRecord::Base.connection.select_all(
-      "SELECT users.name AS name, COALESCE(abs.num, 0) AS absense_num, \
+      "SELECT users.name AS name, users.first_name AS first_name,
+       users.last_name AS last_name, users.middle_name AS middle_name,\
+       COALESCE(abs.num, 0) AS absense_num, \
        COALESCE(progresses.percentage,0) AS percentage FROM users LEFT JOIN (\
          SELECT user_id, COUNT(*) AS num FROM absenses GROUP BY user_id\
        ) AS abs ON users.id=abs.user_id LEFT JOIN progresses ON\

@@ -1,5 +1,4 @@
 module SessionHelper
-
   def log_in(user)
     session[:user_id] = user.id
   end
@@ -9,7 +8,7 @@ module SessionHelper
   end
 
   def logged_in?
-    not current_user.nil?
+    !current_user.nil?
   end
 
   def log_out

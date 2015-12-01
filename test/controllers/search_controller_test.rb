@@ -9,9 +9,8 @@ class SearchControllerTest < ActionController::TestCase
     log_out
   end
 
-  test "should get find" do
+  test 'should get find' do
     get :find
     assert_response :success
   end
-
 end

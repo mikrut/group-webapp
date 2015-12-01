@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  skip_before_filter :authorize, only: [:create, :login]
+  skip_before_action :authorize, only: [:create, :login]
 
   def create
     return redirect_to action: :read, id: current_user.id if logged_in?
@@ -21,14 +21,15 @@ class UserController < ApplicationController
     @absenses = {}
 
     Discipline.all.each do |discipline|
-      @absenses[discipline.id] = {by_type: {}, percentage: 0, name: discipline.name}
+      @absenses[discipline.id] = { by_type: {}, percentage: 0,
+                                   name: discipline.name }
     end
 
     Lesson.all.each do |lesson|
       disc_id = lesson.discipline_id
       less_t = lesson.lesson_type
-      @absenses[disc_id][:by_type][less_t] ||= {count: 0, total: 0}
-      factor = less_t == 0 ? 1 : 2;
+      @absenses[disc_id][:by_type][less_t] ||= { count: 0, total: 0 }
+      factor = less_t == 0 ? 1 : 2
       @absenses[disc_id][:by_type][less_t][:total] += 17 / factor
     end
 
@@ -39,22 +40,16 @@ class UserController < ApplicationController
     end
 
     @absenses.each do |discipline_id, record|
-      progress = Progress.find_by ({
-        user: @user,
-        discipline_id: discipline_id
-      })
+      progress = Progress.find_by(user: @user,
+                                  discipline_id: discipline_id)
       percentage = progress ? progress.percentage : 0
       record[:percentage] = percentage
     end
   end
 
   def read
-    begin
-      @user = User.find(params[:id])
-      @disciplines = @user.group.disciplines
-    rescue
-      redirect_to '/', status: :not_found
-    end
+    @user = User.find_by(id: params[:id]) or not_found
+    @disciplines = @user.group.disciplines
   end
 
   def list
@@ -62,11 +57,9 @@ class UserController < ApplicationController
   end
 
   def update
-    begin
-      @user = User.find(params[:id])
-    rescue
-      redirect_to '/', status: :not_found
-    end
+    @user = User.find(params[:id])
+  rescue
+    redirect_to '/', status: :not_found
   end
 
   def updatePOST
@@ -78,22 +71,28 @@ class UserController < ApplicationController
       rendered = false
       begin
         @user = User.find(params[:id])
-        if (current_user == @user or current_user.admin?) then
+        if current_user == @user || current_user.admin?
           rendered = true
           if @user.update(params.require(:user).permit(permitted))
-            format.html {redirect_to action: :read, id: params[:id]}
+            format.html { redirect_to action: :read, id: params[:id] }
             format.json {}
           else
-            format.html {render action: :update}
-            format.json {render json: @user.errors, status: :unprocessable_entity}
+            format.html { render action: :update }
+            format.json do
+              render json: @user.errors,
+                     status: :unprocessable_entity
+            end
           end
         end
       rescue
       end
 
-      if not rendered
-        format.html {redirect_to action: :read, id: params[:id], status: :unprocessable_entity}
-        format.json {render json: {message: 'Failed'}}
+      unless rendered
+        format.html do
+          redirect_to action: :read, id: params[:id],
+                      status: :unprocessable_entity
+        end
+        format.json { render json: { message: 'Failed' } }
       end
     end
   end
@@ -102,7 +101,7 @@ class UserController < ApplicationController
     begin
       if logged_in?
         user = User.find(id: params[:id])
-        user.delete if user == current_user or current_user.admin?
+        user.delete if user == current_user || current_user.admin?
         log_out
       end
     rescue
@@ -114,5 +113,4 @@ class UserController < ApplicationController
     log_out
     redirect_to '/user/login'
   end
-
 end

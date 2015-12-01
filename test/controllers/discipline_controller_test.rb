@@ -11,33 +11,33 @@ class DisciplineControllerTest < ActionController::TestCase
 
   attr_accessor :rnd_discipline
 
-  test "should get create" do
+  test 'should get create' do
     get :create
     assert_response :success
   end
 
-  test "should get read" do
+  test 'should get read' do
     get :read, id: rnd_discipline.id
     assert_response :success
   end
 
-  test "should get update" do
-    log_in get_some_admin
+  test 'should get update' do
+    log_in some_admin
     get :view_update, id: rnd_discipline.id
     assert_response :success
   end
 
-  test "should get listMaterials" do
+  test 'should get listMaterials' do
     get :listMaterials, id: rnd_discipline.id
     assert_response :success
   end
 
-  test "should get listPublications" do
+  test 'should get listPublications' do
     get :listPublications, id: rnd_discipline.id
     assert_response :success
   end
 
-  test "should get listDisciplines" do
+  test 'should get listDisciplines' do
     get :listDisciplines
     assert_response :success
   end
@@ -47,5 +47,4 @@ class DisciplineControllerTest < ActionController::TestCase
   def rnd_discipline
     Discipline.first
   end
-
 end

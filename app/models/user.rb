@@ -1,41 +1,41 @@
-﻿#encoding=utf-8
-
+﻿# encoding=utf-8
+# Class describing a student
 class User < ActiveRecord::Base
   validates :name, :email, presence: true
   validates :name, :email, length: { minimum: 2, maximum: 128 }
   validates :email, uniqueness: { case_sensitive: false }
-  validate :email_has_one_atSign?
+  validate :email_has_one_at_sign?
 
   before_save do
     self.email = email.downcase
     self.group = Group.first
   end
 
-  def email_has_one_atSign?
-    errors.add(:email, "is not valid") unless (email.count "@") == 1
+  def email_has_one_at_sign?
+    errors.add(:email, 'is not valid') unless (email.count '@') == 1
   end
 
-  enum role: {user: 0, admin: 1}
+  enum role: { user: 0, admin: 1 }
 
   has_secure_password
 
   has_many :materials
   has_many :articles, foreign_key: :author_id
-  has_many :absenses # Жизненно...
+  has_many :absenses
   belongs_to :group
 
   def absense_count
-    self.absenses.count
+    absenses.count
   end
 
-  def absense_count_disc discipline
-    dis_abs = Absense.count_by_sql([
-      "SELECT COUNT(*) as cnt FROM absenses\
-        LEFT JOIN lessons ON absenses.lesson_id = lessons.id\
-        WHERE lessons.discipline_id = ?
-        AND absenses.user_id = ?",
-        discipline.id,
-        self.id
+  def absense_count_disc(discipline)
+    Absense.count_by_sql([
+      'SELECT COUNT(*) as cnt FROM absenses\
+       LEFT JOIN lessons ON absenses.lesson_id = lessons.id\
+       WHERE lessons.discipline_id = ?
+       AND absenses.user_id = ?',
+      discipline.id,
+      id
     ])
   end
 
@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def absense_perc_disc discipline
+  def absense_perc_disc(discipline)
     lis = discipline.less_in_sem
     if lis != 0
       absense_count_disc(discipline).to_f / lis

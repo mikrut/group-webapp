@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 get_schedule_form = (inflatee, time_index, weekday_index, occurence_type = 0) ->
-  form = $('<form method="post" accept-charset="UTF-8" action="/schedule/updateItem" autocomplete="off"></form>')
+  form = $('<form method="post" accept-charset="UTF-8" action="/schedule/update_item" autocomplete="off"></form>')
   inflatee.append(form)
 
   csrf = $('meta[name=csrf-token]').attr('content')

@@ -2,7 +2,7 @@ class SearchController < ApplicationController
   def find
     @query = nil
     @results = []
-    if params.has_key? :q
+    if params.key? :q
       @query = params[:q]
       @results = ThinkingSphinx.search @query
     end
@@ -11,11 +11,11 @@ class SearchController < ApplicationController
   def find_helper
     @query = nil
     @results = []
-    if params.has_key? :q
+    if params.key? :q
       @query = params[:q]
-      @results = ThinkingSphinx.search(@query, star: true, ranker: :sph04).collect &:title
+      @results = ThinkingSphinx.search(@query, star: true, ranker: :sph04).collect(&:title)
     end
-    render :json => [
+    render json: [
       @query,
       @results
     ]

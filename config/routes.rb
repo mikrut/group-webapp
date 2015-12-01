@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'report/create'
   post 'report/form'
 
@@ -14,7 +13,7 @@ Rails.application.routes.draw do
 
   get 'schedule/read'
   get 'schedule/update'
-  post 'schedule/updateItem'
+  post 'schedule/update_item'
 
   get 'search' => 'search#find'
   get 'search_h' => 'search#find_helper'
@@ -28,10 +27,10 @@ Rails.application.routes.draw do
   post 'article/new'
 
   post 'group/update' => 'group#do_update'
-  get  'group/update' => 'group#view_update'
-  get  'group/view'
-  get  'group/view_absenses'
-  get  'group/get_updated_view_absenses'
+  get 'group/update' => 'group#view_update'
+  get 'group/view'
+  get 'group/view_absenses'
+  get 'group/get_updated_view_absenses'
   post 'group/create_absense'
   post 'group/delete_absense' => 'group#delete_absense'
   post 'group/update_percentage'
@@ -43,10 +42,9 @@ Rails.application.routes.draw do
   get 'discipline/listDisciplines'
   get 'discipline/listDisciplines.json' => 'discipline#listDisciplines'
   post 'discipline/new'
-  get  'discipline/update/:id' => 'discipline#view_update'
+  get 'discipline/update/:id' => 'discipline#view_update'
   post 'discipline/update/:id' => 'discipline#update'
   post 'discipline/delete/:id' => 'discipline#delete'
-
 
   get 'materials/download/:id' => 'materials#download'
   get 'materials/create'
@@ -54,7 +52,7 @@ Rails.application.routes.draw do
   get 'materials/list_materials'
   post 'materials/delete/:id' => 'materials#delete'
   post 'materials/create'
-  get  'materials/update/:id' => 'materials#view_update'
+  get 'materials/update/:id' => 'materials#view_update'
   post 'materials/update/:id' => 'materials#update'
 
   get 'user/login' => 'user#create'

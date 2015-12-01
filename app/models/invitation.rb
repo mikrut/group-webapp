@@ -1,3 +1,4 @@
+# Class describing an invitation to register on a site
 class Invitation < ActiveRecord::Base
   has_secure_token :secret_key
 
@@ -6,7 +7,7 @@ class Invitation < ActiveRecord::Base
   end
 
   def resend
-    secret_key = self.regenerate_secret_key
-    self.send_invite
+    regenerate_secret_key
+    send_invite
   end
 end
