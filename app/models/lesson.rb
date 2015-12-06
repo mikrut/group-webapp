@@ -6,6 +6,8 @@ class Lesson < ActiveRecord::Base
   enum weekday: { MON: 0, TUE: 1, WED: 2,
                   THU: 3, FRI: 4, SAT: 5, SUN: 6 }
 
+  validates :lecturer, length: { maximum: 128 }
+
   WEEKDAY_NAMES = %w(Понедельник Вторник Среда Четверг
                      Пятница Суббота Воскресенье)
   TIMES = [

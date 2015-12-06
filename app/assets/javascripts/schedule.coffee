@@ -29,10 +29,12 @@ get_schedule_form = (inflatee, time_index, weekday_index, occurence_type = 0) ->
       weekday_tag = $('<input type="hidden" id="" name="lesson[weekday]"/>').val(weekday_index)
       time_tag = $('<input type="hidden" name="lesson[time_index]">').val(time_index)
       occurence_tag = $('<input type="hidden" name="lesson[occurence_type]"/>').val(occurence_type)
+      lecturer = $('<input type="text" name="lesson[lecturer]">')
       submit_tag = $('<input type="submit" value="Update item" name="commit">')
 
       form.append(utf_tag).append(csrf_tag).append(discipline_select)
       .append(lesson_type_select).append(weekday_tag).append(time_tag)
+      .append(lecturer)
       .append(occurence_tag).append(submit_tag)
       return
 

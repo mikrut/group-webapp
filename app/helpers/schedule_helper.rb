@@ -16,8 +16,10 @@ module ScheduleHelper
     discipline_id = 0
     if row.class == Array && !row[index].nil?
       discipline_id = row[index].discipline_id
+      lecturer = row[index].lecturer
     elsif row.class == Lesson
-      discipline_id = row.discipline_id if row.class == Lesson
+      lecturer = row.lecturer
+      discipline_id = row.discipline_id
     end
 
     form_for :lesson, url: { action: :update_item }, method: 'POST',
@@ -37,6 +39,10 @@ module ScheduleHelper
         form.hidden_field :occurence_type,
                           value: occurence_type,
                           id: nil
+      ).concat(
+        form.text_field :lecturer,
+                        value: lecturer,
+                        id: nil
       ).concat(form.submit 'Update item', id: nil)
     end
   end

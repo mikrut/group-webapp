@@ -17,7 +17,7 @@ class ScheduleController < ApplicationController
       params[:lesson].key? param
     end
       data = params[:lesson]
-      Lesson.destroy_all ['weekday = ? AND time_index = ? and'\
+      Lesson.destroy_all ['weekday = ? AND time_index = ? and '\
                           'occurence_type in (?)', data[:weekday],
                           data[:time_index],
                           [
@@ -27,7 +27,7 @@ class ScheduleController < ApplicationController
                          ]
 
       lesson = Lesson.new(params.require(:lesson)
-                          .permit(required_params))
+                          .permit(required_params.push(:lecturer)))
       lesson.group = Group.first
       lesson.save
 
