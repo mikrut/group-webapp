@@ -1,11 +1,13 @@
 ﻿# encoding=utf-8
 # Class describing a student
 class User < ActiveRecord::Base
+  # Проверки для E-mail и имени
   validates :name, :email, presence: true
   validates :name, :email, length: { minimum: 2, maximum: 128 }
   validates :email, uniqueness: { case_sensitive: false }
   validate :email_has_one_at_sign?
 
+  # Перед сохранением переводим e-mail в нижний регистр и добавляем группу
   before_save do
     self.email = email.downcase
     self.group = Group.first
@@ -15,14 +17,18 @@ class User < ActiveRecord::Base
     errors.add(:email, 'is not valid') unless (email.count '@') == 1
   end
 
+  # Имеется два типа пользователей: обычный и администратор
   enum role: { user: 0, admin: 1 }
 
   has_secure_password
 
+  # Ассоциации модели в БД
   has_many :materials
   has_many :articles, foreign_key: :author_id
   has_many :absenses
   belongs_to :group
+
+  # Далее приведены методы для сбора статистики по пользователю
 
   def absense_count
     absenses.count

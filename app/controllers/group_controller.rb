@@ -1,6 +1,8 @@
+# encoding=utf-8
 class GroupController < ApplicationController
   before_action :check_admin, except: :view
 
+  # Получение информации о группе
   def view
     @group = Group.first
     @disciplines = Discipline.select("disciplines.*,\
@@ -10,6 +12,7 @@ class GroupController < ApplicationController
        where articles.discipline_id = disciplines.id) articles_count")
   end
 
+  # Статистика пропусков
   def view_absenses
     @group = Group.first
     @discipline = Discipline.first
@@ -67,6 +70,7 @@ class GroupController < ApplicationController
     end
   end
 
+  # Обновление информации о группе
   def do_update
     group = Group.first
     group.update(params.require(:group).permit(:semester, :cathedra,
@@ -75,11 +79,13 @@ class GroupController < ApplicationController
     redirect_to action: :view
   end
 
+  # Показ страницы редактирования
   def view_update
     @group = Group.first
     render 'update'
   end
 
+  # Добавление пропуска
   def create_absense
     needed = [:user_id, :lesson_id, :week]
     begin
@@ -94,6 +100,7 @@ class GroupController < ApplicationController
     end
   end
 
+  # Удаление пропуска
   def delete_absense
     lesson = Lesson.find_by!(time_index: params.require(:absense).require(:time_index),
                              weekday: params.require(:absense).require(:weekday))
@@ -111,6 +118,7 @@ class GroupController < ApplicationController
       } }
   end
 
+  # Обновление процента успеваемости по дисциплине
   def update_percentage
     needed = [:user_id, :discipline_id, :percentage]
     begin

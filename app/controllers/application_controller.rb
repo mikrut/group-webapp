@@ -1,3 +1,4 @@
+# encoding=utf-8
 # Controller superclass
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
@@ -9,11 +10,13 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Перед входом в систему пользователя необходимо авторизовать
   def authorize
     redirect_to controller: :user,
                 action: :login, status: :forbidden unless logged_in?
   end
 
+  # Для некоторых действий проверяем, что пользователь - администратор
   def check_admin
     if logged_in?
       unless current_user.admin?
@@ -25,6 +28,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # В случае, если страница не найдена, выдаём ошибку
   def not_found
     fail ActionController::RoutingError, 'Not Found'
   end
